@@ -1,0 +1,16 @@
+.waltz-div {
+    background-image: url(../images/waltz.png);
+    height: 245px;
+    /* width: 287px; */
+    aspect-ratio: 1.17 / 1;
+    overflow: hidden;
+}
+
+.waltz-img {
+
+}
+
+.waltz-btn {
+    padding: 10px;
+    border-radius: 17px;
+}
