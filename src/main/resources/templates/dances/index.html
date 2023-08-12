@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Dances</title>
-    <link rel="stylesheet" href="../../static/css/dance.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <button class="waltz-btn">
-        <div class="waltz-div">
-            <img class="waltz-img" src="../../static/images/waltz.png"/>
-        </div>  
-        <span>Waltz</span>
-    </button>
 
-    <div class="dance-types-grid">
-        <div th:each="danceType : ${danceTypes}">
-            <button th:text="${danceType.getName()}">
-
-            </button>
+    <header>
+        <h1>Исторические танцы</h1>
+    </header>
+    <div class="dance-types-div-container">
+        <div class="dance-types-div">
+            <div th:each="danceType : ${danceTypes}">
+                <button class="dance-type-btn" >
+                    <img class="dance-type-img" th:src="@{'/images/' + ${danceType.getName()} + '.png'}"/>
+                    <span class="dance-type-label" th:text="${danceType.getName()}"></span>
+                </button>
+            </div>
         </div>
     </div>
 </body>
