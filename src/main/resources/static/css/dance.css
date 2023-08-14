@@ -1,3 +1,31 @@
+.header {
+    display: flex;
+    justify-content: center;   
+    flex-direction: column; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-text-historical {
+    font-family: 'Jost', sans-serif;
+    /* исторические */
+
+font-style: normal;
+font-weight: 300;
+font-size: 23px;
+line-height: 33px;
+letter-spacing: 0.305em;
+
+color: #000000;
+
+}
+
+.logo-text-dance {
+    font-family: 'Viaoda Libre', cursive;
+    font-size: 64px;
+    line-height: 96.1%;
+}
+
 .waltz-div {
     background-image: url(../images/waltz.png);
     height: 245px;
@@ -8,7 +36,10 @@
 
 .dance-type-btn {
     padding: 10px;
-    border-radius: 17px;
+    border-radius: 15px;
+    border-width: 1px;
+    border-color: #000;
+    border-style: solid;
     /* width: 200px; */
     width: 240px;
     aspect-ratio: 1.1 / 1;
@@ -23,17 +54,18 @@
 
 }
 
+
 .dance-types-div {
     display: flex;
     flex-wrap: wrap;
     /* width: 620px;   */
-    width: 740px;  
-    gap: 10px;  
+    width: 815px;  
+    gap: 14px;  
     
 }
 
 .dance-type-img {
-    border-radius: 17px;
+    border-radius: 13px;
     width: 100%;
 }
 
@@ -47,12 +79,13 @@
 /* Хоровод */
 
 color: #000;
-font-family: Inria Sans;
-font-size: 24px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
-
+/* font-family: 'Roboto', sans-serif; */
+/* font-family: 'Raleway', sans-serif; */
+font-family: 'Raleway', sans-serif;
+font-size: 16px;
+font-style: medium;
+font-weight: 500;
+/* line-height: normal; */
 
 }
 
