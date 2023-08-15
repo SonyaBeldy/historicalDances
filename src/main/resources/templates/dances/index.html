@@ -19,21 +19,24 @@
     <header class="header">
         <span class="logo-text-historical">исторические</span>
         <span class="logo-text-dance">ТАНЦЫ</span>
-        <div class="toolbar">
-            <span class="toolbar-text">УРОКИ</span>
-            <span class="toolbar-text">ТЕРМИНЫ</span>
-            <span class="toolbar-text">ТЕСТЫ</span>
+        <div class="header-toolbar">
+            <a class="toolbar-text">УРОКИ</a>
+            <a class="toolbar-text">ТЕРМИНЫ</a>
+            <a class="toolbar-text">ТЕСТЫ</a>
         </div>
     </header>
     <div class="dance-types-div-container">
         <div class="dance-types-div">
             <div th:each="danceType : ${danceTypes}">
-                <div class="dance-type-btn" >
+                <a th:href="@{/dances/{danceType}(danceType=${danceType.getName()})}" class="dance-type-btn" >
+                    <!-- <a th:href="@{/dances/{danceType}(danceType=${danceType.getName()})}"></a> -->
                     <img class="dance-type-img" th:src="@{'/images/' + ${danceType.getName()} + '.png'}"/>
                     <span class="dance-type-label" th:text="${danceType.getName()}"></span>
-                </div>
+                </a>
             </div>
         </div>
     </div>
+
+
 </body>
 </html>

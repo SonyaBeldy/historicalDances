@@ -18,6 +18,10 @@ public class DanceTypeService {
     }
 
     public List<DanceType> findAll() {
-        return danceTypeRepository.findAll();
+        return danceTypeRepository.findAllByOrderByNameAsc();
+    }
+
+    public DanceType findDanceTypeByName(String name) {
+        return danceTypeRepository.findDanceTypeByName(name);
     }
 }

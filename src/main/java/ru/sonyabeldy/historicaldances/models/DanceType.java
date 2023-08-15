@@ -1,10 +1,9 @@
 package ru.sonyabeldy.historicaldances.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "dance_type")
@@ -12,14 +11,17 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class DanceType {
 
     @Id
     @Column(name = "id")
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "name")
-    String name;
+    private String name;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private List<Dance> dances;
 
 }

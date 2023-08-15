@@ -4,20 +4,27 @@
     flex-direction: column; 
     flex-direction: column;
     align-items: center;
+    padding-top: 20px;
 }
+
+.header-toolbar {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    font-family: 'Raleway', sans-serif;
+}
+
+
 
 .logo-text-historical {
     font-family: 'Jost', sans-serif;
-    /* исторические */
+    font-style: normal;
+    font-weight: 300;
+    font-size: 23px;
+    line-height: 33px;
+    letter-spacing: 0.305em;
 
-font-style: normal;
-font-weight: 300;
-font-size: 23px;
-line-height: 33px;
-letter-spacing: 0.305em;
-
-color: #000000;
-
+    color: #000000;
 }
 
 .logo-text-dance {
@@ -38,7 +45,7 @@ color: #000000;
     padding: 10px;
     border-radius: 15px;
     border-width: 1px;
-    border-color: #000;
+    border-color: #b1b1b1;
     border-style: solid;
     /* width: 200px; */
     width: 240px;
@@ -54,13 +61,20 @@ color: #000000;
 
 }
 
+.dance-type-btn:hover {
+    border-color: #7a7a7a;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0px 0px 11px 0px #9a9a9a;;
+}
+
 
 .dance-types-div {
     display: flex;
     flex-wrap: wrap;
     /* width: 620px;   */
-    width: 815px;  
-    gap: 14px;  
+    width: 820px;  
+    gap: 15px;  
     
 }
 
@@ -76,7 +90,6 @@ color: #000000;
 }
 
 .dance-type-label {
-/* Хоровод */
 
 color: #000;
 /* font-family: 'Roboto', sans-serif; */
@@ -85,6 +98,7 @@ font-family: 'Raleway', sans-serif;
 font-size: 16px;
 font-style: medium;
 font-weight: 500;
+padding-top: 6px;
 /* line-height: normal; */
 
 }
