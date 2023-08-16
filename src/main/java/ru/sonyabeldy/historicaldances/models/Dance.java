@@ -24,7 +24,13 @@ public class Dance {
     @JoinColumn(name = "dance_type_id", referencedColumnName = "id")
     private DanceType owner;
 
+    @Column(name = "video_link")
+    private String videoLink;
+
     @Column(name = "description")
     private String description;
+
+    @Column(name = "difficulty")
+    private int difficult;
 
 }

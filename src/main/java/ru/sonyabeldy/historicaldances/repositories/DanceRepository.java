@@ -11,4 +11,6 @@ import java.util.List;
 public interface DanceRepository extends JpaRepository<Dance, Integer> {
 
     List<Dance> findAllByOwner(DanceType owner);
+
+    List<Dance> findAllByOrderByNameAsc();
 }

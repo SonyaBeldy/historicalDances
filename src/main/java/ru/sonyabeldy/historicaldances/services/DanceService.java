@@ -23,6 +23,6 @@ public class DanceService {
     }
 
     public List<Dance> findAll() {
-        return danceRepository.findAll();
+        return danceRepository.findAllByOrderByNameAsc();
     }
 }

@@ -2,19 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dance-list.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+    
     <title>Title</title>
 </head>
 <body>
 
 
-  <header>
+  <header class="header">
+    <span class="logo-text-historical">исторические</span>
+    <span class="logo-text-dance">ТАНЦЫ</span>
+    <div class="header-toolbar">
+        <a class="toolbar-text">УРОКИ</a>
+        <a class="toolbar-text">ТЕРМИНЫ</a>
+        <a class="toolbar-text">ТЕСТЫ</a>
+    </div>
+</header>
 
-  </header>
+  <div class="content-container">
 
-  <div class="dance-list-container">
-    <div th:each="dance: ${dances}" class="dance-container">
-      <a th:href=""></a>
-      <span></span>
+    <div class="dance-list-container">
+      <div th:each="dance: ${dances}" class="dance-container">
+        <span th:text="${dance.getName()}"></span>
+  
+      </div>
     </div>
   </div>
 

@@ -1,6 +1,29 @@
+* {
+    box-sizing: border-box;
+}
 
+.content-container {
+    display: flex;
+    justify-content: center;
+}
+
+.dance-list-container {
+    display: flex;  
+    flex-direction: column;
+    width: 500px;
+
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(63, 63, 63);
+    border-radius: 20px;
+}
 
 .dance-container {
     border: solid;
     border-width: 0 0 1px 0;
+    border-color: rgb(231 231 231);
+    padding: 18px;
+    width: 100%;
+
+    font-family: 'Jost', 'sans-serif';
 }
