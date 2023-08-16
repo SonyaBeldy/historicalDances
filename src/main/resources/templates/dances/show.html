@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${danceType}"></title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
+</head>
+<body>
+    <header class="header">
+        <span class="logo-text-historical">исторические</span>
+        <span class="logo-text-dance">ТАНЦЫ</span>
+        <div class="header-toolbar">
+            <a href="/dances" class="toolbar-text">УРОКИ</a>
+            <a class="toolbar-text">ТЕРМИНЫ</a>
+            <a class="toolbar-text">ТЕСТЫ</a>
+        </div>
+    </header>
+
+    <div class="dance-types-div-container">
+        <div class="dance-types-div">
+            <div th:each="dance : ${dances}">
+                <a th:href="@{/dances/{dance}(dance=${dance.getName()})}" class="dance-type-btn dance-video">
+<!--                    <img class="dance-type-img" th:src="@{'/images/' + ${dance.getName()} + '.png'}"/>-->
+<!--                    <video width="320" height="240" controls>-->
+<!--                        <source src=”https://www.youtube.com/watch?v=5n-RYrSHIrI” type=video/mp4>-->
+<!--                    </video>-->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5n-RYrSHIrI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <span class="dance-type-label" th:text="${dance.getName()}"></span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

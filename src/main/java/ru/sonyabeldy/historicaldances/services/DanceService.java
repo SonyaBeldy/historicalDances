@@ -21,4 +21,8 @@ public class DanceService {
     public List<Dance> findAllByDanceTypeId(DanceType danceType) {
         return danceRepository.findAllByOwner(danceType);
     }
+
+    public List<Dance> findAll() {
+        return danceRepository.findAll();
+    }
 }

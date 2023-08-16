@@ -25,9 +25,19 @@ public class DanceController {
     @GetMapping("/{danceType}")
     public String show(@PathVariable("danceType") String danceType, Model model) {
 
-        model.addAttribute("danceType",
+        model.addAttribute("danceType", danceType);
+        model.addAttribute("dances",
                 danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType)));
         System.out.println(danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType)).get(0).getId());
-        return "dances/index";
+        return "dances/show";
     }
+
+    @GetMapping("/dance-list")
+    public String showDanceList(Model model) {
+        model.addAttribute("dances",
+                danceService.findAll());
+        return "dances/dance-list";
+    }
+
+
 }
