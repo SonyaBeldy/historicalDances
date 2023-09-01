@@ -16,6 +16,8 @@
     border-width: 1px;
     border-color: rgb(63, 63, 63);
     border-radius: 20px;
+
+    overflow-y: auto;
 }
 
 .dance-container {
