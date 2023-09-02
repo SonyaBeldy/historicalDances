@@ -32,7 +32,7 @@ public class DanceController {
         return "dances/show";
     }
 
-    @GetMapping("/dance-list")
+    @GetMapping()
     public String showDanceList(Model model) {
         model.addAttribute("dances",
                 danceService.findAll());
