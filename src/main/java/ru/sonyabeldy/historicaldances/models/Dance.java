@@ -3,6 +3,8 @@ package ru.sonyabeldy.historicaldances.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "dance")
 @Getter
@@ -22,7 +24,7 @@ public class Dance {
 
     @ManyToOne
     @JoinColumn(name = "dance_type_id", referencedColumnName = "id")
-    private DanceType owner;
+    private DanceType owner; //переименовать в type
 
     @Column(name = "video_link")
     private String videoLink;
@@ -32,5 +34,13 @@ public class Dance {
 
     @Column(name = "difficulty")
     private int difficult;
+
+    @ManyToMany
+    @JoinTable(
+            name = "dance_from_dance_list",
+            joinColumns = @JoinColumn(name = "dance_id"),
+            inverseJoinColumns = @JoinColumn(name = "list_id")
+    )
+    private List<DanceList> danceLists;
 
 }

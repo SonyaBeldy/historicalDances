@@ -7,30 +7,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
-@Table(name = "dance_list")
+@Table(name = "dance_form_dance_list")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class DanceList {
+public class DanceFromDanceList {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
 
-    @Column(name = "description")
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "list_id", referencedColumnName = "id")
+    private DanceList owner;
 
-    @Column(name = "date")
-    private Timestamp date;
+    @ManyToMany
+    @JoinColumn(name = "")
+    private Dance dance;
 
-    @ManyToMany(mappedBy = "danceLists")
-    private List<Dance> dances;
 }
+
