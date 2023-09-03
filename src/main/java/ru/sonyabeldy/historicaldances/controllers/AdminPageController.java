@@ -11,6 +11,7 @@ public class AdminPageController {
 
     @GetMapping()
     public String index() {
+        System.out.println("haha");
         return "admin/index";
     }
 

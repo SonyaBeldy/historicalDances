@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sonyabeldy.historicaldances.services.DanceTypeService;
 
 @Controller
-@RequestMapping("/dances")
+@RequestMapping("/dance-types")
 public class DanceTypeController {
 
     private final DanceTypeService danceTypeService;
