@@ -4,11 +4,16 @@
     font-family: 'Jost', 'sans-serif';
     gap: 4px;
     margin-top: 40px;
-    margin-left: 80px;
-    margin-right: 10px;
+    margin-left: 50px;
+    margin-right: 20px;
+    padding: 10px 20px;
+
+    background-color: rgb(235, 235, 235);
 
 }
 .left-side-menu-btn {
+    display: flex;
+
     font-family: 'Jost', 'sans-serif';
     font-size: 18px;
     background-color: transparent;

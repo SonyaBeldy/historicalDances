@@ -5,6 +5,7 @@
     <title>Admin Page</title>
     <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
     <link type="text/css" rel="stylesheet" th:href="@{/css/admin-page.css}">
+    <script defer th:src="@{/scripts/main.js}"></script>
 </head>
 <body>
     <header class="header">
@@ -12,17 +13,23 @@
         <span class="logo-text-dance">ТАНЦЫ</span>
     </header>
     <div class="content-div">
+
         <div class="left-side-menu-div">
-            <button id="dance-list" class="left-side-menu-btn">Подборки</button>
-            <button id="dances" class="left-side-menu-btn">Танцы</button>
-            <button id="dances-types" class="left-side-menu-btn">Типы танцев</button>
-        </div>
-        <div class="list-div">
-            <div class="top-side-menu-div">
                 <span>Занятия</span>
                 <span>Мероприятия</span>
             </div>
-
+        <div class="list-div">
+            
+            <div class="top-side-menu-div">
+                <button id="dance-list" class="left-side-menu-btn">Подборки</button>
+                <button id="dances" class="left-side-menu-btn">Танцы</button>
+                <button id="dances-types" class="left-side-menu-btn">Типы танцев</button>
+            </div>
+            <div class="list-container">
+                <div th:each="danceList : ${danceLists}">
+                    <span th:text="${danceList.getName()}"></span>
+                </div>
+            </div>
         </div>
     </div>
 

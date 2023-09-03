@@ -16,12 +16,9 @@ public class DanceDTO {
 
     private DanceType owner;
 
-    @Column(name = "video_link")
     private String videoLink;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "difficulty")
     private int difficult;
 }
