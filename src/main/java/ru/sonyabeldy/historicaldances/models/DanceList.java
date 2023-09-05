@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,8 @@ public class DanceList {
     private String description;
 
     @Column(name = "date")
-    private Timestamp date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @ManyToMany(mappedBy = "danceLists")
     private List<Dance> dances;

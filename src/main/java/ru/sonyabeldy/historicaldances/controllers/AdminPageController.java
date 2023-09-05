@@ -2,11 +2,12 @@ package ru.sonyabeldy.historicaldances.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
 import ru.sonyabeldy.historicaldances.models.DanceList;
 import ru.sonyabeldy.historicaldances.services.DanceListService;
@@ -45,6 +46,13 @@ public class AdminPageController {
     }
     private DanceListDTO convertToDanceListDTO(DanceList danceList) {
         return modelMapper.map(danceList, DanceListDTO.class);
+    }
+
+    @ResponseBody
+    @PostMapping("/new-dance-list")
+    public ResponseEntity<HttpStatus> create(@RequestBody DanceListDTO dto, BindingResult bindingResult) {
+        danceListService.save(convertToDanceList(dto));
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
 
