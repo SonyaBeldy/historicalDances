@@ -176,6 +176,11 @@
     flex-direction: row;
     padding: 0 2px;
 }
+
+.more-btn:hover {
+    cursor: pointer;
+}
+
 .more-btn:active {
     background: #e7e7e7;
     border-radius: 20px;
@@ -191,5 +196,69 @@
     /*width: 100%;*/
     width: 18px;
     transform: rotate(90deg);
+}
+
+
+
+.creating-menu-background {
+
+    display: flex;
+    display: none;
+
+
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+    background: rgba(72, 72, 72, 0.5);
+    z-index: 132;
+
+}
+
+.creating-menu {
+    width: 300px;
+    height: fit-content;
+    box-shadow:  0px 0px 11px 0px #9a9a9a;
+
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    opacity: 1;
+    z-index: 256;
+    background: rgb(255, 255, 255);
+
+    /*gap: 20px;*/
+}
+
+.bold-span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.confirm-btn {
+    font-family: 'Jost', 'sans-serif';
+    font-size: 14px;
+    font-weight: bold;
+    color: #7a7ede;
+    background: transparent;
+    border: 0;
+    align-self: end;
+
+    margin-top: 20px;
+}
+
+.input-label {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.list-name-input {
 }
 

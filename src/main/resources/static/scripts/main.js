@@ -30,3 +30,23 @@ function createListItem(name) {
 
     return item;
 }
+
+let confirmBtn = document.getElementById("new-item-btn");
+
+confirmBtn.addEventListener("click", (ev) => {
+    let menu = document.getElementById("creating-menu-background");
+    menu.style.display = "flex";
+})
+
+document.getElementById("close-btn").addEventListener("click", (ev) => {
+    document.getElementById("creating-menu-background").style.display = "none";
+})
+
+document.getElementById("confirm-btn").addEventListener("click", (ev) => {
+    let listName = document.getElementById("list-name-input").value;
+    let obj = {name: listName}
+    let json = JSON.stringify(obj);
+    console.log(json);
+
+    let newListRes = fetch("http://localhost:8080/admin", {method: "POST"});
+})
