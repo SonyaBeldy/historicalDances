@@ -39,5 +39,4 @@ public class DanceController {
         return "dances/dance-list";
     }
 
-
 }

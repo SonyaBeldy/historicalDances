@@ -20,17 +20,21 @@
     font-family: 'Jost', sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 23px;
-    line-height: 33px;
+    /*font-size: 23px;*/
+    /*line-height: 33px;*/
     letter-spacing: 0.305em;
 
     color: #000000;
+    line-height: 120.1%;
+    font-size: 16px;
 }
 
 .logo-text-dance {
     font-family: 'Viaoda Libre', cursive;
-    font-size: 64px;
+    /*font-size: 64px;*/
     line-height: 96.1%;
+
+    font-size: 44px;
 }
 
 .waltz-div {
