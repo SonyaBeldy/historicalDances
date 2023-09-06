@@ -1,11 +1,28 @@
-let danceList = document.getElementById("radio-dance-list");
-danceList.addEventListener("click", async(ev) => {
-    let res = await fetch("http://localhost:8080/admin/dance-lists", { method: "GET" });
-    let name = (await res.json())[0].name;
 
+let danceList = document.getElementById("radio-dance-list");
+
+let listContainer = document.getElementById("list-container");
+danceList.addEventListener("change", async(ev) => {
     let listContainer = document.getElementById("list-container");
-    listContainer.appendChild(createListItem(name));
+    let listValues = await fetch("http://localhost:8080/admin/dance-lists", { method: "GET" });
+    removeAllItems(listContainer);
+    await showList(listValues);
 })
+
+function removeAllItems(listContainer) {
+    while (listContainer.lastElementChild) {
+        listContainer.removeChild(listContainer.lastElementChild);
+    }
+}
+
+async function showList(listValues) {
+    let listArray= (await listValues.json());
+    for (let i = 0; i < listArray.length; i++) {
+        let name = listArray[i].name;
+        let listContainer = document.getElementById("list-container");
+        listContainer.appendChild(createListItem(name));
+    }
+}
 
 function createListItem(name) {
 
@@ -57,5 +74,5 @@ document.getElementById("confirm-btn").addEventListener("click", async (ev) => {
             body: JSON.stringify(obj)
         });
     // return response.json();
-
+    document.getElementById("creating-menu-background").style.display = "none";
 })

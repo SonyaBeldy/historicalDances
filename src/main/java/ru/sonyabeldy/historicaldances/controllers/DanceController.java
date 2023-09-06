@@ -36,6 +36,8 @@ public class DanceController {
     public String showDanceList(Model model) {
         model.addAttribute("dances",
                 danceService.findAll());
+                int ar[] = {1,2,3};
+        System.out.println(ar.length);
         return "dances/dance-list";
     }
 
