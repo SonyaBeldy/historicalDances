@@ -10,10 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.sonyabeldy.historicaldances.dto.DanceDTO;
 import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
+import ru.sonyabeldy.historicaldances.dto.DanceTypeDTO;
 import ru.sonyabeldy.historicaldances.models.Dance;
 import ru.sonyabeldy.historicaldances.models.DanceList;
+import ru.sonyabeldy.historicaldances.models.DanceType;
 import ru.sonyabeldy.historicaldances.services.DanceListService;
 import ru.sonyabeldy.historicaldances.services.DanceService;
+import ru.sonyabeldy.historicaldances.services.DanceTypeService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +28,14 @@ public class AdminPageController {
     private final ModelMapper modelMapper;
     private final DanceListService danceListService;
     private final DanceService danceService;
+    private final DanceTypeService danceTypeService;
 
     @Autowired
-    public AdminPageController(ModelMapper modelMapper, DanceListService danceListService, DanceService danceService) {
+    public AdminPageController(ModelMapper modelMapper, DanceListService danceListService, DanceService danceService, DanceTypeService danceTypeService) {
         this.modelMapper = modelMapper;
         this.danceListService = danceListService;
         this.danceService = danceService;
+        this.danceTypeService = danceTypeService;
     }
 
     @GetMapping()
@@ -59,6 +64,12 @@ public class AdminPageController {
         return danceService.findAll().stream().map(this::convertToDanceDTO).collect(Collectors.toList());
     }
 
+    @ResponseBody
+    @GetMapping("/dance-types")
+    public List<DanceTypeDTO> getAllDanceTypes() {
+        return danceTypeService.findAll().stream().map(this::convertToDanceTypeDTO).collect(Collectors.toList());
+    }
+
     private DanceList convertToDanceList(DanceListDTO dto) {
         return modelMapper.map(dto, DanceList.class);
     }
@@ -74,6 +85,13 @@ public class AdminPageController {
         return modelMapper.map(dance, DanceDTO.class);
     }
 
+    private DanceType convertToDanceType(DanceTypeDTO dto) {
+        return modelMapper.map(dto, DanceType.class);
+    }
+
+    private DanceTypeDTO convertToDanceTypeDTO(DanceType danceType) {
+        return modelMapper.map(danceType, DanceTypeDTO.class);
+    }
 
 
 }

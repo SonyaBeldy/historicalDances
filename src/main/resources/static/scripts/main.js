@@ -14,6 +14,12 @@ document.getElementById("radio-dances").addEventListener("change", async(ev) => 
     await showList(listValues);
 });
 
+document.getElementById("radio-dance-types").addEventListener("change", async(ev) => {
+    removeAllItems();
+    let listValues = await fetch("http://localhost:8080/admin/dance-types", { method: "GET" });
+    await showList(listValues);
+})
+
 
 function removeAllItems() {
     while (listContainer.lastElementChild) {
