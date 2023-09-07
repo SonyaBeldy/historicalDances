@@ -14,6 +14,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
     <script defer th:src="@{/scripts/main.js}"></script>
+    <script defer th:src="@{/scripts/admin/item-menu.js}"></script>
+
 </head>
 <body>
     <header class="header">
@@ -57,20 +59,51 @@
                 </div>
             </div>
 
-            <div class="creating-menu-background" id="creating-menu-background">
+
+            <div class="creating-menu-background" id="dance-lists-add-menu-background">
                 <div class="creating-menu">
                     <div class="top-bar">
                         <span class="bold-span">Новая подборка</span>
-                        <button class="more-btn" id="close-btn">
+                        <button class="more-btn" id="dance-lists-close-btn">
                             <img src="../../images/btns/close-32.png" alt="" class="close-img">
                         </button>
                     </div>
                     <label for="list-name-input" class="input-label">Название</label>
                     <input type="text" class="list-name-input" id="list-name-input">
-                    <button id="confirm-btn" class="confirm-btn">Создать</button>
+                    <button id="dance-lists-confirm-btn" class="confirm-btn">Создать</button>
                 </div>
             </div>
 
+            <div class="creating-menu-background" id="dances-add-menu-background">
+                <div class="creating-menu">
+                    <div class="top-bar">
+                        <span class="bold-span">Новый танец</span>
+                        <button class="more-btn" id="dances-close-btn">
+                            <img src="../../images/btns/close-32.png" alt="" class="close-img">
+                        </button>
+                    </div>
+                    <label for="dance-name-input" class="input-label">Название</label>
+                    <input type="text" class="list-name-input" id="dance-name-input">
+
+                    <label for="dance-type" class="input-label">Тип танца</label>
+                    <select id="dance-type"></select>
+                    <button id="dances-confirm-btn" class="confirm-btn">Создать</button>
+                </div>
+            </div>
+
+            <div class="creating-menu-background" id="dance-types-add-menu-background">
+                <div class="creating-menu">
+                    <div class="top-bar">
+                        <span class="bold-span">Новый тип</span>
+                        <button class="more-btn" id="dance-types-close-btn">
+                            <img src="../../images/btns/close-32.png" alt="" class="close-img">
+                        </button>
+                    </div>
+                    <label for="list-name-input" class="input-label">Название</label>
+                    <input type="text" class="list-name-input" id="dance-types-list-name-input">
+                    <button id="dance-types-confirm-btn" class="confirm-btn">Создать</button>
+                </div>
+            </div>
         </div>
     </div>
 

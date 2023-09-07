@@ -53,7 +53,7 @@ public class AdminPageController {
 
     @ResponseBody
     @PostMapping("/new-dance-list")
-    public ResponseEntity<HttpStatus> create(@RequestBody DanceListDTO dto, BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> create(@RequestBody DanceListDTO dto) {
         danceListService.save(convertToDanceList(dto));
         return ResponseEntity.ok(HttpStatus.CREATED);
     }

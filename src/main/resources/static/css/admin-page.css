@@ -82,6 +82,10 @@
     width: 532px;
 }
 
+.creating-menu .top-bar {
+    width: 100%;
+}
+
 .top-bar .radio-group-item:first-child label {
     /*border-radius: 6px 0 0 6px;*/
 }

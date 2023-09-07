@@ -54,37 +54,14 @@ function createListItem(name) {
 
     moreBtn.appendChild(moreImg);
 
+
     item.appendChild(listName);
+
+    moreBtn.addEventListener("click", ev => {
+        console.log(name)
+    })
     item.appendChild(moreBtn);
 
     return item;
 }
 
-let confirmBtn = document.getElementById("new-item-btn");
-
-confirmBtn.addEventListener("click", (ev) => {
-    let menu = document.getElementById("creating-menu-background");
-    menu.style.display = "flex";
-})
-
-document.getElementById("close-btn").addEventListener("click", (ev) => {
-    document.getElementById("creating-menu-background").style.display = "none";
-})
-
-document.getElementById("confirm-btn").addEventListener("click", async (ev) => {
-    let listName = document.getElementById("list-name-input").value;
-    let obj = {name: listName}
-    let json = JSON.stringify(obj);
-    console.log(json);
-
-    let newListRes = await fetch("http://localhost:8080/admin/new-dance-list",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        });
-    // return response.json();
-    document.getElementById("creating-menu-background").style.display = "none";
-})
