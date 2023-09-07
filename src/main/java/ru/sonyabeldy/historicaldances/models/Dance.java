@@ -24,7 +24,7 @@ public class Dance {
 
     @ManyToOne
     @JoinColumn(name = "dance_type_id", referencedColumnName = "id")
-    private DanceType owner; //переименовать в type
+    private DanceType type; //переименовать в type
 
     @Column(name = "video_link")
     private String videoLink;

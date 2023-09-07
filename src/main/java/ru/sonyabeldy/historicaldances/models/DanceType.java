@@ -21,7 +21,7 @@ public class DanceType {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     private List<Dance> dances;
 
 }

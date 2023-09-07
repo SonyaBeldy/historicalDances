@@ -3,13 +3,19 @@ let danceList = document.getElementById("radio-dance-list");
 
 let listContainer = document.getElementById("list-container");
 danceList.addEventListener("change", async(ev) => {
-    let listContainer = document.getElementById("list-container");
+    removeAllItems();
     let listValues = await fetch("http://localhost:8080/admin/dance-lists", { method: "GET" });
-    removeAllItems(listContainer);
     await showList(listValues);
 })
 
-function removeAllItems(listContainer) {
+document.getElementById("radio-dances").addEventListener("change", async(ev) => {
+    removeAllItems();
+    let listValues = await fetch("http://localhost:8080/admin/dances", { method: "GET" });
+    await showList(listValues);
+});
+
+
+function removeAllItems() {
     while (listContainer.lastElementChild) {
         listContainer.removeChild(listContainer.lastElementChild);
     }

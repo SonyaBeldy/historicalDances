@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface DanceRepository extends JpaRepository<Dance, Integer> {
 
-    List<Dance> findAllByOwner(DanceType owner);
+    List<Dance> findAllByType(DanceType type);
 
     List<Dance> findAllByOrderByNameAsc();
 }

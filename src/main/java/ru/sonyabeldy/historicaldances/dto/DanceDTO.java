@@ -8,13 +8,12 @@ import ru.sonyabeldy.historicaldances.models.DanceType;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class DanceDTO {
 
 
     private String name;
 
-    private DanceType owner;
+    private DanceTypeDTO type;
 
     private String videoLink;
 
