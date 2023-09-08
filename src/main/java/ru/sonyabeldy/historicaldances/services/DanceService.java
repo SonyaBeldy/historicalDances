@@ -25,4 +25,9 @@ public class DanceService {
     public List<Dance> findAll() {
         return danceRepository.findAllByOrderByNameAsc();
     }
+
+    public void save(Dance dance, DanceType danceType) {
+        dance.setType(danceType);
+        danceRepository.save(dance);
+    }
 }

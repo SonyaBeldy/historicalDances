@@ -27,8 +27,8 @@ public class DanceController {
 
         model.addAttribute("danceType", danceType);
         model.addAttribute("dances",
-                danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType)));
-        System.out.println(danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType)).get(0).getId());
+                danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType).orElseThrow()));
+        System.out.println(danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType).orElseThrow()).get(0).getId());
         return "dances/show";
     }
 

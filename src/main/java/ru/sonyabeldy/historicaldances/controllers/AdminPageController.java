@@ -52,13 +52,6 @@ public class AdminPageController {
     }
 
     @ResponseBody
-    @PostMapping("/new-dance-list")
-    public ResponseEntity<HttpStatus> create(@RequestBody DanceListDTO dto) {
-        danceListService.save(convertToDanceList(dto));
-        return ResponseEntity.ok(HttpStatus.CREATED);
-    }
-
-    @ResponseBody
     @GetMapping("/dances")
     public List<DanceDTO>  getAllDances() {
         return danceService.findAll().stream().map(this::convertToDanceDTO).collect(Collectors.toList());
@@ -68,6 +61,27 @@ public class AdminPageController {
     @GetMapping("/dance-types")
     public List<DanceTypeDTO> getAllDanceTypes() {
         return danceTypeService.findAll().stream().map(this::convertToDanceTypeDTO).collect(Collectors.toList());
+    }
+
+    @ResponseBody
+    @PostMapping("/new-dance-list")
+    public ResponseEntity<HttpStatus> create(@RequestBody DanceListDTO dto) {
+        danceListService.save(convertToDanceList(dto));
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+
+    @ResponseBody
+    @PostMapping("/new-dance")
+    public ResponseEntity<HttpStatus> create(@RequestBody DanceDTO dto) {
+        danceService.save(convertToDance(dto), danceTypeService.findDanceTypeByName(dto.getType().getName()).orElseThrow());
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+
+    @ResponseBody
+    @PostMapping("/new-dance-type")
+    public ResponseEntity<HttpStatus> create(@RequestBody DanceTypeDTO dto) {
+        danceTypeService.save(convertToDanceType(dto));
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     private DanceList convertToDanceList(DanceListDTO dto) {

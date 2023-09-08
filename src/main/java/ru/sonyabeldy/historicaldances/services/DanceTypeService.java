@@ -6,6 +6,7 @@ import ru.sonyabeldy.historicaldances.models.DanceType;
 import ru.sonyabeldy.historicaldances.repositories.DanceTypeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DanceTypeService {
@@ -21,7 +22,11 @@ public class DanceTypeService {
         return danceTypeRepository.findAllByOrderByNameAsc();
     }
 
-    public DanceType findDanceTypeByName(String name) {
+    public Optional<DanceType> findDanceTypeByName(String name) {
         return danceTypeRepository.findDanceTypeByName(name);
+    }
+
+    public void save(DanceType danceType) {
+        danceTypeRepository.save(danceType);
     }
 }
