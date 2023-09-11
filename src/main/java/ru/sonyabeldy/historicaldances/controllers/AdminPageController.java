@@ -42,7 +42,7 @@ public class AdminPageController {
     public String index(Model model) {
 //        model.addAttribute(danceListService.find, "dances");
         model.addAttribute("danceLists", danceListService.findAll());
-        return "admin/index";
+        return "admin/index2";
     }
 
     @ResponseBody
