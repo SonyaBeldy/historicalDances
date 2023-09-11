@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sonyabeldy.historicaldances.services.DanceService;
 import ru.sonyabeldy.historicaldances.services.DanceTypeService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/dances")
 public class DanceController {
@@ -24,7 +29,10 @@ public class DanceController {
 
     @GetMapping("/{danceType}")
     public String show(@PathVariable("danceType") String danceType, Model model) {
+        int[] arr = {1, 3 , 5};
+        HashSet<Integer> hs = Arrays.stream(arr).boxed().collect(Collectors.toCollection(HashSet::new));
 
+        ArrayList<Integer> list = new ArrayList<>();
         model.addAttribute("danceType", danceType);
         model.addAttribute("dances",
                 danceService.findAllByDanceTypeId(danceTypeService.findDanceTypeByName(danceType).orElseThrow()));

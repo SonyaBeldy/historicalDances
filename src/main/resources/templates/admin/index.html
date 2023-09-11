@@ -33,7 +33,7 @@
             <div class="top-bar">
                 <div class="top-bar_radio-group">
                     <div class="radio-group-item">
-                        <input type="radio" id="radio-dance-list" name="radio" value="1" checked>
+                        <input type="radio" id="radio-dance-list" name="radio" value="1">
                         <label for="radio-dance-list">Подборки</label>
                     </div>
                     <div class="radio-group-item">
@@ -51,12 +51,12 @@
                 </div>
             </div>
             <div id="list-container" class="list-container">
-                <div th:each="danceList : ${danceLists}" class="list-item">
-                    <span th:text="${danceList.getName()}"></span>
-                    <button class="more-btn">
-                        <img src="../../images/btns/more-2-25.png" alt="" class="more-img">
-                    </button>
-                </div>
+<!--                <div th:each="danceList : ${danceLists}" class="list-item">-->
+<!--                    <span th:text="${danceList.getName()}"></span>-->
+<!--                    <button class="more-btn">-->
+<!--                        <img src="../../images/btns/more-2-25.png" alt="" class="more-img">-->
+<!--                    </button>-->
+<!--                </div>-->
             </div>
 
 

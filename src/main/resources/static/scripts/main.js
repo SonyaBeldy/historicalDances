@@ -1,23 +1,41 @@
-
-let danceList = document.getElementById("radio-dance-list");
+if(sessionStorage.getItem('data')) {
+    document.getElementById(sessionStorage.getItem('data')).checked = true;
+} else {
+    document.getElementById("radio-dance-list").checked = true;
+    sessionStorage.setItem("data", "radio-dance-list");
+}
 
 let listContainer = document.getElementById("list-container");
-danceList.addEventListener("change", async(ev) => {
+showCheckedList();
+async function showCheckedList() {
+    if(document.getElementById("radio-dance-list").checked) {
+        await showList(await getItemList("dance-lists"));
+    } else if(document.getElementById("radio-dances").checked) {
+        await showList(await getItemList("dances"));
+    } else if(document.getElementById("radio-dance-types").checked) {
+        await showList(await getItemList("dance-types"));
+    }
+}
+
+async function getItemList(url) {
+    return await fetch("http://localhost:8080/admin/" + url, {method: "GET"});
+}
+document.getElementById("radio-dance-list").addEventListener("change", async(ev) => {
     removeAllItems();
-    let listValues = await fetch("http://localhost:8080/admin/dance-lists", { method: "GET" });
-    await showList(listValues);
+    await showList(await getItemList("dance-lists"));
+    sessionStorage.setItem("data", "radio-dance-list");
 })
 
 document.getElementById("radio-dances").addEventListener("change", async(ev) => {
     removeAllItems();
-    let listValues = await fetch("http://localhost:8080/admin/dances", { method: "GET" });
-    await showList(listValues);
+    await showList(await getItemList("dances"));
+    sessionStorage.setItem("data","radio-dances");
 });
 
 document.getElementById("radio-dance-types").addEventListener("change", async(ev) => {
     removeAllItems();
-    let listValues = await fetch("http://localhost:8080/admin/dance-types", { method: "GET" });
-    await showList(listValues);
+    await showList(await getItemList("dance-types"));
+    sessionStorage.setItem("data","radio-dance-types");
 })
 
 

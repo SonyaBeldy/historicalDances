@@ -56,6 +56,7 @@ document.getElementById("dance-lists-confirm-btn").addEventListener("click", asy
             body: JSON.stringify(obj)
         });
     document.getElementById("dance-lists-add-menu-background").style.display = "none";
+    location.reload();
 })
 
 document.getElementById("dances-confirm-btn").addEventListener("click", async (ev) => {
@@ -74,6 +75,7 @@ document.getElementById("dances-confirm-btn").addEventListener("click", async (e
             body: JSON.stringify(obj)
         });
     document.getElementById("dances-add-menu-background").style.display = "none";
+    location.reload();
 })
 
 document.getElementById("dance-types-confirm-btn").addEventListener("click", async (ev) => {
@@ -91,5 +93,6 @@ document.getElementById("dance-types-confirm-btn").addEventListener("click", asy
             body: JSON.stringify(obj)
         });
     document.getElementById("dance-types-add-menu-background").style.display = "none";
+    location.reload();
 })
 
