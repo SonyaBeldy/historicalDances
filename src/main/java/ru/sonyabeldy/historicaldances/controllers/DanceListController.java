@@ -1,18 +1,43 @@
 package ru.sonyabeldy.historicaldances.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
+import ru.sonyabeldy.historicaldances.models.DanceList;
+import ru.sonyabeldy.historicaldances.services.DanceListService;
 
 @RestController
 @RequestMapping("/dance-list")
 public class DanceListController {
 
+    private final ModelMapper modelMapper;
+    private final DanceListService danceListService;
 
+    public DanceListController(ModelMapper modelMapper, DanceListService danceListService) {
+        this.modelMapper = modelMapper;
+        this.danceListService = danceListService;
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<HttpStatus> update(@RequestBody DanceListDTO dto) {
+
+
+        danceListService.update(dto.getId(), convertToDanceList(dto));
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
     @GetMapping()
     public String getAll() {
         return "";
+    }
+
+    private DanceList convertToDanceList(DanceListDTO dto) {
+        return modelMapper.map(dto, DanceList.class);
+    }
+
+    private DanceListDTO convertToDanceListDTO(DanceList danceList) {
+        return modelMapper.map(danceList, DanceListDTO.class);
     }
 }
