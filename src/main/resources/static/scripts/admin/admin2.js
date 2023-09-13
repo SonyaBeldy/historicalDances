@@ -32,7 +32,6 @@ function createTableItem(name, date, desc) {
 
     let item = document.createElement("tr");
     item.addEventListener("click", ev => {
-        console.log("bd click tr")
         let nodes = document.getElementById("table").getElementsByTagName("tr");
         for (let i = 0; i < nodes.length; i++) {
             nodes[i].style.background = "#ffffff";
@@ -43,10 +42,22 @@ function createTableItem(name, date, desc) {
     let itemName = document.createElement("td");
     itemName.textContent = name;
     itemName.addEventListener("dblclick", ev => {
-        let menu = document.getElementById("edit-menu");
-        menu.style.left = ev.x + "px";
-        menu.style.top = ev.y + "px";
+        updateMenuPosition(document.getElementById("edit-menu"), itemName);
+        document.getElementById("textarea").textContent = name;
+        window.addEventListener("resize", ev => {
+            updateMenuPosition(document.getElementById("edit-menu"), itemName);
+        })
     });
+
+
+    function updateMenuPosition(menu, refElement) {
+        let rec = refElement.getBoundingClientRect();
+        menu.style.left = rec.left + "px";
+        console.log(rec.top - menu.style.height/2);
+        console.log(menu.style.height);
+        menu.style.top = (rec.top) + "px";
+    }
+
 
     let itemDate = document.createElement("td");
     itemDate.textContent = date;
