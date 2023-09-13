@@ -75,7 +75,7 @@
     display: none;
 }
 .left-menu__radio-group label {
-    display: inline-block;
+    display: flex;
     cursor: pointer;
     padding: 0 15px;
     line-height: 34px;
@@ -85,8 +85,9 @@
     /*border: 1px solid #999;*/
     /*border-right: none;*/
     user-select: none;
-    font-weight: lighter;
     color: #646464;
+    font-weight: 600;
+    min-width: 120px;
 }
 
 .top-bar {
@@ -218,10 +219,8 @@
 
 
 .creating-menu-background {
-
     display: flex;
     display: none;
-
 
     justify-content: center;
     align-items: center;
@@ -236,7 +235,6 @@
     left:0;
     background: rgba(72, 72, 72, 0.5);
     z-index: 132;
-
 }
 
 .creating-menu {
@@ -279,7 +277,7 @@
 .name-input {
 }
 
-.menu-item__menu-option span {
+.submenu span {
     display: flex;
     padding-left: 10px;
     font-size: 14px;
@@ -287,36 +285,130 @@
     padding-top: 4px;
 }
 
-.menu-item__menu-option {
+.submenu {
     display: flex;
     flex-direction: column;
     padding-left: 16px;
     font-size: 14px;
-    gap: 2px;
+    /*gap: 2px;*/
     padding-bottom: 4px;
 }
+.submenu-item div {
+    width: 2px;
+    background: #caccd7;
+}
+
+.submenu-item {
+    display: flex;
+    flex-direction: row;
+}
+
+/*.table, th, td{*/
+/*    border-collapse: collapse;*/
+/*    border: 1px solid #dadada;*/
+/*    padding: 4px 10px;*/
+/*}*/
+
+/*.table th {*/
+/*    height: 22px;*/
+/*    font-size: 13px;*/
+/*    align-self: start;*/
+/*    text-align: start;*/
+/*    !*background: #eeeeee;*!*/
+/*    color: #7e7e7e;*/
+/*    font-weight: 100;*/
+/*}*/
+
+/*.table td {*/
+/*    height: 20px;*/
+/*    font-size: 14px;*/
+/*}*/
+
+/*.table {*/
+/*    width: 550px;*/
+/*    height: max-content;*/
+/*}*/
+
+/*.top-bar_table {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.top-bar {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    gap: 10px;*/
+/*}*/
+
+
+/*table design 2*/
+
+
+
+/*.table tr:nth-child(even) {*/
+/*    background: #e8eaf5;*/
+/*}*/
 
 .table, th, td{
+    border-bottom: 1px solid #dadada;
+    padding: 10px 18px;
     border-collapse: collapse;
-    border: 1px solid #dadada;
-    padding: 4px 10px;
+
 }
 
 .table th {
     height: 22px;
-    font-size: 14px;
+    font-size: 13px;
     align-self: start;
     text-align: start;
     background: #eeeeee;
+    margin: 4px;
+    color: #000000;
+    padding: 10px 18px;
 }
 
 .table td {
     height: 20px;
     font-size: 14px;
+    padding: 10px 18px;
 }
 
 .table {
-    width: 550px;
+    width: 650px;
     height: max-content;
+    border: 1px solid #dadada;
+    border-radius: 4px;
 }
 
+.top-bar_table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-menu {
+    border: 1px solid #dadada;
+    width: fit-content;
+}
+.edit-menu div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 4px;
+}
+.edit-menu {
+    padding: 4px;
+
+
+    display: flex;
+    /*display: none;*/
+
+    position:fixed;
+    margin:0;
+
+    top:0;
+    left:0;
+    /*background: rgba(72, 72, 72, 0.5);*/
+    z-index: 132;
+}

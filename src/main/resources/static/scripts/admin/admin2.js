@@ -5,6 +5,7 @@ if(sessionStorage.getItem('data')) {
     sessionStorage.setItem("data", "radio-dance-lists");
 }
 
+
 showCheckedTable();
 async function showCheckedTable() {
     if(document.getElementById("radio-dance-lists").checked) {
@@ -30,15 +31,31 @@ async function fillTable(listValues) {
 function createTableItem(name, date, desc) {
 
     let item = document.createElement("tr");
+    item.addEventListener("click", ev => {
+        console.log("bd click tr")
+        let nodes = document.getElementById("table").getElementsByTagName("tr");
+        for (let i = 0; i < nodes.length; i++) {
+            nodes[i].style.background = "#ffffff";
+        }
+        item.style.background = "#ecf0fd";
+    });
 
     let itemName = document.createElement("td");
     itemName.textContent = name;
+    itemName.addEventListener("dblclick", ev => {
+        let menu = document.getElementById("edit-menu");
+        menu.style.left = ev.x + "px";
+        menu.style.top = ev.y + "px";
+    });
 
     let itemDate = document.createElement("td");
     itemDate.textContent = date;
 
     let itemDescription = document.createElement("td");
     itemDescription.textContent = desc;
+    itemDescription.addEventListener("dblclick", ev => {
+        console.log("desc dbclick");
+    })
 
     let itemState = document.createElement("td");
     itemState.textContent = "Нет";
@@ -50,3 +67,10 @@ function createTableItem(name, date, desc) {
 
     return item;
 }
+
+var clickCount = 0;
+document.getElementById("radio-dance-lists").addEventListener("dblclick", ev => {
+    console.log("radio dbclick");
+})
+
+

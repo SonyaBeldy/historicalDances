@@ -14,7 +14,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
 <!--    <script defer th:src="@{/scripts/admin/main.js}"></script>-->
-<!--    <script defer th:src="@{/scripts/admin/item-menu.js}"></script>-->
+    <script defer th:src="@{/scripts/admin/item-menu.js}"></script>
     <script defer th:src="@{/scripts/admin/admin2.js}"></script>
 </head>
 <body>
@@ -32,10 +32,21 @@
                 <div class="radio-group-item">
                     <input type="radio" id="radio-dance-lists" name="radio" value="1">
                     <label for="radio-dance-lists">Подборки</label>
-                    <div class="menu-item__menu-option">
-                        <span>Занятия</span>
-                        <span>Мероприятия</span>
-                        <span>Прочее</span>
+                    <div class="submenu">
+                        <div class="submenu-item">
+                            <div class="side-line"></div>
+                            <span>Занятия</span>
+                        </div>
+                        <div class="submenu-item">
+                            <div class="side-line"></div>
+                            <span>Мероприятия</span>
+                        </div>
+                        <div class="submenu-item">
+                            <div class="side-line"></div>
+                            <span>Прочее</span>
+                        </div>
+                        <!--                    <span>Мероприятия</span>-->
+                        <!--                    <span>Прочее</span>-->
                     </div>
 
                 </div>
@@ -49,44 +60,85 @@
                 </div>
             </div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Название</th>
+            <div class="top-bar_table">
+                <div class="top-bar">
+                    <button class="new-item-btn" id="new-item-btn">Добавить</button>
+                </div>
+                <table id="table" class="table">
+                    <thead>
+                    <tr class="rows">
+
+                        <th>
+                            <input type="checkbox">
+                            <span>Название</span>
+
+                        </th>
                         <th>Дата</th>
                         <th>Описание</th>
                         <th>Статус</th>
                     </tr>
-                </thead>
-                <tbody id="table-items">
-                    <tr>
-                        <td>Нуар</td>
-                        <td>30 сен 2023</td>
-                        <td></td>
-                        <td>Скоро</td>
-                    </tr>
-                    <tr >
-                        <td>Кошачья вечеринка</td>
-                        <td>21 мая 2023</td>
-                        <td></td>
-                        <td>Прошел</td>
-                    </tr>
-                    <tr>
-                        <td>Кошачья вечеринка</td>
-                        <td>21 мая 2023</td>
-                        <td></td>
-                        <td>Прошел</td>
-                    </tr>
-                    <tr>
+                    </thead>
+                    <tbody id="table-items"></tbody>
+                </table>
+            </div>
 
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
+        </div>
+    </div>
 
-                    </tr>
-                </tbody>
-            </table>
+
+
+    <div class="edit-menu" id="edit-menu">
+        <label>
+            <textarea></textarea>
+        </label>
+        <div>
+            <button>Отмена</button>
+            <button>Ок</button>
+        </div>
+    </div>
+
+    <div class="creating-menu-background" id="dance-lists-add-menu-background">
+        <div class="creating-menu">
+            <div class="top-bar">
+                <span class="bold-span">Новая подборка</span>
+                <button class="more-btn" id="dance-lists-close-btn">
+                    <img src="../../images/btns/close-32.png" alt="" class="close-img">
+                </button>
+            </div>
+            <label for="list-name-input" class="input-label">Название</label>
+            <input type="text" class="name-input" id="list-name-input">
+            <button id="dance-lists-confirm-btn" class="confirm-btn">Создать</button>
+        </div>
+    </div>
+
+    <div class="creating-menu-background" id="dances-add-menu-background">
+        <div class="creating-menu">
+            <div class="top-bar">
+                <span class="bold-span">Новый танец</span>
+                <button class="more-btn" id="dances-close-btn">
+                    <img src="../../images/btns/close-32.png" alt="" class="close-img">
+                </button>
+            </div>
+            <label for="dance-name-input" class="input-label">Название</label>
+            <input type="text" class="name-input" id="dance-name-input">
+
+            <label for="dance-type" class="input-label">Тип танца</label>
+            <select id="dance-type"></select>
+            <button id="dances-confirm-btn" class="confirm-btn">Создать</button>
+        </div>
+    </div>
+
+    <div class="creating-menu-background" id="dance-types-add-menu-background">
+        <div class="creating-menu">
+            <div class="top-bar">
+                <span class="bold-span">Новый тип</span>
+                <button class="more-btn" id="dance-types-close-btn">
+                    <img src="../../images/btns/close-32.png" alt="" class="close-img">
+                </button>
+            </div>
+            <label for="dance-type-name-input" class="input-label">Название</label>
+            <input type="text" class="name-input" id="dance-type-name-input">
+            <button id="dance-types-confirm-btn" class="confirm-btn">Создать</button>
         </div>
     </div>
 </body>
