@@ -33,11 +33,11 @@ async function fillTable(listValues) {
         };
 
         let d = new Date(date).toLocaleDateString('ru-RU', options);
-        console.log(d);
         d = d.replace(',', '');
         // d = d.replace(/[а-я]/, c => c.toUpperCase());
-        d = d.replace('г.', '');
+        d = d.replace(' г.', '');
 
+        parseCustomLocalizedDateTime(d);
         let desc = listArray[i].description;
         let listContainer = document.getElementById("table-items");
         listContainer.appendChild(createTableItem(id, name, d, desc));
@@ -71,7 +71,10 @@ function createTableItem(id, name, date, desc) {
         })
 
         document.getElementById("submit").addEventListener("click", async ev1 => {
-            let obj = {id: id, name: document.getElementById("textarea").value, date: date, desc: desc};
+
+
+            ////////////////////hfhgfsf
+            let obj = {id: id, name: document.getElementById("textarea").value, date: parseCustomLocalizedDateTime(date), desc: desc};
             await fetch("http://localhost:8080/dance-list/update",
                 {
                     method: "PATCH",
@@ -81,7 +84,7 @@ function createTableItem(id, name, date, desc) {
                     body: JSON.stringify(obj)
                 });
             menu.style.display = "none";
-            // location.reload();
+            location.reload();
         })
 
         window.addEventListener("resize", ev => {
@@ -120,4 +123,24 @@ var clickCount = 0;
 document.getElementById("radio-dance-lists").addEventListener("dblclick", ev => {
 })
 
+function parseCustomLocalizedDateTime(customDateTime) {
+    const pattern = /(\d{2}) ([а-я]+) (\d{4}) в (\d{2}):(\d{2})/;
 
+    const match = customDateTime.match(pattern);
+
+    if (!match) {
+        throw new Error('Invalid custom date-time format');
+    }
+
+    const [, day, month, year, hours, minutes] = match;
+
+    let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября','ноября','декабря'];
+
+    const parsedMonth = months.indexOf(month);
+
+
+    // Create a new Date object with the parsed components
+    const parsedDate = new Date(year, parsedMonth, day, hours, minutes);
+    console.log('parsed ' + parsedDate);
+    return parsedDate;
+}
