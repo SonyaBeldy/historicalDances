@@ -399,7 +399,7 @@
     padding: 4px;
     font-family: 'Jost', 'sans-serif';
 
-    display: flex;
+    display: none;
     flex-direction: column;
     /*display: none;*/
 

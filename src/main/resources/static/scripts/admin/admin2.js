@@ -23,9 +23,24 @@ async function fillTable(listValues) {
         let id = listArray[i].id;
         let name = listArray[i].name;
         let date = listArray[i].date;
+
+        const options = {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        };
+
+        let d = new Date(date).toLocaleDateString('ru-RU', options);
+        console.log(d);
+        d = d.replace(',', '');
+        // d = d.replace(/[а-я]/, c => c.toUpperCase());
+        d = d.replace('г.', '');
+
         let desc = listArray[i].description;
         let listContainer = document.getElementById("table-items");
-        listContainer.appendChild(createTableItem(id, name, date, desc));
+        listContainer.appendChild(createTableItem(id, name, d, desc));
     }
 }
 
