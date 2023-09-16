@@ -33,6 +33,10 @@ public class DanceList {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Column(name = "time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date time;
+
     @ManyToMany(mappedBy = "danceLists")
     private List<Dance> dances;
 }
