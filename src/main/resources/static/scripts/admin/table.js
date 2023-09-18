@@ -59,13 +59,13 @@ function createElement(textContent) {
 
 class TableRow {
     _row;
-    constructor(id, name, date, time, desc) {
+    constructor(id, name, date, desc) {
         this._row = document.createElement("tr");
         this._row.setAttribute('id', id);
         this._id = id;
         this._name = createElement(name);
         this._date = createElement(this.parseDate(date));
-        this._time = createElement(time);
+        this._time = createElement(this.parseTime(date));
         this._desc = createElement(desc);
         // this._status = createElement(status);
 
@@ -81,13 +81,18 @@ class TableRow {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
-        };
+        }
         let newDate = new Date(date).toLocaleString('ru-RU', dateOptions);
         newDate = newDate.replace(' г.', '');
         return newDate;
     }
 
     parseTime(time) {
+        const timeOptions = {
+            hour: '2-digit',
+            minute: '2-digit'
+        }
+        return new Date(time).toLocaleString('ru-RU', timeOptions);
 
     }
     get id() {

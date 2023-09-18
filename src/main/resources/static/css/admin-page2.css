@@ -1,3 +1,28 @@
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.space-between {
+    justify-content: space-between;
+}
+.align-self-end {
+    align-self: end;
+}
+.light-jost {
+    font-family: 'Jost', 'sans-serif';
+    font-weight: lighter;
+}
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+.padding-top-10 {
+    padding-top: 10px;
+}
+
 .content-div {
     display: flex;
     flex-direction: column;
@@ -97,7 +122,7 @@
     font-size: 18px;
     /*gap: 20px;*/
     align-items: center;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     width: 532px;
 }
 
@@ -265,8 +290,6 @@
     background: transparent;
     border: 0;
     align-self: end;
-
-    margin-top: 20px;
 }
 
 .input-label {
@@ -275,6 +298,7 @@
 }
 
 .name-input {
+    margin-bottom: 20px;
 }
 
 .submenu span {
@@ -410,4 +434,22 @@
     left:0;
     background: rgb(231, 231, 231);
     z-index: 132;
+}
+
+.time-edit-menu {
+    display: none;
+    /*flex-direction: row;*/
+    gap: 2px;
+    font-family: 'Jost', 'sans-serif';
+    font-weight: bold;
+    border: #c7c7c7 solid 1px;
+    width: max-content;
+    padding: 8px;
+    background-color: #e7e7e7;
+
+    position:fixed;
+    margin:0;
+
+    top:0;
+    left:0;
 }
