@@ -2,6 +2,7 @@ package ru.sonyabeldy.historicaldances.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
 import ru.sonyabeldy.historicaldances.models.DanceList;
@@ -22,7 +23,7 @@ public class DanceListService {
     }
 
     public List<DanceList> findAll() {
-        return danceListRepository.findAll();
+        return danceListRepository.findAllByOrderByIdAsc();
     }
 
     public void save(DanceList danceList) {

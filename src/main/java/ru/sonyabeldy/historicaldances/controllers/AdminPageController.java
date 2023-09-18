@@ -18,6 +18,8 @@ import ru.sonyabeldy.historicaldances.services.DanceListService;
 import ru.sonyabeldy.historicaldances.services.DanceService;
 import ru.sonyabeldy.historicaldances.services.DanceTypeService;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,7 @@ public class AdminPageController {
     @ResponseBody
     @GetMapping("/dance-lists")
     public List<DanceListDTO> getAllDanceLists() {
+        System.out.println("danceListService.findAll() = " + danceListService.findAll());
         return danceListService.findAll().stream().map(this::convertToDanceListDTO).collect(Collectors.toList());
     }
 

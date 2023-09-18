@@ -35,4 +35,14 @@ public class DanceList {
 
     @ManyToMany(mappedBy = "danceLists")
     private List<Dance> dances;
+
+    @Override
+    public String toString() {
+        return "DanceList{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

@@ -151,33 +151,3 @@ class TableRow {
         this._status = value;
     }
 }
-
-class tableColumn {
-    doubleClickAction() {
-
-    }
-}
-class nameColumn extends tableColumn {
-    _clickBehavior;
-
-    get clickBehavior() {
-        return this._clickBehavior;
-    }
-
-    set clickBehavior(value) {
-        this._clickBehavior = value;
-    }
-}
-
-class dateColumn extends tableColumn {
-    doubleClickAction() {
-
-    }
-}
-
-
-class timeColumn extends tableColumn {
-    doubleClickAction() {
-        console.log("time click")
-    }
-}

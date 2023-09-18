@@ -19,7 +19,7 @@ async function showCheckedTable() {
 
 
 async function getItemList(url) {
-    return await fetch("http://localhost:8080/admin/" + url, {method: "GET"});
+    return await fetch("http://localhost:8080/" + url, {method: "GET"});
 }
 class EditMenu {
     _id;
@@ -73,8 +73,8 @@ async function fillTable(listValues) {
     document.getElementById('submit').addEventListener('click', async ev1 => {
         let newName = document.getElementById("textarea").value;
         let curRow = rows.get(nameEditMenu.id);
-        let obj = {id: nameEditMenu.id, name: newName, date: parseCustomDateTime(curRow.date.textContent), desc: 'desc'};
-        patch(obj, "dance-list/update");
+        let obj = {id: nameEditMenu.id, name: newName, date: parseCustomDateTime(curRow.date.textContent, curRow.time.textContent), desc: 'desc'};
+        patch(obj, "dance-lists/update");
         nameEditMenu.menu.style.display = "none";
         curRow.name.textContent = newName;
     })
@@ -100,7 +100,7 @@ async function fillTable(listValues) {
 
         let obj = {id: row.id, name:row.name.textContent, date: parseCustomDateTime(row.date.textContent, row.time.textContent), desc: 'desc'};
 
-        patch(obj, 'dance-list/update');
+        patch(obj, 'dance-lists/update');
         // row.time.textContent =
         // let parsedTime = new Date().toLocaleDateString("ru-RU", timeOptions);
     })
@@ -117,11 +117,11 @@ async function fillTable(listValues) {
 function nameDoubleClick(event) {
     let menu = document.getElementById("edit-menu");
     menu.style.display = "flex";
-    updateMenuPosition(nameEditMenu.menu, nameElement);
+    updateMenuPosition(nameEditMenu.menu, event.target);
 
     let nameElement = event.target;
     nameEditMenu.id = Number(nameElement.parentNode.id);
-    document.getElementById("textarea").value = nameElement.textContent;
+    document.getElementById("textarea").value = event.target.textContent;
 }
 function dateDoubleClick(event) {
     let currentDateNode = event.target;
@@ -131,7 +131,7 @@ function dateDoubleClick(event) {
             let time = row.time.textContent;
             let id = Number(currentDateNode.parentNode.id);
             let obj = {id: id, name: rows.get(id).name.textContent, date: parseCustomDateTime(parseDate, time), desc: 'desc'};
-            patch(obj, "dance-list/update");
+            patch(obj, "dance-lists/update");
             currentDateNode.textContent = parseDate;
         }  });
 }
@@ -183,8 +183,8 @@ function parseCustomDateTime(customDate, customTime) {
     let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября','ноября','декабря'];
     const parsedMonth = months.indexOf(month);
 
-    const timePatter = /(\d{2}):(\d{2})/;
-    const timeMatch = customTime.match(timePatter);
+    const timePattern = /(\d{2}):(\d{2})/;
+    const timeMatch = customTime.match(timePattern);
     if (!match) {
         throw new Error('Invalid custom time format');
     }

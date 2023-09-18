@@ -8,8 +8,11 @@ import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
 import ru.sonyabeldy.historicaldances.models.DanceList;
 import ru.sonyabeldy.historicaldances.services.DanceListService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
-@RequestMapping("/dance-list")
+@RequestMapping("/dance-lists")
 public class DanceListController {
 
     private final ModelMapper modelMapper;
@@ -29,9 +32,11 @@ public class DanceListController {
     }
 
     @GetMapping()
-    public String getAll() {
-        return "";
+    public List<DanceListDTO> getAll() {
+        System.out.println("danceListService.findAll() = " + danceListService.findAll());
+        return danceListService.findAll().stream().map(this::convertToDanceListDTO).collect(Collectors.toList());
     }
+
 
     private DanceList convertToDanceList(DanceListDTO dto) {
         return modelMapper.map(dto, DanceList.class);
