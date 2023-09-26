@@ -5,7 +5,6 @@ addEventListenerToCloseBtnById("dance-lists-close-btn", "dance-lists-add-menu-ba
 addEventListenerToCloseBtnById("dances-close-btn", "dances-add-menu-background");
 addEventListenerToCloseBtnById("dance-types-close-btn", "dance-types-add-menu-background");
 
-
 newItemBtn.addEventListener("click", (ev) => {
     let menu;
     if(document.getElementById("radio-dance-lists").checked) {

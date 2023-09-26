@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+
     <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
     <link type="text/css" rel="stylesheet" th:href="@{/css/admin-page2.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/calendar.css}" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/calendar.css}" />
+    <script defer type="text/javascript" th:src="@{/scripts/admin/server-requests.js}"></script>
+    <script defer type="text/javascript" th:src="@{/scripts/admin/menus.js}"></script>
     <script defer type="text/javascript" th:src="@{/scripts/admin/table.js}"></script>
     <script defer type="text/javascript" th:src="@{/scripts/admin/calendar.js}"></script>
+    <script defer type="text/javascript" th:src="@{/scripts/admin/new-row-menu.js}"></script>
+    <script defer type="text/javascript" th:src="@{/scripts/admin/time-edit-menu.js}"></script>
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/admin2.js}"></script>-->
 
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto:wght@300&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
-    <script defer th:src="@{/scripts/admin/item-menu.js}"></script>
-    <script defer th:src="@{/scripts/admin/time-edit-menu.js}"></script>
-    <script defer th:src="@{/scripts/admin/admin2.js}"></script>
+    <script defer type="text/javascript" th:src="@{/scripts/admin/Main.js}"></script>
 </head>
 <body>
     <header class="header">
@@ -128,6 +129,10 @@
             </div>
             <label for="list-name-input" class="input-label">Название</label>
             <input type="text" class="name-input" id="list-name-input">
+            <div class="flex-row">
+                <span id="date-span"></span>
+                <button class="calendar-btn" id="calendar-btn"></button>
+            </div>
             <button id="dance-lists-confirm-btn" class="confirm-btn">Создать</button>
         </div>
     </div>

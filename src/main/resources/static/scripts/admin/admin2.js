@@ -19,7 +19,7 @@ async function showCheckedTable() {
 
 
 async function getItemList(url) {
-    return await fetch("http://localhost:8080/" + url, {method: "GET"});
+    return await fetch( url, {method: "GET"});
 }
 class EditMenu {
     _id;
@@ -74,7 +74,7 @@ async function fillTable(listValues) {
         let newName = document.getElementById("textarea").value;
         let curRow = rows.get(nameEditMenu.id);
         let obj = {id: nameEditMenu.id, name: newName, date: parseCustomDateTime(curRow.date.textContent, curRow.time.textContent), desc: 'desc'};
-        patch(obj, "dance-lists/update");
+        patch("dance-lists/update", obj);
         nameEditMenu.menu.style.display = "none";
         curRow.name.textContent = newName;
     })
@@ -100,7 +100,7 @@ async function fillTable(listValues) {
 
         let obj = {id: row.id, name:row.name.textContent, date: parseCustomDateTime(row.date.textContent, row.time.textContent), desc: 'desc'};
 
-        patch(obj, 'dance-lists/update');
+        patch('dance-lists/update', obj);
         // row.time.textContent =
         // let parsedTime = new Date().toLocaleDateString("ru-RU", timeOptions);
     })
@@ -131,7 +131,7 @@ function dateDoubleClick(event) {
             let time = row.time.textContent;
             let id = Number(currentDateNode.parentNode.id);
             let obj = {id: id, name: rows.get(id).name.textContent, date: parseCustomDateTime(parseDate, time), desc: 'desc'};
-            patch(obj, "dance-lists/update");
+            patch("dance-lists/update", obj);
             currentDateNode.textContent = parseDate;
         }  });
 }
@@ -158,16 +158,18 @@ function updateMenuPosition(menu, refElement) {
     menu.style.left = rec.left + "px";
     menu.style.top = (rec.top) + "px";
 }
-async function patch(obj, url) {
-    await fetch("http://localhost:8080/" + url,
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj)
-        });
-}
+
+//TODO уже есть в server-request
+// async function patch(url, obj) {
+//     await fetch("http://localhost:8080/" + url,
+//         {
+//             method: "PATCH",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(obj)
+//         });
+// }
 
 var clickCount = 0;
 document.getElementById("radio-dance-lists").addEventListener("dblclick", ev => {
