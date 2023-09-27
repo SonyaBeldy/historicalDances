@@ -58,7 +58,7 @@ class DanceListData {
 
 class DanceListTableRow { //view
 // , calendarEditMenu, timeEditMenu, descEditMenu
-    constructor(danceList, nameEditMenu) {
+    constructor(danceList, nameEditMenu, calendarEditMenu) {
         this._danceList = danceList;
         this._danceList.addObserver(this);
 
@@ -76,7 +76,7 @@ class DanceListTableRow { //view
 
         this._rowHtml.appendChild(this._descHtml);
         this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, danceList)})
-        // this._dateHtml.addEventListener('click', ev => {calendarEditMenu.open(this._dateHtml)})
+        this._dateHtml.addEventListener('click', ev => {calendarEditMenu.open(this._dateHtml)})
         // this._timeHtml.addEventListener('click', ev => {timeEditMenu.open(this._timeHtml)})
 
         // this._descHtml.addEventListener('click', ev => {descEditMenu.open(this._descHtml)})
@@ -84,8 +84,10 @@ class DanceListTableRow { //view
 
     update(danceList) {
         this._nameHtml.textContent = danceList.name;
-        this._dateHtml.textContent = danceList.date;
-        this._timeHtml.textContent = danceList.date;
+
+        let dateTimeConverter = new DateTimeConverter();
+        this._dateHtml.textContent = dateTimeConverter.parseToSimpleDateFromServer(danceList.date);
+        this._timeHtml.textContent = dateTimeConverter.parseToSimpleTimeFromServer(danceList.date);
         this._descHtml.textContent = danceList.desc;
     }
 

@@ -49,8 +49,12 @@ class NameEditMenu extends EditMenu2 {
         this._updatePosition(nameTableDataHtml);
         this._show();
     }
+}
 
+class CalendarEditMenu extends EditMenu2 {
 
+    open() {
+        super.open();
 
-
+    }
 }
