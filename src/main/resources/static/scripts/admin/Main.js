@@ -58,7 +58,7 @@ class DanceListData {
 
 class DanceListTableRow { //view
 // , calendarEditMenu, timeEditMenu, descEditMenu
-    constructor(danceList, nameEditMenu, calendarEditMenu) {
+    constructor(danceList, nameEditMenu, calendarEditMenu, timeEditMenu) {
         this._danceList = danceList;
         this._danceList.addObserver(this);
 
@@ -76,8 +76,8 @@ class DanceListTableRow { //view
 
         this._rowHtml.appendChild(this._descHtml);
         this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, this._danceList)})
-        this._dateHtml.addEventListener('click', ev => {calendarEditMenu.open(this._dateHtml, this._danceList)})
-        // this._timeHtml.addEventListener('click', ev => {timeEditMenu.open(this._timeHtml)})
+        this._dateHtml.addEventListener('dblclick', ev => {calendarEditMenu.open(this._dateHtml, this._danceList)})
+        this._timeHtml.addEventListener('dblclick', ev => {timeEditMenu.open(this._timeHtml, this._danceList)})
 
         // this._descHtml.addEventListener('click', ev => {descEditMenu.open(this._descHtml)})
     }
@@ -138,14 +138,13 @@ function updateDanceListTableRows() {
     let tbody = document.getElementById('table-items');
     let nameEditMenu = new NameEditMenu();
     let dateEditMenu = new DateEditMenu();
+    let timeEditMenu = new TimeEditMenu();
     tbody.innerHTML = "";
     for (let i = 0; i < danceLists.length; i++) {
-        let tableRow = new DanceListTableRow(danceLists[i], nameEditMenu, dateEditMenu);
+        let tableRow = new DanceListTableRow(danceLists[i], nameEditMenu, dateEditMenu, timeEditMenu);
         tbody.appendChild(tableRow.rowHtml);
     }
 }
-
-
 
 let danceLists = [];
 
