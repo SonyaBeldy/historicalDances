@@ -13,12 +13,8 @@ import java.util.List;
 public class DanceListDTO {
 
     private int id;
-
     private String name;
-
+    private Timestamp date;
     private String description;
 
-    private Timestamp date;
-
-//    private List<DanceDTO> dances;
 }

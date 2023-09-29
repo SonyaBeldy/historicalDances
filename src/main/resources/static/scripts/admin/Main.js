@@ -75,8 +75,8 @@ class DanceListTableRow { //view
         this._rowHtml.appendChild(this._timeHtml);
 
         this._rowHtml.appendChild(this._descHtml);
-        this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, danceList)})
-        this._dateHtml.addEventListener('click', ev => {calendarEditMenu.open(this._dateHtml)})
+        this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, this._danceList)})
+        this._dateHtml.addEventListener('click', ev => {calendarEditMenu.open(this._dateHtml, this._danceList)})
         // this._timeHtml.addEventListener('click', ev => {timeEditMenu.open(this._timeHtml)})
 
         // this._descHtml.addEventListener('click', ev => {descEditMenu.open(this._descHtml)})
@@ -85,9 +85,8 @@ class DanceListTableRow { //view
     update(danceList) {
         this._nameHtml.textContent = danceList.name;
 
-        let dateTimeConverter = new DateTimeConverter();
-        this._dateHtml.textContent = dateTimeConverter.parseToSimpleDateFromServer(danceList.date);
-        this._timeHtml.textContent = dateTimeConverter.parseToSimpleTimeFromServer(danceList.date);
+        this._dateHtml.textContent = DateTimeConverter.dateToCustomDateString(danceList.date);
+        this._timeHtml.textContent = DateTimeConverter.dateToCustomTimeString(danceList.date);
         this._descHtml.textContent = danceList.desc;
     }
 
@@ -118,8 +117,8 @@ class DanceListOnServer {
         danceList.addObserver(this);
     }
     async update(danceList) {
-        console.log('update');
-        await patch('dance-lists/update', danceList);
+        //TODO why obj works and mapped is not
+        await patch("dance-lists/update", Mapper.toDanceListDTOJson(danceList));
     }
 }
 
@@ -128,7 +127,7 @@ async function updateDanceList(danceListsJSON) {
     for (let i = 0; i < danceListsJSON.length; i++) {
         let id = danceListsJSON[i].id;
         let name = danceListsJSON[i].name;
-        let date = danceListsJSON[i].date;
+        let date = new Date(danceListsJSON[i].date);
         let desc = danceListsJSON[i].description;
         resultList.push(new DanceListData(id, name, date, desc));
     }
@@ -138,9 +137,10 @@ async function updateDanceList(danceListsJSON) {
 function updateDanceListTableRows() {
     let tbody = document.getElementById('table-items');
     let nameEditMenu = new NameEditMenu();
+    let dateEditMenu = new DateEditMenu();
     tbody.innerHTML = "";
     for (let i = 0; i < danceLists.length; i++) {
-        let tableRow = new DanceListTableRow(danceLists[i], nameEditMenu);
+        let tableRow = new DanceListTableRow(danceLists[i], nameEditMenu, dateEditMenu);
         tbody.appendChild(tableRow.rowHtml);
     }
 }

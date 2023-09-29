@@ -51,10 +51,21 @@ class NameEditMenu extends EditMenu2 {
     }
 }
 
-class CalendarEditMenu extends EditMenu2 {
+class DateEditMenu extends EditMenu2 {
 
-    open() {
+    open(dateTableDataHtml, data) {
         super.open();
-
+        xCal(dateTableDataHtml, {lang: 'ru', fn: (date, ob) => {
+            data.date = DateTimeConverter.xCalDateToDate(date);
+            }});
     }
 }
+
+
+function wrap(fn) {
+    fn();
+}
+
+wrap(() => {
+
+})

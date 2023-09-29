@@ -1,17 +1,16 @@
 class DateTimeConverter {
 
 
-    parseToSimpleDateFromServer(dateOnServer) {
-        let simpleDate = new Date(dateOnServer);
+    static dateToCustomDateString(date) {
         const dateOptions = {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
         };
-        return simpleDate.toLocaleDateString('ru-RU', dateOptions).replace('г.', '');
+        return date.toLocaleDateString('ru-RU', dateOptions).replace('г.', '');
     }
 
-    parseToSimpleDateFromCalendar(date) {
+    static xCalDateToDate(date) {
         const pattern = /(\d{2}).(\d{2}).(\d{4})/;
         const match = date.match(pattern);
 
@@ -19,17 +18,14 @@ class DateTimeConverter {
             throw new Error('Invalid custom date-time format');
         }
         const [, day, month, year] = match;
-        const dateOptions = {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-        };
-        let parsedDate = new Date(year, month - 1, day).toLocaleDateString("ru-RU", dateOptions);
-        parsedDate = parsedDate.replace(' г.', '');
-        return parsedDate;
+        return new Date(year, month - 1, day);
     }
 
-    parseToSimpleTimeFromServer(dateOnServer) {
+    // static xCalcToCustomDate(date) {
+    //     return this.dateToCustomDateString(this.xCalDateToDate(date));
+    // }
+
+    static dateToCustomTimeString(dateOnServer) {
         const timeOptions = {
             hour: '2-digit',
             minute: '2-digit'
