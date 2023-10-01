@@ -58,7 +58,7 @@ class DanceListData {
 
 class DanceListTableRow { //view
 // , calendarEditMenu, timeEditMenu, descEditMenu
-    constructor(danceList, nameEditMenu, calendarEditMenu, timeEditMenu) {
+    constructor(danceList, nameEditMenu, calendarEditMenu, timeEditMenu, descEditMenu) {
         this._danceList = danceList;
         this._danceList.addObserver(this);
 
@@ -73,13 +73,12 @@ class DanceListTableRow { //view
         this._rowHtml.appendChild(this._nameHtml);
         this._rowHtml.appendChild(this._dateHtml);
         this._rowHtml.appendChild(this._timeHtml);
-
         this._rowHtml.appendChild(this._descHtml);
-        this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, this._danceList)})
-        this._dateHtml.addEventListener('dblclick', ev => {calendarEditMenu.open(this._dateHtml, this._danceList)})
-        this._timeHtml.addEventListener('dblclick', ev => {timeEditMenu.open(this._timeHtml, this._danceList)})
 
-        // this._descHtml.addEventListener('click', ev => {descEditMenu.open(this._descHtml)})
+        this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, this._danceList, 'name')})
+        this._dateHtml.addEventListener('dblclick', ev => {calendarEditMenu.open(this._dateHtml, this._danceList, 'date')})
+        this._timeHtml.addEventListener('dblclick', ev => {timeEditMenu.open(this._timeHtml, this._danceList, 'date')})
+        this._descHtml.addEventListener('dblclick', ev => {descEditMenu.open(this._descHtml, this._danceList, 'desc')})
     }
 
     update(danceList) {
@@ -136,12 +135,12 @@ async function updateDanceList(danceListsJSON) {
 
 function updateDanceListTableRows() {
     let tbody = document.getElementById('table-items');
-    let nameEditMenu = new NameEditMenu();
+    let textEditMenu = new TextEditMenu();
     let dateEditMenu = new DateEditMenu();
     let timeEditMenu = new TimeEditMenu();
     tbody.innerHTML = "";
     for (let i = 0; i < danceLists.length; i++) {
-        let tableRow = new DanceListTableRow(danceLists[i], nameEditMenu, dateEditMenu, timeEditMenu);
+        let tableRow = new DanceListTableRow(danceLists[i], textEditMenu, dateEditMenu, timeEditMenu, textEditMenu);
         tbody.appendChild(tableRow.rowHtml);
     }
 }

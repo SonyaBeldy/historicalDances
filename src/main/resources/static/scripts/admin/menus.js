@@ -1,8 +1,8 @@
 class EditMenu2 {
     _menuHtml;
-
-    constructor() {}
-    open() {}
+    open() {
+        throw new Error('Call not implemented method');
+    }
     _updatePosition(refElement) {
         let rec = refElement.getBoundingClientRect();
         this._menuHtml.style.left = rec.left + "px";
@@ -17,15 +17,15 @@ class EditMenu2 {
     }
 }
 
-class NameEditMenu extends EditMenu2 {
-    static _instance;
+class TextEditMenu extends EditMenu2 {
     _obj;
+    _fieldToChange;
     constructor() {
-        if(NameEditMenu._instance != null) {
-            return NameEditMenu._instance;
-        }
         super();
-        NameEditMenu._instance = this;
+        if(TextEditMenu._instance) {
+            return TextEditMenu._instance;
+        }
+        TextEditMenu._instance = this;
         this._menuHtml = document.getElementById('edit-menu');
         this._textAreaHtml = document.getElementById('textarea');
         this._cancelBtnHtml = document.getElementById('cancel');
@@ -35,17 +35,15 @@ class NameEditMenu extends EditMenu2 {
             this._hide();
         });
         this._submitBtnHtml.addEventListener('click', ev => {
-            console.log(this._obj);
-            this._obj.name = this._textAreaHtml.value;
-            console.log(this._obj);
+            this._obj[this._fieldToChange] = this._textAreaHtml.value;
             this._hide();
         });
 
     }
-
-    open(nameTableDataHtml, obj) {
+    open(nameTableDataHtml, obj, fieldToChange) {
         this._obj = obj;
-        this._textAreaHtml.textContent = obj.name;
+        this._fieldToChange = fieldToChange;
+        this._textAreaHtml.value = obj[fieldToChange];
         this._updatePosition(nameTableDataHtml);
         this._show();
     }
@@ -92,4 +90,5 @@ class TimeEditMenu extends EditMenu2 {
         this._updatePosition(timeTableDateHtml);
         this._show();
     }
+
 }
