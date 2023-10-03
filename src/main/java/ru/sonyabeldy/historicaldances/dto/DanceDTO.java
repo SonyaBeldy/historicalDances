@@ -1,8 +1,6 @@
 package ru.sonyabeldy.historicaldances.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
-import ru.sonyabeldy.historicaldances.models.DanceType;
 
 @Getter
 @Setter
@@ -10,6 +8,7 @@ import ru.sonyabeldy.historicaldances.models.DanceType;
 @AllArgsConstructor
 public class DanceDTO {
 
+    private int id;
 
     private String name;
 
@@ -19,5 +18,5 @@ public class DanceDTO {
 
     private String description;
 
-    private int difficult;
+    private int difficulty;
 }

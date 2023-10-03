@@ -25,15 +25,12 @@ public class DanceListController {
 
     @PatchMapping("/update")
     public ResponseEntity<HttpStatus> update(@RequestBody DanceListDTO dto) {
-
-        System.out.println("update server");
         danceListService.update(dto.getId(), convertToDanceList(dto));
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping()
     public List<DanceListDTO> getAll() {
-        System.out.println("danceListService.findAll() = " + danceListService.findAll());
         return danceListService.findAll().stream().map(this::convertToDanceListDTO).collect(Collectors.toList());
     }
 

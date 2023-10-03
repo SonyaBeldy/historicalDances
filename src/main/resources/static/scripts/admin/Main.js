@@ -57,7 +57,6 @@ class DanceListData {
 }
 
 class DanceListTableRow { //view
-// , calendarEditMenu, timeEditMenu, descEditMenu
     constructor(danceList, nameEditMenu, calendarEditMenu, timeEditMenu, descEditMenu) {
         this._danceList = danceList;
         this._danceList.addObserver(this);
@@ -88,24 +87,6 @@ class DanceListTableRow { //view
         this._timeHtml.textContent = DateTimeConverter.dateToCustomTimeString(danceList.date);
         this._descHtml.textContent = danceList.desc;
     }
-
-
-    get nameHtml() {
-        return this._nameHtml;
-    }
-
-    get dateHtml() {
-        return this._dateHtml;
-    }
-
-    get timeHtml() {
-        return this._timeHtml;
-    }
-
-    get descHtml() {
-        return this._descHtml;
-    }
-
     get rowHtml() {
         return this._rowHtml;
     }
@@ -139,19 +120,60 @@ function updateDanceListTableRows() {
     let dateEditMenu = new DateEditMenu();
     let timeEditMenu = new TimeEditMenu();
     tbody.innerHTML = "";
-    for (let i = 0; i < danceLists.length; i++) {
-        let tableRow = new DanceListTableRow(danceLists[i], textEditMenu, dateEditMenu, timeEditMenu, textEditMenu);
+    for (let i = 0; i < danceListsData.length; i++) {
+        let tableRow = new DanceListTableRow(danceListsData[i], textEditMenu, dateEditMenu, timeEditMenu, textEditMenu);
         tbody.appendChild(tableRow.rowHtml);
     }
 }
 
-let danceLists = [];
+async function updateDances(dancesJson) {
+    let dancesDataList = [];
+    for (let i = 0; i < dancesJson.length; i++) {
+        let id = dancesJson[i].id;
+        let name = dancesJson[i].name;
+        let danceType = dancesJson[i].type;
+        let videoLink = dancesJson[i].videoLink;
+        let desc = dancesJson[i].description;
+        let difficulty = dancesJson[i].difficulty;
+
+        dancesDataList.push(new DanceData(id, name, danceType, videoLink, desc, difficulty));
+    }
+    return dancesDataList;
+}
+
+function updateDancesTableRows() {
+    // let tbody = document.getElementById('table-items');
+
+    let newTable = document.createElement('table');
+    let tbody = document.createElement('tbody');
+
+    let tableDiv = document.getElementById('top-bar_table');
+    tableDiv.classList.add('top-bar_table');
+
+    newTable.appendChild(tbody);
+    tableDiv.appendChild(newTable);
+
+
+    tbody.innerHTML = '';
+    for (let i = 0; i < dancesData.length; i++) {
+        let tableRow = new DanceTableRow(dancesData[i]);
+        tbody.appendChild(tableRow.rowHtml);
+    }
+}
+let danceListsData = [];
+let dancesData = [];
 
 async function main() {
-    danceLists = await updateDanceList(await getDanceListJSON());
+    danceListsData = await updateDanceList(await getDanceListJSON());
     updateDanceListTableRows();
-    for (let i = 0; i < danceLists.length; i++) {
-        new DanceListOnServer(danceLists[i]);
+    for (let i = 0; i < danceListsData.length; i++) {
+        new DanceListOnServer(danceListsData[i]);
+    }
+
+    dancesData = await updateDances(await getDancesJSON());
+    updateDancesTableRows();
+    for (let i = 0; i < dancesData.length; i++) {
+        new DanceOnServer(dancesData[i]);
     }
 }
 
