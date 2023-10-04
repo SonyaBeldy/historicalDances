@@ -145,11 +145,17 @@ function updateDancesTableRows() {
     // let tbody = document.getElementById('table-items');
 
     let newTable = document.createElement('table');
+    newTable.classList.add('table');
     let tbody = document.createElement('tbody');
+    let headersRow = new DanceTableHeadersRow();
+    headersRow._rowHtml.classList.add('rows');
+    let thead = document.createElement('thead');
+    thead.appendChild(headersRow.rowHtml);
 
     let tableDiv = document.getElementById('top-bar_table');
     tableDiv.classList.add('top-bar_table');
 
+    newTable.appendChild(thead);
     newTable.appendChild(tbody);
     tableDiv.appendChild(newTable);
 
@@ -163,6 +169,13 @@ function updateDancesTableRows() {
 let danceListsData = [];
 let dancesData = [];
 
+async function fillDanceTable() {
+    dancesData = await updateDances(await getDancesJSON());
+    updateDancesTableRows();
+    for (let i = 0; i < dancesData.length; i++) {
+        new DanceOnServer(dancesData[i]);
+    }
+}
 async function main() {
     danceListsData = await updateDanceList(await getDanceListJSON());
     updateDanceListTableRows();
@@ -170,11 +183,10 @@ async function main() {
         new DanceListOnServer(danceListsData[i]);
     }
 
-    dancesData = await updateDances(await getDancesJSON());
-    updateDancesTableRows();
-    for (let i = 0; i < dancesData.length; i++) {
-        new DanceOnServer(dancesData[i]);
-    }
+    let danceTable = new Dt
+
+    await fillDanceTable();
+
 }
 
 main();
