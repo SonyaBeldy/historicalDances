@@ -1,6 +1,6 @@
 class DanceTableHeadersRow {
 
-    _rowHtml;
+    _html;
 
     _nameHeaderHtml;
     _typeHeaderHtml;
@@ -22,23 +22,23 @@ class DanceTableHeadersRow {
         this._descriptionHeaderHtml.textContent = 'Описание';
         this._difficultyHeaderHtml.textContent = 'Сложность';
 
-        this._rowHtml = document.createElement('tr');
-        this._rowHtml.appendChild(this._nameHeaderHtml);
-        this._rowHtml.appendChild(this._typeHeaderHtml);
-        this._rowHtml.appendChild(this._videoLinkHeaderHtml);
-        this._rowHtml.appendChild(this._descriptionHeaderHtml);
-        this._rowHtml.appendChild(this._difficultyHeaderHtml);
+        this._html = document.createElement('tr');
+        this._html.appendChild(this._nameHeaderHtml);
+        this._html.appendChild(this._typeHeaderHtml);
+        this._html.appendChild(this._videoLinkHeaderHtml);
+        this._html.appendChild(this._descriptionHeaderHtml);
+        this._html.appendChild(this._difficultyHeaderHtml);
 
-        this._rowHtml.classList.add('table-row');
+        this._html.classList.add('table-row');
     }
 
-    get rowHtml() {
-        return this._rowHtml;
+    get html() {
+        return this._html;
     }
 }
 
 class DanceListTableHeadersRow {
-    _rowHtml;
+    _html;
 
     _nameHeaderHtml;
     _dateHeaderHtml;
@@ -52,26 +52,26 @@ class DanceListTableHeadersRow {
         this._descriptionHeaderHtml = document.createElement('th');
 
         this._nameHeaderHtml.textContent = 'Название';
-        this._dateHeaderHtml.textContent = 'Тип';
-        this._timeHeaderHtml.textContent = 'Ссылка';
+        this._dateHeaderHtml.textContent = 'Дата';
+        this._timeHeaderHtml.textContent = 'Время';
         this._descriptionHeaderHtml.textContent = 'Описание';
 
-        this._rowHtml = document.createElement('tr');
-        this._rowHtml.appendChild(this._nameHeaderHtml);
-        this._rowHtml.appendChild(this._dateHeaderHtml);
-        this._rowHtml.appendChild(this._timeHeaderHtml);
-        this._rowHtml.appendChild(this._descriptionHeaderHtml);
+        this._html = document.createElement('tr');
+        this._html.appendChild(this._nameHeaderHtml);
+        this._html.appendChild(this._dateHeaderHtml);
+        this._html.appendChild(this._timeHeaderHtml);
+        this._html.appendChild(this._descriptionHeaderHtml);
 
-        this._rowHtml.classList.add('table-row');
+        this._html.classList.add('table-row');
     }
 
-    get rowHtml() {
-        return this._rowHtml;
+    get html() {
+        return this._html;
     }
 }
 
 class DanceTypeTableHeadersRow {
-    _rowHtml;
+    _html;
     _nameHeaderHtml;
 
     constructor() {
@@ -83,14 +83,14 @@ class DanceTypeTableHeadersRow {
 
         this._nameHeaderHtml.textContent = 'Название';
 
-        this._rowHtml = document.createElement('tr');
-        this._rowHtml.appendChild(this._nameHeaderHtml);
+        this._html = document.createElement('tr');
+        this._html.appendChild(this._nameHeaderHtml);
 
-        this._rowHtml.classList.add('table-row');
+        this._html.classList.add('table-row');
 
     }
 
-    get rowHtml() {
-        return this._rowHtml;
+    get html() {
+        return this._html;
     }
 }

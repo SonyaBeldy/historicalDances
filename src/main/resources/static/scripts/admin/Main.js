@@ -148,9 +148,9 @@ function updateDancesTableRows() {
     newTable.classList.add('table');
     let tbody = document.createElement('tbody');
     let headersRow = new DanceTableHeadersRow();
-    headersRow._rowHtml.classList.add('rows');
+    headersRow._html.classList.add('rows');
     let thead = document.createElement('thead');
-    thead.appendChild(headersRow.rowHtml);
+    thead.appendChild(headersRow.html);
 
     let tableDiv = document.getElementById('top-bar_table');
     tableDiv.classList.add('top-bar_table');
@@ -168,6 +168,7 @@ function updateDancesTableRows() {
 }
 let danceListsData = [];
 let dancesData = [];
+let danceTypesData = [];
 
 async function fillDanceTable() {
     dancesData = await updateDances(await getDancesJSON());
@@ -178,14 +179,51 @@ async function fillDanceTable() {
 }
 async function main() {
     danceListsData = await updateDanceList(await getDanceListJSON());
-    updateDanceListTableRows();
-    for (let i = 0; i < danceListsData.length; i++) {
-        new DanceListOnServer(danceListsData[i]);
-    }
+    dancesData = await updateDances(await getDancesJSON());
 
-    let danceTable = new Dt
+    // updateDanceListTableRows();
+    // for (let i = 0; i < danceListsData.length; i++) {
+    //     new DanceListOnServer(danceListsData[i]);
+    // }
 
-    await fillDanceTable();
+    let danceTable = new DanceTable(new DanceTableHeadersRow(), new DanceTableBody(dancesData));
+    let danceListTable = new DanceListTable(new DanceListTableHeadersRow(), new DanceListTableBody(danceListsData));
+    let danceTypeTable = new DanceTypeTable(new DanceTypeTableHeadersRow(), new DanceTypesTableBody(danceTypesData));
+
+    let tableParentNode = document.getElementById('top-bar_table');
+
+    danceListTable.tableHtml.style.display = 'none';
+    tableParentNode.appendChild(danceListTable.tableHtml);
+
+    danceTable.tableHtml.style.display = 'none';
+    tableParentNode.appendChild(danceTable.tableHtml);
+
+    danceTypeTable.tableHtml.style.display = 'none';
+    tableParentNode.appendChild(danceTypeTable.tableHtml);
+
+
+    document.getElementById('radio-dance-lists').addEventListener('change', ev => {
+        console.log('dance list');
+        danceListTable.tableHtml.style.display = 'table';
+        danceTypeTable.tableHtml.style.display = 'none';
+        danceTable.tableHtml.style.display = 'none';
+    });
+    document.getElementById('radio-dances').addEventListener('change', ev => {
+        console.log('dance list');
+        danceListTable.tableHtml.style.display = 'none';
+        danceTypeTable.tableHtml.style.display = 'none';
+        danceTable.tableHtml.style.display = 'table';
+    });
+    document.getElementById('radio-dance-types').addEventListener('change', ev => {
+        console.log('dance list');
+        danceTypeTable.tableHtml.style.display = 'table';
+        danceListTable.tableHtml.style.display = 'none';
+        danceTable.tableHtml.style.display = 'none';
+    })
+
+}
+
+function hideAllTables() {
 
 }
 
