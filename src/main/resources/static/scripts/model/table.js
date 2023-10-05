@@ -81,8 +81,8 @@ class DanceTypesTableBody {
     constructor(danceTypesData) {
         this._html = document.createElement('tbody');
         for (let i = 0; i < danceTypesData.length; i++) {
-            let tableRow = new DanceListTableRow(danceTypesData[i]);
-            this._html.appendChild(tableRow.rowHtml);
+            let tableRow = new DanceTypeTableRow(danceTypesData[i]);
+            this._html.appendChild(tableRow.html);
         }
     }
 

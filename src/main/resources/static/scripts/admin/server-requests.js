@@ -28,6 +28,14 @@ async function patch(url, obj) {
         });
 }
 
+async function _getDanceTypes() {
+    return await fetch('dance-types', {method:'GET'});
+}
+async function getDanceTypesJSON(){
+    let dancesResponse = await _getDanceTypes();
+    return await dancesResponse.json();
+}
+
 
 async function updateDanceList(danceList) {
     await patch('dance-lists/update', danceList);

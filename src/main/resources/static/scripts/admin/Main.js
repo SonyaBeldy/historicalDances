@@ -65,14 +65,14 @@ class DanceListTableRow { //view
         this._dateHtml = document.createElement('td');
         this._timeHtml = document.createElement('td');
         this._descHtml = document.createElement('td');
-        this._rowHtml = document.createElement('tr');
+        this._html = document.createElement('tr');
 
         this.update(this._danceList);
 
-        this._rowHtml.appendChild(this._nameHtml);
-        this._rowHtml.appendChild(this._dateHtml);
-        this._rowHtml.appendChild(this._timeHtml);
-        this._rowHtml.appendChild(this._descHtml);
+        this._html.appendChild(this._nameHtml);
+        this._html.appendChild(this._dateHtml);
+        this._html.appendChild(this._timeHtml);
+        this._html.appendChild(this._descHtml);
 
         this._nameHtml.addEventListener('dblclick', ev => {nameEditMenu.open(this._nameHtml, this._danceList, 'name')})
         this._dateHtml.addEventListener('dblclick', ev => {calendarEditMenu.open(this._dateHtml, this._danceList, 'date')})
@@ -88,7 +88,7 @@ class DanceListTableRow { //view
         this._descHtml.textContent = danceList.desc;
     }
     get rowHtml() {
-        return this._rowHtml;
+        return this._html;
     }
 }
 
@@ -131,7 +131,7 @@ async function updateDances(dancesJson) {
     for (let i = 0; i < dancesJson.length; i++) {
         let id = dancesJson[i].id;
         let name = dancesJson[i].name;
-        let danceType = dancesJson[i].type;
+        let danceType = dancesJson[i].type.name;
         let videoLink = dancesJson[i].videoLink;
         let desc = dancesJson[i].description;
         let difficulty = dancesJson[i].difficulty;
@@ -140,46 +140,24 @@ async function updateDances(dancesJson) {
     }
     return dancesDataList;
 }
+async function updateDanceTypes(danceTypesJson) {
+    let danceTypesDataList = [];
+    for (let i = 0; i < danceTypesJson.length; i++) {
+        let name = danceTypesJson.name;
 
-function updateDancesTableRows() {
-    // let tbody = document.getElementById('table-items');
-
-    let newTable = document.createElement('table');
-    newTable.classList.add('table');
-    let tbody = document.createElement('tbody');
-    let headersRow = new DanceTableHeadersRow();
-    headersRow._html.classList.add('rows');
-    let thead = document.createElement('thead');
-    thead.appendChild(headersRow.html);
-
-    let tableDiv = document.getElementById('top-bar_table');
-    tableDiv.classList.add('top-bar_table');
-
-    newTable.appendChild(thead);
-    newTable.appendChild(tbody);
-    tableDiv.appendChild(newTable);
-
-
-    tbody.innerHTML = '';
-    for (let i = 0; i < dancesData.length; i++) {
-        let tableRow = new DanceTableRow(dancesData[i]);
-        tbody.appendChild(tableRow.rowHtml);
+        danceTypesDataList.push(new DanceTypeData(name));
     }
+    return danceTypesDataList;
 }
+
 let danceListsData = [];
 let dancesData = [];
 let danceTypesData = [];
 
-async function fillDanceTable() {
-    dancesData = await updateDances(await getDancesJSON());
-    updateDancesTableRows();
-    for (let i = 0; i < dancesData.length; i++) {
-        new DanceOnServer(dancesData[i]);
-    }
-}
 async function main() {
     danceListsData = await updateDanceList(await getDanceListJSON());
     dancesData = await updateDances(await getDancesJSON());
+    danceTypesData = await updateDanceTypes(await getDanceTypesJSON());
 
     // updateDanceListTableRows();
     // for (let i = 0; i < danceListsData.length; i++) {

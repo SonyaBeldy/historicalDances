@@ -10,7 +10,7 @@ class DanceData {
         this._difficulty = difficulty;
     }
 
-    _update() {
+    _notify() {
         for (let i = 0; i < this._observers.length; i++) {
             this._observers[i].update(this);
         }
@@ -27,7 +27,7 @@ class DanceData {
 
     set id(value) {
         this._id = value;
-        this._update();
+        this._notify();
     }
 
     get name() {
@@ -36,7 +36,7 @@ class DanceData {
 
     set name(value) {
         this._name = value;
-        this._update();
+        this._notify();
     }
 
     get danceType() {
@@ -45,7 +45,7 @@ class DanceData {
 
     set danceType(value) {
         this._danceType = value;
-        this._update();
+        this._notify();
     }
 
     get videoLink() {
@@ -54,7 +54,7 @@ class DanceData {
 
     set videoLink(value) {
         this._videoLink = value;
-        this._update();
+        this._notify();
     }
 
     get desc() {
@@ -63,7 +63,7 @@ class DanceData {
 
     set desc(value) {
         this._desc = value;
-        this._update();
+        this._notify();
     }
 
     get difficulty() {
@@ -72,7 +72,7 @@ class DanceData {
 
     set difficulty(value) {
         this._difficulty = value;
-        this._update();
+        this._notify();
     }
 }
 

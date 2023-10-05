@@ -12,22 +12,26 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/admin-page2.css}">
     <link type="text/css" rel="stylesheet" th:href="@{/css/calendar.css}" />
 
-    <script defer type="text/javascript" th:src="@{/scripts/admin/server-requests.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/utils/date-time-converter.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/admin/menus.js}"></script>
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/server-requests.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/utils/date-time-converter.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/menus.js}"></script>-->
 
-    <script defer type="text/javascript" th:src="@{/scripts/dto/mapper.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/dto/dance-list-dto.js}"></script>
+<!--    <script defer type="text/javascript" th:src="@{/scripts/dto/mapper.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/dto/dance-list-dto.js}"></script>-->
 
-    <script defer type="text/javascript" th:src="@{/scripts/admin/calendar.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/admin/new-row-menu.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/admin/time-edit-menu.js}"></script>
-<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/admin2.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/calendar.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/new-row-menu.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/time-edit-menu.js}"></script>-->
+<!--&lt;!&ndash;    <script defer type="text/javascript" th:src="@{/scripts/admin/admin2.js}"></script>&ndash;&gt;-->
 
-    <script defer type="text/javascript" th:src="@{/scripts/model/dance/dance.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/model/dance-table-header.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/model/table.js}"></script>
-    <script defer type="text/javascript" th:src="@{/scripts/admin/Main.js}"></script>
+<!--    <script defer type="text/javascript" th:src="@{/scripts/model/dance.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/model/dance-type.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/model/dance-table-header.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/model/table.js}"></script>-->
+<!--    <script defer type="text/javascript" th:src="@{/scripts/admin/Main.js}"></script>-->
+
+        <script defer type="text/javascript" th:src="@{/scripts/typescript/view.js}"></script>
+
 </head>
 <body>
     <header class="header">
@@ -75,6 +79,12 @@
             <div id="top-bar_table" class="top-bar_table">
                 <div class="top-bar">
                     <button class="new-item-btn" id="new-item-btn">Добавить</button>
+                </div>
+                <div class="top-bar">
+                    <button class="new-item-btn" id="delete-btn">Удалить</button>
+                </div>
+                <div id="table-container">
+
                 </div>
 <!--                <table id="table" class="table">-->
 <!--                    <thead>-->
