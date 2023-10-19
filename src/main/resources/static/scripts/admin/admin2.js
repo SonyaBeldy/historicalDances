@@ -1,4 +1,4 @@
-setCheckedTab();
+etCheckedTab();
 showCheckedTable();
 let rows = new Map();
 function setCheckedTab() {

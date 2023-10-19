@@ -1,5 +1,6 @@
 import { AdminPagePresenter } from "./admin-page-presenter.js";
 import { AdminPageModel } from "./admin-page-model.js";
+import { dateToCustomDateString, dateToCustomTimeString } from "./utils/date-time-converter.js";
 export class AdminPageView {
     constructor() {
         this._$danceListsRadio = document.querySelector('#radio-dance-lists');
@@ -11,15 +12,6 @@ export class AdminPageView {
         this.danceListsTableView = new DanceListsTableView();
         this.dancesTableView = new DancesTableView();
         this.danceTypesTableView = new DanceTypesTableView();
-        // this._$danceListsRadio.addEventListener('click', ev => {
-        //     this.changeTable(this.danceListsTableView);
-        // })
-        // this._$dancesRadio.addEventListener('click', ev => {
-        //     this.changeTable(this.dancesTableView);
-        // })
-        // this._$danceTypesRadio.addEventListener('click', ev => {
-        //     this.changeTable(this.danceTypesTableView);
-        // })
         // this.list = new ObservableList<DanceType>(new DanceType(1, 'Вальс'), new DanceType(2, 'Полька'));
         // this.list.addObserver(this.danceTypesTableView);
         // this.list.add(new DanceType(3, 'Танго'));
@@ -113,8 +105,8 @@ class DanceListRowView {
     }
     update(danceList) {
         this._$name.textContent = danceList.name;
-        this._$date.textContent = danceList.date.toString();
-        this._$time.textContent = danceList.date.toString();
+        this._$date.textContent = dateToCustomDateString(danceList.date);
+        this._$time.textContent = dateToCustomTimeString(danceList.date);
         this._$desc.textContent = danceList.desc;
     }
     get $html() {
