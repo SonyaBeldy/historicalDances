@@ -19,6 +19,7 @@ export class DanceList {
 
     public addObserver(observer: Observer<DanceList>) {
         this._observers.push(observer);
+        observer.update(this);
     }
     public removeObserver(observer: Observer<DanceList>) {
         this._observers = this._observers.filter(element => element != observer);

@@ -15,7 +15,12 @@ export class AdminPagePresenter {
             case 1:
                 await this._model.updateDanceLists();
                 this._model.danceLists.addObserver(this._view.danceListsTableView);
+
                 this._view.changeTable(this._view.danceListsTableView);
+
+                this._model.danceLists.addObserver(this._view.danceListListView);
+                this._view.changeList(this._view.danceListListView);
+
                 break;
             case 2:
                 await this._model.updateDances();
@@ -29,4 +34,5 @@ export class AdminPagePresenter {
                 break;
         }
     }
+
 }

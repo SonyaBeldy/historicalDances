@@ -8,6 +8,7 @@ export class DanceList {
     }
     addObserver(observer) {
         this._observers.push(observer);
+        observer.update(this);
     }
     removeObserver(observer) {
         this._observers = this._observers.filter(element => element != observer);

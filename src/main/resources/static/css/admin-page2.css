@@ -120,9 +120,9 @@
     flex-direction: row;
     font-family: 'Jost', 'sans-serif';
     font-size: 18px;
-    /*gap: 20px;*/
+    gap: 10px;
     align-items: center;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     width: 532px;
 }
 
@@ -280,6 +280,56 @@
 .bold-span {
     font-size: 16px;
     font-weight: bold;
+}
+.bold {
+    font-weight: bold;
+}
+
+.jost {
+    font-family: 'Jost', 'sans-serif';
+}
+.font-size-18 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.font-size-14 {
+    font-size: 14px;
+    font-weight: lighter;
+}
+.font-size-16 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.font-size-12 {
+    font-size: 12px;
+    font-weight: lighter;
+}
+.ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.li:not(:last-child) {
+    margin-bottom: 4px;
+}
+.gap-10 {
+    gap: 10px;
+}
+.gap-5 {
+    gap: 5px;
+}
+.list-item-div {
+    padding: 14px 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ebeaea;
+}
+.list-info-container {
+    width: 400px;
+    padding: 14px 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ebeaea;
 }
 
 .confirm-btn {

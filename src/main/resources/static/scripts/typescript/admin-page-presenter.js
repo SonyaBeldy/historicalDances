@@ -20,6 +20,8 @@ export class AdminPagePresenter {
                     yield this._model.updateDanceLists();
                     this._model.danceLists.addObserver(this._view.danceListsTableView);
                     this._view.changeTable(this._view.danceListsTableView);
+                    this._model.danceLists.addObserver(this._view.danceListListView);
+                    this._view.changeList(this._view.danceListListView);
                     break;
                 case 2:
                     yield this._model.updateDances();

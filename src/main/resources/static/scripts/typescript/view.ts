@@ -5,6 +5,7 @@ import {ObservableList, Observer} from "./utils/Observer.js";
 import {AdminPagePresenter} from "./admin-page-presenter.js";
 import {AdminPageModel} from "./admin-page-model.js";
 import {dateToCustomDateString, dateToCustomTimeString} from "./utils/date-time-converter.js";
+import {DanceListInfoView} from "./view/list-info-view.js";
 
 export class AdminPageView {
     private _$danceListsRadio: HTMLInputElement;
@@ -19,9 +20,13 @@ export class AdminPageView {
     public dancesTableView: DancesTableView;
     public danceTypesTableView: DanceTypesTableView;
 
+    public danceListListView: DanceListListView;
+    private danceListInfoView: DanceListInfoView;
 
     //TODO DELETE
-    private list: ObservableList<DanceType>;
+    private list: ObservableList<DanceList>;
+    private _$listContainer: HTMLDivElement;
+    private _$danceListInfoContainer: HTMLDivElement;
     constructor() {
         this._$danceListsRadio = document.querySelector('#radio-dance-lists');
         this._$dancesRadio = document.querySelector('#radio-dances');
@@ -35,9 +40,21 @@ export class AdminPageView {
         this.dancesTableView = new DancesTableView();
         this.danceTypesTableView = new DanceTypesTableView();
 
-        // this.list = new ObservableList<DanceType>(new DanceType(1, 'Вальс'), new DanceType(2, 'Полька'));
-        // this.list.addObserver(this.danceTypesTableView);
-        // this.list.add(new DanceType(3, 'Танго'));
+        this._$listContainer = document.querySelector('#list-container');
+        this._$danceListInfoContainer = document.querySelector('#list-info-container');
+
+        this.danceListInfoView = new DanceListInfoView();
+
+        this.danceListListView = new DanceListListView();
+        // this.list = new ObservableList<DanceList>(new DanceList(1, 'Танго', new Date(Date.now()), ''), new DanceList(2, 'Парижский вальс', new Date(Date.now()), ''));
+        // this.list.addObserver(this.danceListListView);
+        // // this.list.add(new DanceType(3, 'Танго'));
+        // this.changeList(this.danceListListView); //TODO че тут
+    }
+
+    changeList(list: ListView) {
+        this._$listContainer.innerHTML = '';
+        this._$listContainer.appendChild(list.$html);
     }
 
     changeTable(table: TableView) {
@@ -56,6 +73,58 @@ export class AdminPageView {
 
 }
 
+class ListView {
+    protected readonly _$html: HTMLUListElement;
+
+    constructor() {
+        this._$html = document.createElement('ul');
+    }
+
+    get $html(): HTMLUListElement {
+        return this._$html;
+    }
+}
+
+class DanceListListView extends ListView implements Observer<DanceList[]> {
+    constructor() {
+        super();
+        this._$html.classList.add('ul')
+    }
+
+    update(danceLists: DanceList[]): void {
+        for (let i = 0; i < danceLists.length; i++) {
+            let item = new DanceListListItemView();
+            danceLists[i].addObserver(item);
+            this._$html.appendChild(item.$html);
+        }
+    }
+
+}
+
+class DanceListListItemView implements Observer<DanceList> {
+    private _$name: HTMLSpanElement;
+    private _$date: HTMLSpanElement;
+    private _$html: HTMLLIElement;
+    constructor() {
+        this._$html = document.createElement('li');
+        this._$html.classList.add('li');
+        this._$html.innerHTML =
+            `<div class="flex-column list-item-div">
+                <span class="font-size-16 bold jost"></span>
+                <span class="font-size-12 jost"></span>
+            </div>`;
+        [this._$name, this._$date] = this._$html.querySelectorAll('span');
+    }
+
+    update(danceList: DanceList): void {
+        this._$name.textContent = danceList.name;
+        this._$date.textContent = dateToCustomDateString(danceList.date);
+    }
+
+    get $html(): HTMLLIElement {
+        return this._$html;
+    }
+}
 class TableView {
     protected readonly _$html: HTMLTableElement;
     protected readonly _$tbody: HTMLTableSectionElement;
