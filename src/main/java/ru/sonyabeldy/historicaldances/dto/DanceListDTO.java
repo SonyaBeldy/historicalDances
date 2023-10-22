@@ -16,5 +16,5 @@ public class DanceListDTO {
     private String name;
     private Timestamp date;
     private String description;
-
+    private DanceDTO[] dances;
 }

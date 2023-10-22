@@ -8,7 +8,9 @@ export class DanceList {
     private _desc: string;
 
     private _observers: Observer<DanceList>[];
-    constructor(id: number, name: string, date: Date, desc: string) {
+    private _dances: Dance[];
+    constructor(id: number, name: string, date: Date, desc: string, dances: Dance[]) {
+        this._dances = dances;
         this._observers = [];
 
         this._id = id;
@@ -60,5 +62,19 @@ export class DanceList {
     set desc(value: string) {
         this._desc = value;
         this._notify();
+    }
+
+    public add(dance: Dance) {
+        this._dances.push(dance);
+    }
+    public remove(dance: Dance) {
+        this._dances = this._dances.filter((el) => el != dance);
+    }
+    get dances(): Dance[] {
+        return this._dances;
+    }
+
+    set dances(value: Dance[]) {
+        this._dances = value;
     }
 }

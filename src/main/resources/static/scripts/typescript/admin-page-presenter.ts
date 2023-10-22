@@ -16,11 +16,11 @@ export class AdminPagePresenter {
         switch (tableType) {
             case 1:
                 await this._model.updateDanceLists();
-                this._model.danceLists.addObserver(this._view.danceListsTableView);
-
-                this._view.changeTable(this._view.danceListsTableView);
-
-                // this._model.danceLists.addObserver(this._view.danceListListView);
+                // this._model.danceLists.addObserver(this._view.danceListsTableView);
+                //
+                // this._view.changeTable(this._view.danceListsTableView);
+                //
+                // // this._model.danceLists.addObserver(this._view.danceListListView);
                 this._view.danceListView.changeList(this._view.danceListView._danceListListView);
 
                 break;

@@ -19,12 +19,14 @@ export class AdminPageModel {
         return __awaiter(this, void 0, void 0, function* () {
             this.danceLists = new ObservableList();
             let danceListsJSON = yield this.getDanceListsJSON();
+            console.log(danceListsJSON);
             for (let i = 0; i < danceListsJSON.length; i++) {
                 let id = danceListsJSON[i].id;
                 let name = danceListsJSON[i].name;
                 let date = new Date(danceListsJSON[i].date);
                 let desc = danceListsJSON[i].description;
-                this.danceLists.add(new DanceList(id, name, date, desc));
+                let dances = danceListsJSON[i].dances;
+                this.danceLists.add(new DanceList(id, name, date, desc, dances));
             }
         });
     }

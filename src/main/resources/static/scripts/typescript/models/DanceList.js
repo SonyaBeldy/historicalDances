@@ -1,5 +1,6 @@
 export class DanceList {
-    constructor(id, name, date, desc) {
+    constructor(id, name, date, desc, dances) {
+        this._dances = dances;
         this._observers = [];
         this._id = id;
         this._name = name;
@@ -41,5 +42,17 @@ export class DanceList {
     set desc(value) {
         this._desc = value;
         this._notify();
+    }
+    add(dance) {
+        this._dances.push(dance);
+    }
+    remove(dance) {
+        this._dances = this._dances.filter((el) => el != dance);
+    }
+    get dances() {
+        return this._dances;
+    }
+    set dances(value) {
+        this._dances = value;
     }
 }
