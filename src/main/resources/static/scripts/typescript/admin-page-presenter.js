@@ -7,11 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { DanceListPresenter } from "./presenters/list-info-presenter.js";
 export class AdminPagePresenter {
     constructor(view, model) {
         this._view = view;
         this._model = model;
         this._view.bindChangeTableAction(this.changeTable.bind(this));
+        new DanceListPresenter(this._view.danceListView, this._model);
     }
     changeTable(tableType) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -20,8 +22,8 @@ export class AdminPagePresenter {
                     yield this._model.updateDanceLists();
                     this._model.danceLists.addObserver(this._view.danceListsTableView);
                     this._view.changeTable(this._view.danceListsTableView);
-                    this._model.danceLists.addObserver(this._view.danceListListView);
-                    this._view.changeList(this._view.danceListListView);
+                    // this._model.danceLists.addObserver(this._view.danceListListView);
+                    this._view.danceListView.changeList(this._view.danceListView._danceListListView);
                     break;
                 case 2:
                     yield this._model.updateDances();

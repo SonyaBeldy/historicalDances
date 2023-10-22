@@ -38,6 +38,14 @@ export class ObservableList<T> {
         this._list = [];
         this.notify();
     }
+
+    get length() {
+        return this._list.length;
+    }
+
+    get (i: number) {
+        return this._list[i];
+    }
 }
 
 

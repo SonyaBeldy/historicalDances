@@ -1,5 +1,6 @@
-import {AdminPageView} from "./view";
-import {AdminPageModel} from "./admin-page-model";
+import {AdminPageView} from "./view.js";
+import {AdminPageModel} from "./admin-page-model.js";
+import {DanceListPresenter} from "./presenters/list-info-presenter.js";
 
 export class AdminPagePresenter {
     private _view: AdminPageView;
@@ -8,6 +9,7 @@ export class AdminPagePresenter {
         this._view = view;
         this._model = model;
         this._view.bindChangeTableAction(this.changeTable.bind(this));
+        new DanceListPresenter(this._view.danceListView, this._model);
     }
 
     async changeTable(tableType: number) {
@@ -18,8 +20,8 @@ export class AdminPagePresenter {
 
                 this._view.changeTable(this._view.danceListsTableView);
 
-                this._model.danceLists.addObserver(this._view.danceListListView);
-                this._view.changeList(this._view.danceListListView);
+                // this._model.danceLists.addObserver(this._view.danceListListView);
+                this._view.danceListView.changeList(this._view.danceListView._danceListListView);
 
                 break;
             case 2:

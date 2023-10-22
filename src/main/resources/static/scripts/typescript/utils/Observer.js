@@ -27,4 +27,10 @@ export class ObservableList {
         this._list = [];
         this.notify();
     }
+    get length() {
+        return this._list.length;
+    }
+    get(i) {
+        return this._list[i];
+    }
 }

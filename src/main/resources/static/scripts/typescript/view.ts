@@ -6,6 +6,8 @@ import {AdminPagePresenter} from "./admin-page-presenter.js";
 import {AdminPageModel} from "./admin-page-model.js";
 import {dateToCustomDateString, dateToCustomTimeString} from "./utils/date-time-converter.js";
 import {DanceListInfoView} from "./view/list-info-view.js";
+import {DanceListPresenter} from "./presenters/list-info-presenter.js";
+import {DanceListView} from "./view/DanceListView.js";
 
 export class AdminPageView {
     private _$danceListsRadio: HTMLInputElement;
@@ -20,13 +22,14 @@ export class AdminPageView {
     public dancesTableView: DancesTableView;
     public danceTypesTableView: DanceTypesTableView;
 
-    public danceListListView: DanceListListView;
-    private danceListInfoView: DanceListInfoView;
+    // public danceListListView: DanceListListView;
+    // private danceListInfoView: DanceListInfoView;
 
     //TODO DELETE
     private list: ObservableList<DanceList>;
     private _$listContainer: HTMLDivElement;
     private _$danceListInfoContainer: HTMLDivElement;
+    public danceListView: DanceListView;
     constructor() {
         this._$danceListsRadio = document.querySelector('#radio-dance-lists');
         this._$dancesRadio = document.querySelector('#radio-dances');
@@ -40,21 +43,18 @@ export class AdminPageView {
         this.dancesTableView = new DancesTableView();
         this.danceTypesTableView = new DanceTypesTableView();
 
-        this._$listContainer = document.querySelector('#list-container');
-        this._$danceListInfoContainer = document.querySelector('#list-info-container');
 
-        this.danceListInfoView = new DanceListInfoView();
 
-        this.danceListListView = new DanceListListView();
+        // this.danceListInfoView = new DanceListInfoView();
+
+        // this.danceListListView = new DanceListListView();
+        this.danceListView = new DanceListView();
+
+
         // this.list = new ObservableList<DanceList>(new DanceList(1, 'Танго', new Date(Date.now()), ''), new DanceList(2, 'Парижский вальс', new Date(Date.now()), ''));
         // this.list.addObserver(this.danceListListView);
         // // this.list.add(new DanceType(3, 'Танго'));
         // this.changeList(this.danceListListView); //TODO че тут
-    }
-
-    changeList(list: ListView) {
-        this._$listContainer.innerHTML = '';
-        this._$listContainer.appendChild(list.$html);
     }
 
     changeTable(table: TableView) {
@@ -70,10 +70,9 @@ export class AdminPageView {
         }
     }
 
-
 }
 
-class ListView {
+export class ListView {
     protected readonly _$html: HTMLUListElement;
 
     constructor() {
@@ -85,26 +84,37 @@ class ListView {
     }
 }
 
-class DanceListListView extends ListView implements Observer<DanceList[]> {
+export class DanceListListView extends ListView implements Observer<DanceList[]> {
+
+    // public danceListListItemViews: DanceListListItemView[];
+    public items: DanceListListItemView[];
+    private _listItemChangeAction: (danceListId: number) => void;
     constructor() {
         super();
         this._$html.classList.add('ul')
+        this.items = [];
     }
 
     update(danceLists: DanceList[]): void {
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
+            item.bindListItemChangeAction(this._listItemChangeAction);
             danceLists[i].addObserver(item);
             this._$html.appendChild(item.$html);
+            this.items.push(item);
         }
     }
 
+    bindListItemChangeAction(action: (danceListId: number) => void) {
+        this._listItemChangeAction = action;
+    }
 }
 
 class DanceListListItemView implements Observer<DanceList> {
     private _$name: HTMLSpanElement;
     private _$date: HTMLSpanElement;
     private _$html: HTMLLIElement;
+    private _id: number;
     constructor() {
         this._$html = document.createElement('li');
         this._$html.classList.add('li');
@@ -116,7 +126,14 @@ class DanceListListItemView implements Observer<DanceList> {
         [this._$name, this._$date] = this._$html.querySelectorAll('span');
     }
 
+    bindListItemChangeAction(action: (danceListId: number) => void) {
+        this._$html.addEventListener('click', ev => {
+            action(this._id);
+        })
+    }
+
     update(danceList: DanceList): void {
+        this._id = danceList.id;
         this._$name.textContent = danceList.name;
         this._$date.textContent = dateToCustomDateString(danceList.date);
     }
@@ -283,4 +300,6 @@ class DanceTypeRowView implements Observer<DanceType> {
         return this._$html;
     }
 }
-new AdminPagePresenter(new AdminPageView(), new AdminPageModel());
+let view = new AdminPageView();
+let model = new AdminPageModel();
+new AdminPagePresenter(view, model);
