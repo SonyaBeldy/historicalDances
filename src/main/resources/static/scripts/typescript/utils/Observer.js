@@ -33,4 +33,7 @@ export class ObservableList {
     get(i) {
         return this._list[i];
     }
+    getAll() {
+        return this._list;
+    }
 }

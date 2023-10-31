@@ -74,6 +74,10 @@ export class AdminPageModel {
 
     }
 
+    public removeDanceFromDanceList() {
+
+    }
+
 }
 
 type DanceListJSON = {
@@ -81,7 +85,7 @@ type DanceListJSON = {
     name: string;
     date: string; //??
     description: string;
-    dances: Dance[];
+    dances: Set<Dance>;
 }
 type DanceJSON = {
     id: number;

@@ -64,11 +64,13 @@ export class DanceList {
         this._notify();
     }
 
-    public add(dance: Dance) {
+    public addDance(dance: Dance) {
         this._dances.push(dance);
+        this._notify();
     }
-    public remove(dance: Dance) {
-        this._dances = this._dances.filter((el) => el != dance);
+    public removeDance(dance: Dance) {
+        this._dances = this._dances.filter(el => el.id != dance.id);//если у лямбды убрать {}, то результат выражения вернеться без return
+        this._notify();
     }
     get dances(): Dance[] {
         return this._dances;
@@ -76,5 +78,14 @@ export class DanceList {
 
     set dances(value: Dance[]) {
         this._dances = value;
+    }
+
+    has(dance: Dance) {
+        for (let d of this._dances) {
+            if(d.id == dance.id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

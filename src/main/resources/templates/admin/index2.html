@@ -5,7 +5,7 @@
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
 
     <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
@@ -78,19 +78,31 @@
 
             <div id="top-bar_table" class="top-bar_table">
                 <div class="top-bar">
-                    <button class="new-item-btn" id="new-item-btn">Добавить</button>
-                    <button class="new-item-btn" id="delete-btn">Удалить</button>
+<!--                    <button class="new-item-btn" id="new-item-btn">-->
+<!--                        <img src="../../images/btns/add-list-24.png">-->
+<!--                    </button>-->
                 </div>
                 <div id="table-container">
 
                 </div>
                 <div class="flex-row gap-5">
-                    <div id="list-container">
 
-                    </div>
-                    <div id="list-info-container" class="list-info-container">
+                    <div class="flex-column gap-5">
+                        <button class="new-dance-for-dance-list-btn" id="new-item-btn">
+                            <img src="../../images/btns/add-list-24.png">
+                        </button>
+                        <div id="list-container">
 
+                        </div>
                     </div>
+<!--                    <div class="flex-column gap-5">-->
+                        <div id="list-info-container" class="list-info-container">
+
+                        </div>
+<!--                        <button class="button save-changes-btn">-->
+<!--                            сохранить изменения-->
+<!--                        </button>-->
+<!--                    </div>-->
                 </div>
 
 <!--                <table id="table" class="table">-->
@@ -190,6 +202,16 @@
             <input type="text" class="name-input" id="dance-type-name-input">
             <button id="dance-types-confirm-btn" class="confirm-btn">Создать</button>
         </div>
+    </div>
+
+
+<!--    <div class="creating-menu-background">-->
+<!--        -->
+<!--    </div>-->
+    <div id="dances-from-dance-list-menu" class="creating-menu">
+        <ul>
+            <li>el</li>
+        </ul>
     </div>
 </body>
 </html>

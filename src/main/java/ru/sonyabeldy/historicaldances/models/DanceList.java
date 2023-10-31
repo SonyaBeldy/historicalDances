@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "dance_list")
@@ -34,7 +35,7 @@ public class DanceList {
     private Date date;
 
     @ManyToMany(mappedBy = "danceLists")
-    private List<Dance> dances;
+    private Set<Dance> dances;
 
     @Override
     public String toString() {

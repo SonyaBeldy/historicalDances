@@ -105,6 +105,8 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
         }
     }
 
+
+
     bindListItemChangeAction(action: (danceListId: number) => void) {
         this._listItemChangeAction = action;
     }
@@ -117,12 +119,10 @@ class DanceListListItemView implements Observer<DanceList> {
     private _id: number;
     constructor() {
         this._$html = document.createElement('li');
-        this._$html.classList.add('li');
+        this._$html.classList.add('li', 'flex-column', 'list-item-div', 'list-item');
         this._$html.innerHTML =
-            `<div class="flex-column list-item-div">
-                <span class="font-size-16 bold jost"></span>
-                <span class="font-size-12 jost"></span>
-            </div>`;
+            `<span class="font-size-16 jost"></span>
+             <span class="font-size-12 jost"></span>`;
         [this._$name, this._$date] = this._$html.querySelectorAll('span');
     }
 

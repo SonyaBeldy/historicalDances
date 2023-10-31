@@ -1,6 +1,7 @@
 import {Observer} from "../utils/Observer.js";
 import {DanceList} from "../models/DanceList.js";
 import {dateToCustomDateString, dateToCustomTimeString} from "../utils/date-time-converter.js";
+import {Dance} from "../models/Dance";
 
 export class DanceListInfoView {
 
@@ -10,11 +11,13 @@ export class DanceListInfoView {
     private _$date: HTMLInputElement;
     private _$description: HTMLTextAreaElement;
     private _$dances: HTMLUListElement;
+
+    private _danceFromDanceListDeleteAction: (danceListId: number, danceInDanceList: Dance) => void;
+    private _danceMenuOpenAction: (dancesInDanceListId: number) => void;
     constructor() {
         this._$html = document.createElement('div');
         this._$html.innerHTML =
-            `
-            <div class="flex-column gap-10 jost">
+            `<div class="flex-column gap-10 jost">
                 <div class="flex-column gap-5">
                     <label for="name-input" class="font-size-12 bold">Название</label>
                     <input type="text" id="name-input" class="calendar jost bold">
@@ -34,25 +37,103 @@ export class DanceListInfoView {
                     <label for="desc-input" class="font-size-12 bold">Описание</label>
                     <textarea id="desc-input" class="calendar jost bold"></textarea>
                 </div>
-                <div class="flex-column gap-5">
+                <hr>
+                <div class="flex-column gap-10">
                     <label for="dances" class="font-size-12 bold">Танцы</label>
+                    <button class="new-dance-for-dance-list-btn" id="add-dances-btn">+</button>
                     <ul id="dances">
                     </ul>
                 </div>  
+                <hr class="hr">
+                <button class="button save-changes-btn" id="save-changes-btn">сохранить изменения</button>
             </div>
             `;
         [this._$name, this._$date, this._$time] = this._$html.querySelectorAll('input');
         this._$description = this._$html.querySelector('textarea');
         this._$dances = this._$html.querySelector('ul');
+        this._$dances.classList.add('ul');
+
+        this._$html.querySelector('button').addEventListener('click', ev => {
+
+        });
+
 
     }
-    update(element: DanceList): void {
-        this._$name.value = element.name;
-        // this._$date.value = dateToCustomDateString(element.date);
-        this._$date.value = element.date.toISOString().substring(0, 10);
-        // this._$time.value = dateToCustomTimeString(element.date);
-        this._$time.value = element.date.toISOString().substring(11, 16);
-        this._$description.value = element.desc;
+
+
+    update(danceList: DanceList): void {
+        this._$name.value = danceList.name;
+        this._$date.value = danceList.date.toISOString().substring(0, 10);
+        this._$time.value = danceList.date.toISOString().substring(11, 16);
+        this._$description.value = danceList.desc;
+
+        let listItemsHtml = '';
+        for (let currentDance of danceList.dances) {
+            listItemsHtml +=
+                `<li class="li flex-row space-between dance-list-dances">
+                    <span>${currentDance.name}</span>
+                    <button class="btn-icon">
+                        <img src="../../images/btns/garbage-16.png" class="">
+                    </button>
+                </li>`;
+        }
+        this._$dances.innerHTML = listItemsHtml;
+
+        let removeBtns = this._$dances.querySelectorAll('button');
+        for (let i = 0; i < removeBtns.length; i++) {
+            removeBtns[i].addEventListener('click', ev => {
+                this._danceFromDanceListDeleteAction(danceList.id, danceList.dances[i]);
+            });
+        }
+        //TODO remove listeners
+        document.getElementById('add-dances-btn').addEventListener('click', ev => {
+            console.log('click')
+            this._danceMenuOpenAction(danceList.id);
+        });
+    }
+
+    //TODO нахрен сеты
+    showDancesMenu(allDances: Set<Dance>, danceList: DanceList) {
+        let menuHTML = document.getElementById('dances-from-dance-list-menu');
+        let ul = menuHTML.querySelector('ul');
+        let listItems = '';
+        for (let currentDance of allDances) {
+            if(danceList.has(currentDance)) {
+                listItems +=
+                    `<li class="flex-row gap-5">
+                    <input type="checkbox" name="dances" disabled="disabled" checked>
+                    <span>${currentDance.name}</span>
+                    </li>`;
+            } else {
+                listItems +=
+                    `<li class="flex-row gap-5">
+                    <input type="checkbox" name="dances">
+                    <span>${currentDance.name}</span>
+                    </li>`;
+            }
+            // if(dancesInDanceList.has(currentDance)) {
+            //     listItems +=
+            //         `<li class="flex-row gap-5">
+            //         <input type="checkbox" name="dances" disabled="disabled" checked>
+            //         <span>${currentDance.name}</span>
+            //         </li>`;
+            // } else {
+            //     listItems +=
+            //         `<li class="flex-row gap-5">
+            //         <input type="checkbox" name="dances">
+            //         <span>${currentDance.name}</span>
+            //         </li>`;
+            // }
+        }
+        ul.innerHTML = listItems;
+    }
+
+    bindDanceMenuOpenAction(action: (dancesInDanceListId: number) => void): void {
+        this._danceMenuOpenAction = action;
+    }
+
+    bindDanceDeleteAction(action: (danceListId: number, dance: Dance) => void): void {
+        this._danceFromDanceListDeleteAction = action;
     }
 
     get $html(): HTMLDivElement {

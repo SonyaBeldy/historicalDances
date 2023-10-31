@@ -26,6 +26,11 @@ export class AdminPagePresenter {
                     //
                     // // this._model.danceLists.addObserver(this._view.danceListListView);
                     this._view.danceListView.changeList(this._view.danceListView._danceListListView);
+                    if (this._model.danceLists.length == 0) {
+                        break;
+                    }
+                    this._view.danceListView.changeInfo(this._model.danceLists.get(0));
+                    this._view.danceListView.selectListItem(0);
                     break;
                 case 2:
                     yield this._model.updateDances();

@@ -21,7 +21,14 @@ export class DanceListView {
         this._$listContainer.appendChild(list.$html);
     }
     changeInfo(danceList: DanceList) {
-        console.log('click' + danceList.id);
         this._danceListInfoView.update(danceList);
     }
+
+    selectListItem(selectedItemId: number) {
+        for (let i = 0; i < this._danceListListView.items.length; i++) {
+            this._danceListListView.items[i].$html.classList.remove('list-item-select');
+        }
+        this._danceListListView.items[selectedItemId].$html.classList.add('list-item-select');
+    }
+
 }

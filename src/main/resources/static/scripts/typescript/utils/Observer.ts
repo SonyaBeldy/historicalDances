@@ -46,6 +46,10 @@ export class ObservableList<T> {
     get (i: number) {
         return this._list[i];
     }
+
+    getAll() {
+        return this._list;
+    }
 }
 
 

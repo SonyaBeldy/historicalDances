@@ -78,6 +78,8 @@ export class AdminPageModel {
     }
     addDance() {
     }
+    removeDanceFromDanceList() {
+    }
 }
 // type DanceListsType = {
 //     [name: string]: DanceListItem;

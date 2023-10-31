@@ -29,6 +29,11 @@ public class DanceListController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+//    @DeleteMapping("/remove-dance")
+//    public ResponseEntity<HttpStatus> removeDance(@RequestBody int danceListId, int danceId) {
+//        danceListService.removeDance(danceListId, danceId);
+//    }
+
     @GetMapping()
     public List<DanceListDTO> getAll() {
         return danceListService.findAll().stream().map(this::convertToDanceListDTO).collect(Collectors.toList());

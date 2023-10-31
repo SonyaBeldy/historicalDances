@@ -43,16 +43,26 @@ export class DanceList {
         this._desc = value;
         this._notify();
     }
-    add(dance) {
+    addDance(dance) {
         this._dances.push(dance);
+        this._notify();
     }
-    remove(dance) {
-        this._dances = this._dances.filter((el) => el != dance);
+    removeDance(dance) {
+        this._dances = this._dances.filter(el => el.id != dance.id); //если у лямбды убрать {}, то результат выражения вернеться без return
+        this._notify();
     }
     get dances() {
         return this._dances;
     }
     set dances(value) {
         this._dances = value;
+    }
+    has(dance) {
+        for (let d of this._dances) {
+            if (d.id == dance.id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

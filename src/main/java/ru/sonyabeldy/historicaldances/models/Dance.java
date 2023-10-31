@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "dance")
@@ -41,6 +42,6 @@ public class Dance {
             joinColumns = @JoinColumn(name = "dance_id"),
             inverseJoinColumns = @JoinColumn(name = "list_id")
     )
-    private List<DanceList> danceLists;
+    private Set<DanceList> danceLists;
 
 }
