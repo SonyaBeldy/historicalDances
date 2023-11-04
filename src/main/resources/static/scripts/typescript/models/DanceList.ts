@@ -78,6 +78,7 @@ export class DanceList {
 
     set dances(value: Dance[]) {
         this._dances = value;
+        this._notify();
     }
 
     has(dance: Dance) {

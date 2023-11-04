@@ -56,6 +56,7 @@ export class DanceList {
     }
     set dances(value) {
         this._dances = value;
+        this._notify();
     }
     has(dance) {
         for (let d of this._dances) {

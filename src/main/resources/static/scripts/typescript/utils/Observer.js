@@ -33,6 +33,13 @@ export class ObservableList {
     get(i) {
         return this._list[i];
     }
+    getBy(field, value) {
+        for (let i = 0; i < this._list.length; i++) {
+            if (this._list[i][field] == value) {
+                return this._list[i];
+            }
+        }
+    }
     getAll() {
         return this._list;
     }

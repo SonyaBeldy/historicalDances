@@ -85,7 +85,7 @@ type DanceListJSON = {
     name: string;
     date: string; //??
     description: string;
-    dances: Set<Dance>;
+    dances: Dance[];
 }
 type DanceJSON = {
     id: number;

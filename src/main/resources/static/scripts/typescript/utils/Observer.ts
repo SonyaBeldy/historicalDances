@@ -47,6 +47,14 @@ export class ObservableList<T> {
         return this._list[i];
     }
 
+    getBy(field: string, value: any) {
+        for (let i = 0; i < this._list.length; i++) {
+            if (this._list[i][field] == value) {
+                return this._list[i];
+            }
+        }
+    }
+
     getAll() {
         return this._list;
     }

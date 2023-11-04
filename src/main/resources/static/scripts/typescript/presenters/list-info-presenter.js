@@ -4,6 +4,7 @@ export class DanceListPresenter {
         this._model = model;
         this._view._danceListListView.bindListItemChangeAction(this.changeInfo.bind(this));
         this._view._danceListInfoView.bindDanceDeleteAction(this.removeDance.bind(this));
+        this._view._danceListInfoView.bindDanceMenuConfirmBtnAction(this.selectDances.bind(this));
         this._model.updateDances().then(() => {
             this._view._danceListInfoView.bindDanceMenuOpenAction(this.showDancesMenu.bind(this));
         });
@@ -18,6 +19,20 @@ export class DanceListPresenter {
                 break;
             }
         }
+    }
+    selectDances(danceListId, checkedDancesId) {
+        let danceList = this._model.danceLists.getBy('id', danceListId);
+        let newDances = [];
+        console.log('length ' + this._model.dances.length);
+        for (let i = 0; i < this._model.dances.length; i++) {
+            for (let j = 0; j < checkedDancesId.length; j++) {
+                if (this._model.dances.get(i).id == checkedDancesId[j]) {
+                    newDances.push(this._model.dances.get(i));
+                }
+            }
+        }
+        danceList.dances = newDances;
+        this._view.changeInfo(danceList);
     }
     changeInfo(danceListId) {
         for (let i = 0; i < this._model.danceLists.length; i++) {
@@ -35,7 +50,6 @@ export class DanceListPresenter {
             if (danceList.id == danceListId) {
                 this._model.danceLists.get(i).removeDance(dance);
                 this._view.changeInfo(this._model.danceLists.get(i));
-                console.log(danceList.dances.size);
                 // for (let j = 0; j < danceList.dances.size; j++) {
                 //     if (danceList.dances[j].id == danceId) {
                 //         console.log('==')

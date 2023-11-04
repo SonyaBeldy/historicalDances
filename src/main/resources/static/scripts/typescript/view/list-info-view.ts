@@ -14,6 +14,7 @@ export class DanceListInfoView {
 
     private _danceFromDanceListDeleteAction: (danceListId: number, danceInDanceList: Dance) => void;
     private _danceMenuOpenAction: (dancesInDanceListId: number) => void;
+    private _danceMenuConfirmBtnAction: (danceListId: number, checkedDancesId: number[]) => void;
     constructor() {
         this._$html = document.createElement('div');
         this._$html.innerHTML =
@@ -54,9 +55,7 @@ export class DanceListInfoView {
         this._$dances.classList.add('ul');
 
         this._$html.querySelector('button').addEventListener('click', ev => {
-
         });
-
 
     }
 
@@ -72,7 +71,7 @@ export class DanceListInfoView {
             listItemsHtml +=
                 `<li class="li flex-row space-between dance-list-dances">
                     <span>${currentDance.name}</span>
-                    <button class="btn-icon">
+                    <button class="btn-img">
                         <img src="../../images/btns/garbage-16.png" class="">
                     </button>
                 </li>`;
@@ -87,8 +86,23 @@ export class DanceListInfoView {
         }
         //TODO remove listeners
         document.getElementById('add-dances-btn').addEventListener('click', ev => {
-            console.log('click')
             this._danceMenuOpenAction(danceList.id);
+        });
+
+        //TODO может в другой класс?
+        document.getElementById('dances-from-dance-list-menu-confirm-btn').addEventListener('click', ev => {
+            let checkboxes = document.getElementsByName('dances') as NodeListOf<HTMLInputElement> | null;
+            let checkedDancesId: number[] = [];
+            console.log(checkboxes);
+            for (let i = 0; i < checkboxes.length; i++) {
+                if(checkboxes.item(i).checked) {
+
+                    checkedDancesId.push(Number(checkboxes.item(i).value));
+                }
+            }
+            console.log('check');
+            console.log(checkedDancesId);
+            this._danceMenuConfirmBtnAction(danceList.id, checkedDancesId);
         });
     }
 
@@ -98,19 +112,12 @@ export class DanceListInfoView {
         let ul = menuHTML.querySelector('ul');
         let listItems = '';
         for (let currentDance of allDances) {
-            if(danceList.has(currentDance)) {
-                listItems +=
-                    `<li class="flex-row gap-5">
-                    <input type="checkbox" name="dances" disabled="disabled" checked>
+            listItems +=
+                `<li class="flex-row gap-5">
+                    <input type="checkbox" name="dances" value="${currentDance.id}" ${danceList.has(currentDance) ? "checked" : ""}>
                     <span>${currentDance.name}</span>
                     </li>`;
-            } else {
-                listItems +=
-                    `<li class="flex-row gap-5">
-                    <input type="checkbox" name="dances">
-                    <span>${currentDance.name}</span>
-                    </li>`;
-            }
+
             // if(dancesInDanceList.has(currentDance)) {
             //     listItems +=
             //         `<li class="flex-row gap-5">
@@ -134,6 +141,10 @@ export class DanceListInfoView {
 
     bindDanceDeleteAction(action: (danceListId: number, dance: Dance) => void): void {
         this._danceFromDanceListDeleteAction = action;
+    }
+
+    bindDanceMenuConfirmBtnAction(action: (danceListId: number, checkedDancesId: number[]) => void): void {
+        this._danceMenuConfirmBtnAction = action;
     }
 
     get $html(): HTMLDivElement {

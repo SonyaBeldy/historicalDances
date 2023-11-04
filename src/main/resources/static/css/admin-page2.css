@@ -531,12 +531,12 @@
 .btn-small {
 
 }
-.btn-icon {
+.btn-img {
     background: transparent;
     border-style: hidden;
     opacity: 50%;
 }
-.btn-icon:hover {
+.btn-img:hover {
     cursor: pointer;
     opacity: 80%;
 }
@@ -604,4 +604,20 @@
 }
 .hr {
 
+}
+
+.raleway {
+    font-family: 'Raleway', 'serif';
+}
+.inria-sans{
+    font-family: 'Inria+Sans', sans-serif;
+}
+.rubik {
+    font-family: 'Rubik', sans-serif;
+}
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+.libre-franklin {
+    font-family: 'Libre+Franklin', sans-serif;
 }
