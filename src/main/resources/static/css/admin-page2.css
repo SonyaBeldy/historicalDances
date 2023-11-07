@@ -244,8 +244,8 @@
 
 
 
-.creating-menu-background {
-    display: flex;
+.popup-menu-background {
+    /*display: flex;*/
     display: none;
 
     justify-content: center;
@@ -331,13 +331,18 @@
     border-style: solid;
     border-width: 1px;
     border-color: #ebeaea;
+    gap: 10px;
+    width: 160px;
+
 }
 .list-info-container {
     width: 400px;
     padding: 14px 30px;
     border-style: solid;
     border-width: 1px;
-    border-color: #ebeaea;
+    /*border-color: #ebeaea;*/
+    border-color: #676767;
+    background: #efefef;
 }
 
 .confirm-btn {
@@ -543,19 +548,18 @@
 
 .dance-list-dances {
     /*background: #f5f5f4;*/
-    background: #f6f6f6;
-    padding: 6px 5px 5px 12px;
-    border-style: solid;
-    border-width: 1px;
-    /*border-width: 0px 0px 1px 0px;*/
+    /*background: #f6f6f6;*/
+    /*padding: 6px 5px 5px 12px;*/
+    padding: 9px 12px 12px 20px;
+    /*border-style: solid;*/
+    /*border-width: 1px;*/
+
     border-color: #e3e3e3;
+    font-variant: all-petite-caps;
+    border-bottom: 1px solid #7d7d7d;
 }
 
 .new-dance-for-dance-list-btn {
-    /*background: #9094ef;*/
-    /*background: transparent;*/
-    /*border-radius: 20px;*/
-    /*background: #f1f1ff;*/
     background: #ffffff;
     border-color: #a1b9ff;
     border-style: dashed;
@@ -572,6 +576,11 @@
     line-height: 34px;
     color: #093cd1;
     /*background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23093CD1FF' stroke-width='1' stroke-dasharray='5%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");*/
+    /*width: 68px;*/
+    border-radius: 28px;
+}
+.new-dance-list-btn {
+    width: 100%;
 }
 
 .new-dance-for-dance-list-btn:hover {
@@ -587,8 +596,10 @@
     border-color: #c5c5c5;
     border-style: solid;
     border-width: thin;
-    border-color: #aec9f3;
-    background-color: aliceblue;
+    /*border-color: #aec9f3;*/
+    border-color: #7d7d7d;
+    /*background-color: aliceblue;*/
+    background-color: white;
     color: #093cd1;
 }
 .save-changes-btn:hover {
@@ -600,7 +611,9 @@
     font-family: 'Jost', 'sans-serif';
     font-size: 14px;
     padding: 4px 15px;
-    line-height: 34px;
+    line-height: 24px;
+    font-variant: all-petite-caps;
+    font-weight: 500;
 }
 .hr {
 
@@ -620,4 +633,18 @@
 }
 .libre-franklin {
     font-family: 'Libre+Franklin', sans-serif;
+}
+
+.variant {
+    font-variant: all-petite-caps;
+}
+
+.large {
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.dance-menu-div {
+    background: white;
+    padding: 5px 15px 40px 15px;
 }

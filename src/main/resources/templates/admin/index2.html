@@ -5,6 +5,8 @@
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&family=Libre+Franklin&display=swap" rel="stylesheet">
 
@@ -155,7 +157,7 @@
 
     </div>
 
-    <div class="creating-menu-background" id="dance-lists-add-menu-background">
+    <div class="popup-menu-background" id="dance-lists-add-menu-background">
         <div class="creating-menu">
             <div class="top-bar">
                 <span class="bold-span">Новая подборка</span>
@@ -173,7 +175,7 @@
         </div>
     </div>
 
-    <div class="creating-menu-background" id="dances-add-menu-background">
+    <div class="popup-menu-background" id="dances-add-menu-background">
         <div class="creating-menu">
             <div class="top-bar">
                 <span class="bold-span">Новый танец</span>
@@ -190,7 +192,7 @@
         </div>
     </div>
 
-    <div class="creating-menu-background" id="dance-types-add-menu-background">
+    <div class="popup-menu-background" id="dance-types-add-menu-background">
         <div class="creating-menu">
             <div class="top-bar">
                 <span class="bold-span">Новый тип</span>
@@ -208,17 +210,19 @@
 <!--    <div class="creating-menu-background">-->
 <!--        -->
 <!--    </div>-->
-    <div id="dances-from-dance-list-menu" class="creating-menu gap-10 jost">
-        <div class="flex-row space-between">
-            <span class="jost">Выбрать танцы</span>
-            <button class="btn-img">
-                <img src="../../images/btns/close-16.png">
-            </button>
+    <div id="dances-menu-back" class="popup-menu-background">
+        <div id="dances-from-dance-list-menu" class="creating-menu gap-10 jost">
+            <div class="flex-row space-between">
+                <span class="jost">Выбрать танцы</span>
+                <button id="close-dance-menu-btn" class="btn-img">
+                    <img src="../../images/btns/close-16.png">
+                </button>
+            </div>
+            <input type="search">
+            <ul class="flex-column gap-5">
+            </ul>
+            <button class="button" id="dances-from-dance-list-menu-confirm-btn">Выбрать</button>
         </div>
-        <input type="search">
-        <ul class="flex-column gap-5">
-        </ul>
-        <button class="button" id="dances-from-dance-list-menu-confirm-btn">Выбрать</button>
     </div>
 </body>
 </html>

@@ -23,13 +23,12 @@ export class DanceListInfoView {
                     <textarea id="desc-input" class="calendar jost bold"></textarea>
                 </div>
                 <hr>
-                <div class="flex-column gap-10">
-                    <label for="dances" class="font-size-12 bold">Танцы</label>
+                <div class="flex-column gap-10 dance-menu-div">
+                    <label for="dances" class="font-size-12  variant large">Танцы</label>
                     <button class="new-dance-for-dance-list-btn" id="add-dances-btn">+</button>
                     <ul id="dances">
                     </ul>
                 </div>  
-                <hr class="hr">
                 <button class="button save-changes-btn" id="save-changes-btn">сохранить изменения</button>
             </div>
             `;
@@ -38,6 +37,10 @@ export class DanceListInfoView {
         this._$dances = this._$html.querySelector('ul');
         this._$dances.classList.add('ul');
         this._$html.querySelector('button').addEventListener('click', ev => {
+            document.getElementById('dances-menu-back').style.display = 'flex';
+        });
+        document.getElementById('close-dance-menu-btn').addEventListener('click', ev => {
+            document.getElementById('dances-menu-back').style.display = 'none';
         });
     }
     update(danceList) {
