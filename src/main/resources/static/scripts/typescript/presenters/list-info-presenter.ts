@@ -17,11 +17,16 @@ export class DanceListPresenter {
         this._view._danceListInfoView.bindDanceDeleteAction(this.removeDance.bind(this));
 
         this._view._danceListInfoView.bindDanceMenuConfirmBtnAction(this.selectDances.bind(this));
+        //TODO почему если опустить вниз, то не работает
+        this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
+
         this._model.updateDances().then(() => {
             this._view._danceListInfoView.bindDanceMenuOpenAction(this.showDancesMenu.bind(this));
-        })
+        });
+
         this._model.updateDanceLists().then(()=> {
             this._model.danceLists.addObserver(this._view._danceListListView);
+
         });
     }
 
@@ -36,6 +41,7 @@ export class DanceListPresenter {
 
     selectDances(danceListId: number, checkedDancesId: number[]) {
         let danceList = this._model.danceLists.getBy('id', danceListId);
+        console.log('name ' + danceList.name);
         let newDances: Dance[] = [];
         console.log('length ' + this._model.dances.length);
         for (let i = 0; i < this._model.dances.length; i++) {
@@ -60,23 +66,22 @@ export class DanceListPresenter {
     }
     
     removeDance(danceListId: number, dance: Dance): void {
-        console.log('remove');
         for (let i = 0; i < this._model.danceLists.length; i++) {
             let danceList = this._model.danceLists.get(i);
             if (danceList.id == danceListId) {
                 this._model.danceLists.get(i).removeDance(dance);
                 this._view.changeInfo(this._model.danceLists.get(i));
-
-                // for (let j = 0; j < danceList.dances.size; j++) {
-                //     if (danceList.dances[j].id == danceId) {
-                //         console.log('==')
-                //         this._model.danceLists.get(i).removeDance(danceList.dances[j]);
-                //         this._view.changeInfo(this._model.danceLists.get(i));
-                //     } else {
-                //         console.log('!=')
-                //     }
-                // }
                 break;
+            }
+        }
+    }
+
+    saveChanges(danceListId: number, updatedDanceList: DanceList): void {
+        for (let i = 0; i < this._model.danceLists.length; i++) {
+            let danceList = this._model.danceLists.get(i);
+            if (danceList.id == danceListId) {
+                console.log(danceList)
+                danceList.update(updatedDanceList);
             }
         }
     }

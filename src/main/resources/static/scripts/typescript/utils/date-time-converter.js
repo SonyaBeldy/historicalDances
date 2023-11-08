@@ -6,6 +6,21 @@ export function dateToCustomDateString(date) {
     };
     return date.toLocaleDateString('ru-RU', dateOptions).replace('г.', '');
 }
+export function inputDateToDate(inputDate, inputTime) {
+    const datePattern = /(\d{4})-(\d{2})-(\d{2})/;
+    const matchDate = inputDate.match(datePattern);
+    if (!matchDate) {
+        throw new Error('Invalid custom date-time format');
+    }
+    const [, year, month, day] = matchDate;
+    const timePattern = /(\d{2}):(\d{2})/;
+    const matchTime = inputTime.match(timePattern);
+    if (!matchTime) {
+        throw new Error('Invalid custom date-time format');
+    }
+    const [, hour, minutes] = matchTime;
+    return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minutes));
+}
 export function xCalDateToDate(xCalDate, oldDate) {
     const pattern = /(\d{2}).(\d{2}).(\d{4})/;
     const match = xCalDate.match(pattern);

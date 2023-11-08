@@ -1,3 +1,5 @@
+import { DanceList } from "../models/DanceList.js";
+import { inputDateToDate } from "../utils/date-time-converter.js";
 export class DanceListInfoView {
     constructor() {
         this._$html = document.createElement('div');
@@ -37,7 +39,6 @@ export class DanceListInfoView {
         this._$dances = this._$html.querySelector('ul');
         this._$dances.classList.add('ul');
         this._$html.querySelector('button').addEventListener('click', ev => {
-            document.getElementById('dances-menu-back').style.display = 'flex';
         });
         document.getElementById('close-dance-menu-btn').addEventListener('click', ev => {
             document.getElementById('dances-menu-back').style.display = 'none';
@@ -54,7 +55,7 @@ export class DanceListInfoView {
                 `<li class="li flex-row space-between dance-list-dances">
                     <span>${currentDance.name}</span>
                     <button class="btn-img">
-                        <img src="../../images/btns/garbage-16.png" class="">
+                        <img src="../../images/btns/close-16.png" class="">
                     </button>
                 </li>`;
         }
@@ -65,12 +66,21 @@ export class DanceListInfoView {
                 this._danceFromDanceListDeleteAction(danceList.id, danceList.dances[i]);
             });
         }
+        let addDancesBtn = document.getElementById('add-dances-btn');
+        // let addDancesBtnClone = addDancesBtn.cloneNode(true);
+        // addDancesBtn.parentNode.replaceChild(addDancesBtnClone, addDancesBtn);
         //TODO remove listeners
-        document.getElementById('add-dances-btn').addEventListener('click', ev => {
+        let clone = addDancesBtn.cloneNode(true);
+        addDancesBtn.replaceWith(clone);
+        clone.addEventListener('click', ev => {
+            document.getElementById('dances-menu-back').style.display = 'flex';
             this._danceMenuOpenAction(danceList.id);
         });
+        let dancesMenuConfirmBtn = document.getElementById('dances-from-dance-list-menu-confirm-btn');
+        clone = dancesMenuConfirmBtn.cloneNode(true);
+        dancesMenuConfirmBtn.replaceWith(clone);
         //TODO может в другой класс?
-        document.getElementById('dances-from-dance-list-menu-confirm-btn').addEventListener('click', ev => {
+        clone.addEventListener('click', ev => {
             let checkboxes = document.getElementsByName('dances');
             let checkedDancesId = [];
             console.log(checkboxes);
@@ -82,6 +92,12 @@ export class DanceListInfoView {
             console.log('check');
             console.log(checkedDancesId);
             this._danceMenuConfirmBtnAction(danceList.id, checkedDancesId);
+        });
+        let saveChangesBtn = document.getElementById('save-changes-btn');
+        clone = saveChangesBtn.cloneNode(true);
+        saveChangesBtn.replaceWith(clone);
+        clone.addEventListener('click', ev => {
+            this._saveChangesBtnAction(danceList.id, this.makeUpdatedDanceList(danceList));
         });
     }
     //TODO нахрен сеты
@@ -95,21 +111,15 @@ export class DanceListInfoView {
                     <input type="checkbox" name="dances" value="${currentDance.id}" ${danceList.has(currentDance) ? "checked" : ""}>
                     <span>${currentDance.name}</span>
                     </li>`;
-            // if(dancesInDanceList.has(currentDance)) {
-            //     listItems +=
-            //         `<li class="flex-row gap-5">
-            //         <input type="checkbox" name="dances" disabled="disabled" checked>
-            //         <span>${currentDance.name}</span>
-            //         </li>`;
-            // } else {
-            //     listItems +=
-            //         `<li class="flex-row gap-5">
-            //         <input type="checkbox" name="dances">
-            //         <span>${currentDance.name}</span>
-            //         </li>`;
-            // }
         }
         ul.innerHTML = listItems;
+    }
+    makeUpdatedDanceList(oldDanceList) {
+        let name = this._$name.value;
+        let date = this._$date.value;
+        let time = this._$time.value;
+        let desc = this._$description.value;
+        return new DanceList(oldDanceList.id, name, inputDateToDate(date, time), desc, []);
     }
     bindDanceMenuOpenAction(action) {
         this._danceMenuOpenAction = action;
@@ -119,6 +129,9 @@ export class DanceListInfoView {
     }
     bindDanceMenuConfirmBtnAction(action) {
         this._danceMenuConfirmBtnAction = action;
+    }
+    bindSaveChangesBtnAction(action) {
+        this._saveChangesBtnAction = action;
     }
     get $html() {
         return this._$html;

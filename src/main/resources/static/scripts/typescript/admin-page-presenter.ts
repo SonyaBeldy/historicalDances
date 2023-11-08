@@ -15,7 +15,7 @@ export class AdminPagePresenter {
     async changeTable(tableType: number) {
         switch (tableType) {
             case 1:
-                await this._model.updateDanceLists();
+                // await this._model.updateDanceLists();
                 // this._model.danceLists.addObserver(this._view.danceListsTableView);
                 //
                 // this._view.changeTable(this._view.danceListsTableView);

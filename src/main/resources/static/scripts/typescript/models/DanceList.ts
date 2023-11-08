@@ -89,4 +89,17 @@ export class DanceList {
         }
         return false;
     }
+
+    update(updatedDanceList: DanceList) {
+        if (this._name != updatedDanceList.name) {
+            this.name = updatedDanceList.name;
+        }
+        if (this._date != updatedDanceList.date) {
+            this.date = updatedDanceList.date;
+        }
+        if (this._desc != updatedDanceList.desc) {
+            this.desc = updatedDanceList.desc;
+        }
+        this.dances = updatedDanceList.dances;
+    }
 }

@@ -86,7 +86,6 @@ export class ListView {
 
 export class DanceListListView extends ListView implements Observer<DanceList[]> {
 
-    // public danceListListItemViews: DanceListListItemView[];
     public items: DanceListListItemView[];
     private _listItemChangeAction: (danceListId: number) => void;
     constructor() {

@@ -19,7 +19,7 @@ export class AdminPagePresenter {
         return __awaiter(this, void 0, void 0, function* () {
             switch (tableType) {
                 case 1:
-                    yield this._model.updateDanceLists();
+                    // await this._model.updateDanceLists();
                     // this._model.danceLists.addObserver(this._view.danceListsTableView);
                     //
                     // this._view.changeTable(this._view.danceListsTableView);
