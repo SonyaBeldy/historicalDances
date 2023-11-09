@@ -88,12 +88,14 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
 
     public items: DanceListListItemView[];
     private _listItemChangeAction: (danceListId: number) => void;
+    private _newDanceListBtnAction: (newDanceList: DanceList) => void;
     constructor() {
         super();
         this._$html.classList.add('ul')
         this.items = [];
     }
 
+    //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists: DanceList[]): void {
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
@@ -102,12 +104,19 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
             this._$html.appendChild(item.$html);
             this.items.push(item);
         }
+        document.getElementById('new-item-btn').addEventListener('click', ev => {
+            this._newDanceListBtnAction(new DanceList('bn n'));
+        });
     }
 
 
 
     bindListItemChangeAction(action: (danceListId: number) => void) {
         this._listItemChangeAction = action;
+    }
+
+    bindNewDanceListBtnAction(action: (newDanceList: DanceList) => void) {
+        this._newDanceListBtnAction = action;
     }
 }
 
@@ -120,8 +129,8 @@ class DanceListListItemView implements Observer<DanceList> {
         this._$html = document.createElement('li');
         this._$html.classList.add('li', 'flex-column', 'list-item-div', 'list-item');
         this._$html.innerHTML =
-            `<span class="font-size-16 jost"></span>
-             <span class="font-size-12 jost"></span>`;
+            `<span class="font-size-16 weight-500 jost"></span>
+             <span class="font-size-12 weight-300 jost" ></span>`;
         [this._$name, this._$date] = this._$html.querySelectorAll('span');
     }
 

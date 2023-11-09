@@ -6,25 +6,24 @@ export class DanceListInfoView {
         this._$html.innerHTML =
             `<div class="flex-column gap-10 jost">
                 <div class="flex-column gap-5">
-                    <label for="name-input" class="font-size-12 bold">Название</label>
-                    <input type="text" id="name-input" class="calendar jost bold">
+                    <label for="name-input" class="font-size-12 weight-600">Название</label>
+                    <input type="text" id="name-input" class="calendar jost">
                 </div>
                 <div class="flex-row gap-10">
                     <div class="flex-column gap-5">
-                        <label for="date-input" class="font-size-12 bold">Дата</label>
-                        <input type="date" id="date-input" class="calendar jost bold">
+                        <label for="date-input" class="font-size-12 weight-600">Дата</label>
+                        <input type="date" id="date-input" class="calendar jost">
                     </div>
                     <div class="flex-column gap-5">
-                        <label for="time-input" class="font-size-12 bold">Время</label>
-                        <input type="time" id="time-input" class="calendar jost bold">
+                        <label for="time-input" class="font-size-12 weight-600">Время</label>
+                        <input type="time" id="time-input" class="calendar jost">
                     </div>
                 </div>
                 
                 <div class="flex-column gap-5">
-                    <label for="desc-input" class="font-size-12 bold">Описание</label>
-                    <textarea id="desc-input" class="calendar jost bold"></textarea>
+                    <label for="desc-input" class="font-size-12 weight-600">Описание</label>
+                    <textarea id="desc-input" class="calendar jost"></textarea>
                 </div>
-                <hr>
                 <div class="flex-column gap-10 dance-menu-div">
                     <label for="dances" class="font-size-12  variant large">Танцы</label>
                     <button class="new-dance-for-dance-list-btn" id="add-dances-btn">+</button>

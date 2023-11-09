@@ -16,6 +16,8 @@ export class DanceListPresenter {
         this._view._danceListListView.bindListItemChangeAction(this.changeInfo.bind(this));
         this._view._danceListInfoView.bindDanceDeleteAction(this.removeDance.bind(this));
 
+        this._view._danceListListView.bindNewDanceListBtnAction(this.createNewDanceList.bind(this));
+
         this._view._danceListInfoView.bindDanceMenuConfirmBtnAction(this.selectDances.bind(this));
         //TODO почему если опустить вниз, то не работает
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
@@ -30,6 +32,10 @@ export class DanceListPresenter {
         });
     }
 
+    createNewDanceList(newDanceList: DanceList) {
+        newDanceList.name = 'Новая подборка';
+        this._model.danceLists.add(newDanceList);
+    }
     showDancesMenu(danceListId: number) {
         for (let i = 0; i < this._model.danceLists.length; i++) {
             if (this._model.danceLists.get(i).id == danceListId) {

@@ -1,3 +1,4 @@
+import { DanceList } from './models/DanceList.js';
 import { AdminPagePresenter } from "./admin-page-presenter.js";
 import { AdminPageModel } from "./admin-page-model.js";
 import { dateToCustomDateString, dateToCustomTimeString } from "./utils/date-time-converter.js";
@@ -47,6 +48,7 @@ export class DanceListListView extends ListView {
         this._$html.classList.add('ul');
         this.items = [];
     }
+    //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists) {
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
@@ -55,9 +57,15 @@ export class DanceListListView extends ListView {
             this._$html.appendChild(item.$html);
             this.items.push(item);
         }
+        document.getElementById('new-item-btn').addEventListener('click', ev => {
+            this._newDanceListBtnAction(new DanceList('bn n'));
+        });
     }
     bindListItemChangeAction(action) {
         this._listItemChangeAction = action;
+    }
+    bindNewDanceListBtnAction(action) {
+        this._newDanceListBtnAction = action;
     }
 }
 class DanceListListItemView {
@@ -65,8 +73,8 @@ class DanceListListItemView {
         this._$html = document.createElement('li');
         this._$html.classList.add('li', 'flex-column', 'list-item-div', 'list-item');
         this._$html.innerHTML =
-            `<span class="font-size-16 jost"></span>
-             <span class="font-size-12 jost"></span>`;
+            `<span class="font-size-16 weight-500 jost"></span>
+             <span class="font-size-12 weight-300 jost" ></span>`;
         [this._$name, this._$date] = this._$html.querySelectorAll('span');
     }
     bindListItemChangeAction(action) {
