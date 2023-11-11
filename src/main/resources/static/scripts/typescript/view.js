@@ -50,6 +50,8 @@ export class DanceListListView extends ListView {
     }
     //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists) {
+        this._$html.innerHTML = '';
+        this.items = [];
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
             item.bindListItemChangeAction(this._listItemChangeAction);
@@ -57,15 +59,14 @@ export class DanceListListView extends ListView {
             this._$html.appendChild(item.$html);
             this.items.push(item);
         }
-        document.getElementById('new-item-btn').addEventListener('click', ev => {
-            this._newDanceListBtnAction(new DanceList('bn n'));
-        });
     }
     bindListItemChangeAction(action) {
         this._listItemChangeAction = action;
     }
     bindNewDanceListBtnAction(action) {
-        this._newDanceListBtnAction = action;
+        document.getElementById('new-item-btn').addEventListener('click', ev => {
+            action(new DanceList(-1, '', new Date(), '', []));
+        });
     }
 }
 class DanceListListItemView {
@@ -79,11 +80,11 @@ class DanceListListItemView {
     }
     bindListItemChangeAction(action) {
         this._$html.addEventListener('click', ev => {
-            action(this._id);
+            action(this._danceList);
         });
     }
     update(danceList) {
-        this._id = danceList.id;
+        this._danceList = danceList;
         this._$name.textContent = danceList.name;
         this._$date.textContent = dateToCustomDateString(danceList.date);
     }

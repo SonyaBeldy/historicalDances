@@ -7,12 +7,12 @@ export class DanceListInfoView {
             `<div class="flex-column gap-10 jost">
                 <div class="flex-column gap-5">
                     <label for="name-input" class="font-size-12 weight-600">Название</label>
-                    <input type="text" id="name-input" class="calendar jost">
+                    <input type="text" id="name-input" class="calendar input jost">
                 </div>
                 <div class="flex-row gap-10">
                     <div class="flex-column gap-5">
                         <label for="date-input" class="font-size-12 weight-600">Дата</label>
-                        <input type="date" id="date-input" class="calendar jost">
+                        <input type="date" id="date-input" class="calendar input jost">
                     </div>
                     <div class="flex-column gap-5">
                         <label for="time-input" class="font-size-12 weight-600">Время</label>
@@ -48,6 +48,7 @@ export class DanceListInfoView {
         this._$date.value = danceList.date.toISOString().substring(0, 10);
         this._$time.value = danceList.date.toISOString().substring(11, 16);
         this._$description.value = danceList.desc;
+        this._$name.addEventListener('input', ev => { this.checkInputForChanges(this._$name, danceList.name); });
         let listItemsHtml = '';
         for (let currentDance of danceList.dances) {
             listItemsHtml +=
@@ -66,8 +67,6 @@ export class DanceListInfoView {
             });
         }
         let addDancesBtn = document.getElementById('add-dances-btn');
-        // let addDancesBtnClone = addDancesBtn.cloneNode(true);
-        // addDancesBtn.parentNode.replaceChild(addDancesBtnClone, addDancesBtn);
         //TODO remove listeners
         let clone = addDancesBtn.cloneNode(true);
         addDancesBtn.replaceWith(clone);
@@ -96,11 +95,11 @@ export class DanceListInfoView {
         clone = saveChangesBtn.cloneNode(true);
         saveChangesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
-            this._saveChangesBtnAction(danceList.id, this.makeUpdatedDanceList(danceList));
+            this._saveChangesBtnAction(danceList.id, this.getUpdatedDanceList(danceList));
         });
     }
     //TODO нахрен сеты
-    showDancesMenu(allDances, danceList) {
+    generateDancesInDanceMenu(allDances, danceList) {
         let menuHTML = document.getElementById('dances-from-dance-list-menu');
         let ul = menuHTML.querySelector('ul');
         let listItems = '';
@@ -113,12 +112,22 @@ export class DanceListInfoView {
         }
         ul.innerHTML = listItems;
     }
-    makeUpdatedDanceList(oldDanceList) {
+    getUpdatedDanceList(oldDanceList) {
         let name = this._$name.value;
         let date = this._$date.value;
         let time = this._$time.value;
         let desc = this._$description.value;
         return new DanceList(oldDanceList.id, name, inputDateToDate(date, time), desc, []);
+    }
+    checkInputForChanges(input, value) {
+        console.log(input.value + ' & ' + value);
+        if (input.value != value) {
+            input.style.borderColor = '#91f55f';
+            // input.classList.replace('input', 'input-change');
+        }
+        else {
+            input.style.border = '#b1b9b7';
+        }
     }
     bindDanceMenuOpenAction(action) {
         this._danceMenuOpenAction = action;

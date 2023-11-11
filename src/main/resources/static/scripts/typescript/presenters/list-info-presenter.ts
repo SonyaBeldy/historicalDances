@@ -16,14 +16,14 @@ export class DanceListPresenter {
         this._view._danceListListView.bindListItemChangeAction(this.changeInfo.bind(this));
         this._view._danceListInfoView.bindDanceDeleteAction(this.removeDance.bind(this));
 
-        this._view._danceListListView.bindNewDanceListBtnAction(this.createNewDanceList.bind(this));
+        this._view._danceListListView.bindNewDanceListBtnAction(this.changeInfoForNewDanceList.bind(this));
 
         this._view._danceListInfoView.bindDanceMenuConfirmBtnAction(this.selectDances.bind(this));
         //TODO почему если опустить вниз, то не работает
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
 
         this._model.updateDances().then(() => {
-            this._view._danceListInfoView.bindDanceMenuOpenAction(this.showDancesMenu.bind(this));
+            this._view._danceListInfoView.bindDanceMenuOpenAction(this.generateDancesInDanceMenu.bind(this));
         });
 
         this._model.updateDanceLists().then(()=> {
@@ -32,24 +32,47 @@ export class DanceListPresenter {
         });
     }
 
-    createNewDanceList(newDanceList: DanceList) {
-        newDanceList.name = 'Новая подборка';
-        this._model.danceLists.add(newDanceList);
-    }
-    showDancesMenu(danceListId: number) {
+    changeInfo(danceList: DanceList) {
+        this._view.changeInfo(danceList);
         for (let i = 0; i < this._model.danceLists.length; i++) {
-            if (this._model.danceLists.get(i).id == danceListId) {
-                this._view._danceListInfoView.showDancesMenu(new Set(this._model.dances.getAll()), this._model.danceLists.get(i));
+            if (this._model.danceLists.get(i).id == danceList.id) {
+                //todo maybe use a hash map?
+                this._view.selectListItem(i);
                 break;
             }
         }
+        this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
+    }
+
+    changeInfoForNewDanceList(newDanceList: DanceList) {
+        newDanceList.name = 'Новая подборка';
+
+        //todo: why list duplicated
+        // this._model.danceLists.add(newDanceList);
+        this._view.changeInfo(newDanceList);
+        this._view.selectNewDanceBtn();
+        this._view._danceListInfoView.bindSaveChangesBtnAction(this.createNewDanceList.bind(this));
+    }
+
+
+    createNewDanceList(danceListId: number, newDanceList: DanceList) {
+        this._model.danceLists.add(newDanceList);
+    }
+
+    generateDancesInDanceMenu(danceListId: number) {
+        for (let i = 0; i < this._model.danceLists.length; i++) {
+            if (this._model.danceLists.get(i).id == danceListId) {
+                this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), this._model.danceLists.get(i));
+                return;
+            }
+        }
+        //TODO убрать позорный пустой лист
+        this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), new DanceList(-1, '', new Date(), '', []));
     }
 
     selectDances(danceListId: number, checkedDancesId: number[]) {
         let danceList = this._model.danceLists.getBy('id', danceListId);
-        console.log('name ' + danceList.name);
         let newDances: Dance[] = [];
-        console.log('length ' + this._model.dances.length);
         for (let i = 0; i < this._model.dances.length; i++) {
             for (let j = 0; j < checkedDancesId.length; j++) {
                 if(this._model.dances.get(i).id == checkedDancesId[j]) {
@@ -57,20 +80,11 @@ export class DanceListPresenter {
                 }
             }
         }
+        //TODO созранять в другом месте, а то при создании у пустого вызывается
         danceList.dances = newDances;
         this._view.changeInfo(danceList);
     }
 
-    changeInfo(danceListId: number) {
-        for (let i = 0; i < this._model.danceLists.length; i++) {
-            if (this._model.danceLists.get(i).id == danceListId) {
-                this._view.changeInfo(this._model.danceLists.get(i));
-                this._view.selectListItem(i);
-                break;
-            }
-        }
-    }
-    
     removeDance(danceListId: number, dance: Dance): void {
         for (let i = 0; i < this._model.danceLists.length; i++) {
             let danceList = this._model.danceLists.get(i);

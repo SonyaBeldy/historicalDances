@@ -666,3 +666,20 @@
 .weight-400 {
      font-weight: 500;
  }
+
+.input {
+    border: 1px solid #b1b9b7;
+}
+/*.input:focus {*/
+/*    border: 2px solid #71f553;*/
+/*}*/
+.input-change {
+    border: 1px solid #83ff52;
+}
+/*.input-change:focus {*/
+/*    outline: 1px solid #83ff52;*/
+/*}*/
+
+*:focus {
+    outline: none;
+}

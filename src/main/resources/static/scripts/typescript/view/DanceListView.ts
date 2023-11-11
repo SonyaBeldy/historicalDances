@@ -31,4 +31,7 @@ export class DanceListView {
         this._danceListListView.items[selectedItemId].$html.classList.add('list-item-select');
     }
 
+    selectNewDanceBtn() {
+        //TODO выделение кнопки новая подборка
+    }
 }

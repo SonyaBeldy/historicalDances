@@ -4,6 +4,7 @@ import {Dance} from "../models/Dance";
 
 export class DanceListInfoView {
 
+    private currentDanceList: DanceList;
     private _$html: HTMLDivElement;
     private _$name: HTMLInputElement;
     private _$time: HTMLInputElement;
@@ -15,18 +16,19 @@ export class DanceListInfoView {
     private _danceMenuOpenAction: (dancesInDanceListId: number) => void;
     private _danceMenuConfirmBtnAction: (danceListId: number, checkedDancesId: number[]) => void;
     private _saveChangesBtnAction: (danceListId: number, updatedDAnceList: DanceList) => void;
+    private _nameInputChangeAction: (danceListId: number) => void;
     constructor() {
         this._$html = document.createElement('div');
         this._$html.innerHTML =
             `<div class="flex-column gap-10 jost">
                 <div class="flex-column gap-5">
                     <label for="name-input" class="font-size-12 weight-600">Название</label>
-                    <input type="text" id="name-input" class="calendar jost">
+                    <input type="text" id="name-input" class="calendar input jost">
                 </div>
                 <div class="flex-row gap-10">
                     <div class="flex-column gap-5">
                         <label for="date-input" class="font-size-12 weight-600">Дата</label>
-                        <input type="date" id="date-input" class="calendar jost">
+                        <input type="date" id="date-input" class="calendar input jost">
                     </div>
                     <div class="flex-column gap-5">
                         <label for="time-input" class="font-size-12 weight-600">Время</label>
@@ -67,6 +69,8 @@ export class DanceListInfoView {
         this._$time.value = danceList.date.toISOString().substring(11, 16);
         this._$description.value = danceList.desc;
 
+        this._$name.addEventListener('input', ev => {this.checkInputForChanges(this._$name, danceList.name);});
+
         let listItemsHtml = '';
         for (let currentDance of danceList.dances) {
             listItemsHtml +=
@@ -86,9 +90,6 @@ export class DanceListInfoView {
             });
         }
         let addDancesBtn = document.getElementById('add-dances-btn');
-
-        // let addDancesBtnClone = addDancesBtn.cloneNode(true);
-        // addDancesBtn.parentNode.replaceChild(addDancesBtnClone, addDancesBtn);
 
         //TODO remove listeners
         let clone = addDancesBtn.cloneNode(true)
@@ -120,12 +121,12 @@ export class DanceListInfoView {
         clone = saveChangesBtn.cloneNode(true);
         saveChangesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
-            this._saveChangesBtnAction(danceList.id, this.makeUpdatedDanceList(danceList));
+            this._saveChangesBtnAction(danceList.id, this.getUpdatedDanceList(danceList));
         });
 
     }
     //TODO нахрен сеты
-    showDancesMenu(allDances: Set<Dance>, danceList: DanceList) {
+    generateDancesInDanceMenu(allDances: Dance[], danceList: DanceList) {
         let menuHTML = document.getElementById('dances-from-dance-list-menu');
         let ul = menuHTML.querySelector('ul');
         let listItems = '';
@@ -139,7 +140,7 @@ export class DanceListInfoView {
         ul.innerHTML = listItems;
     }
 
-    private makeUpdatedDanceList(oldDanceList: DanceList) {
+    private getUpdatedDanceList(oldDanceList: DanceList) {
         let name = this._$name.value;
         let date = this._$date.value;
         let time = this._$time.value;
@@ -150,6 +151,16 @@ export class DanceListInfoView {
             inputDateToDate(date, time),
             desc,
             []);
+    }
+
+    checkInputForChanges(input: HTMLInputElement, value: string) {
+        console.log(input.value + ' & ' + value);
+        if(input.value != value) {
+            input.style.borderColor = '#91f55f';
+            // input.classList.replace('input', 'input-change');
+        } else {
+            input.style.border = '#b1b9b7';
+        }
     }
 
     bindDanceMenuOpenAction(action: (dancesInDanceListId: number) => void): void {

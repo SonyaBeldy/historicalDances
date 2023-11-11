@@ -87,7 +87,8 @@ export class ListView {
 export class DanceListListView extends ListView implements Observer<DanceList[]> {
 
     public items: DanceListListItemView[];
-    private _listItemChangeAction: (danceListId: number) => void;
+    public currentDanceList: DanceList;
+    private _listItemChangeAction: (danceList: DanceList) => void;
     private _newDanceListBtnAction: (newDanceList: DanceList) => void;
     constructor() {
         super();
@@ -97,6 +98,8 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
 
     //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists: DanceList[]): void {
+        this._$html.innerHTML = '';
+        this.items = [];
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
             item.bindListItemChangeAction(this._listItemChangeAction);
@@ -104,19 +107,17 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
             this._$html.appendChild(item.$html);
             this.items.push(item);
         }
-        document.getElementById('new-item-btn').addEventListener('click', ev => {
-            this._newDanceListBtnAction(new DanceList('bn n'));
-        });
+
     }
 
-
-
-    bindListItemChangeAction(action: (danceListId: number) => void) {
+    bindListItemChangeAction(action: (danceList: DanceList) => void) {
         this._listItemChangeAction = action;
     }
 
     bindNewDanceListBtnAction(action: (newDanceList: DanceList) => void) {
-        this._newDanceListBtnAction = action;
+        document.getElementById('new-item-btn').addEventListener('click', ev => {
+            action(new DanceList(-1, '', new Date(), '', []));
+        });
     }
 }
 
@@ -124,7 +125,7 @@ class DanceListListItemView implements Observer<DanceList> {
     private _$name: HTMLSpanElement;
     private _$date: HTMLSpanElement;
     private _$html: HTMLLIElement;
-    private _id: number;
+    private _danceList: DanceList;
     constructor() {
         this._$html = document.createElement('li');
         this._$html.classList.add('li', 'flex-column', 'list-item-div', 'list-item');
@@ -134,14 +135,14 @@ class DanceListListItemView implements Observer<DanceList> {
         [this._$name, this._$date] = this._$html.querySelectorAll('span');
     }
 
-    bindListItemChangeAction(action: (danceListId: number) => void) {
+    bindListItemChangeAction(action: (danceList: DanceList) => void) {
         this._$html.addEventListener('click', ev => {
-            action(this._id);
+            action(this._danceList);
         })
     }
 
     update(danceList: DanceList): void {
-        this._id = danceList.id;
+        this._danceList = danceList;
         this._$name.textContent = danceList.name;
         this._$date.textContent = dateToCustomDateString(danceList.date);
     }
