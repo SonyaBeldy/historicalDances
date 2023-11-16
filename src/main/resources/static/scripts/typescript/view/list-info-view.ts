@@ -15,7 +15,7 @@ export class DanceListInfoView {
     private _danceFromDanceListDeleteAction: (danceListId: number, danceInDanceList: Dance) => void;
     private _danceMenuOpenAction: (dancesInDanceListId: number) => void;
     private _danceMenuConfirmBtnAction: (danceListId: number, checkedDancesId: number[]) => void;
-    private _saveChangesBtnAction: (danceListId: number, updatedDAnceList: DanceList) => void;
+    private _saveChangesBtnAction: (danceList: DanceList, updatedDAnceList: DanceList) => void;
     private _nameInputChangeAction: (danceListId: number) => void;
     constructor() {
         this._$html = document.createElement('div');
@@ -121,7 +121,7 @@ export class DanceListInfoView {
         clone = saveChangesBtn.cloneNode(true);
         saveChangesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
-            this._saveChangesBtnAction(danceList.id, this.getUpdatedDanceList(danceList));
+            this._saveChangesBtnAction(danceList, this.getUpdatedDanceList(danceList));
         });
 
     }
@@ -175,7 +175,7 @@ export class DanceListInfoView {
         this._danceMenuConfirmBtnAction = action;
     }
 
-    bindSaveChangesBtnAction(action: (danceListId: number) => void): void {
+    bindSaveChangesBtnAction(action: (danceList: DanceList) => void): void {
         this._saveChangesBtnAction = action;
     }
 

@@ -18,13 +18,7 @@ export class DanceListPresenter {
     }
     changeInfo(danceList) {
         this._view.changeInfo(danceList);
-        for (let i = 0; i < this._model.danceLists.length; i++) {
-            if (this._model.danceLists.get(i).id == danceList.id) {
-                //todo maybe use a hash map?
-                this._view.selectListItem(i);
-                break;
-            }
-        }
+        this._view.selectListItem(danceList);
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
     }
     changeInfoForNewDanceList(newDanceList) {
@@ -72,13 +66,7 @@ export class DanceListPresenter {
             }
         }
     }
-    saveChanges(danceListId, updatedDanceList) {
-        for (let i = 0; i < this._model.danceLists.length; i++) {
-            let danceList = this._model.danceLists.get(i);
-            if (danceList.id == danceListId) {
-                console.log(danceList);
-                danceList.update(updatedDanceList);
-            }
-        }
+    saveChanges(danceList, updatedDanceList) {
+        danceList.update(updatedDanceList);
     }
 }

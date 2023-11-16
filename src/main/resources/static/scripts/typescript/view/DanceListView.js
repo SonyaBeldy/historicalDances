@@ -15,11 +15,13 @@ export class DanceListView {
     changeInfo(danceList) {
         this._danceListInfoView.update(danceList);
     }
-    selectListItem(selectedItemId) {
+    selectListItem(danceList) {
         for (let i = 0; i < this._danceListListView.items.length; i++) {
             this._danceListListView.items[i].$html.classList.remove('list-item-select');
+            if (danceList == this._danceListListView.items[i].danceList) {
+                this._danceListListView.items[i].$html.classList.add('list-item-select');
+            }
         }
-        this._danceListListView.items[selectedItemId].$html.classList.add('list-item-select');
     }
     selectNewDanceBtn() {
         //TODO выделение кнопки новая подборка

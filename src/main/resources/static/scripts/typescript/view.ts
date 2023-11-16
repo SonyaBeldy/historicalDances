@@ -107,7 +107,6 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
             this._$html.appendChild(item.$html);
             this.items.push(item);
         }
-
     }
 
     bindListItemChangeAction(action: (danceList: DanceList) => void) {
@@ -150,6 +149,11 @@ class DanceListListItemView implements Observer<DanceList> {
     get $html(): HTMLLIElement {
         return this._$html;
     }
+    get danceList(): DanceList {
+        return this._danceList;
+    }
+
+
 }
 class TableView {
     protected readonly _$html: HTMLTableElement;

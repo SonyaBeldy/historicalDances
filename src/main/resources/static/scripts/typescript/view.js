@@ -91,6 +91,9 @@ class DanceListListItemView {
     get $html() {
         return this._$html;
     }
+    get danceList() {
+        return this._danceList;
+    }
 }
 class TableView {
     constructor(...headers) {

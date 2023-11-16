@@ -95,7 +95,7 @@ export class DanceListInfoView {
         clone = saveChangesBtn.cloneNode(true);
         saveChangesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
-            this._saveChangesBtnAction(danceList.id, this.getUpdatedDanceList(danceList));
+            this._saveChangesBtnAction(danceList, this.getUpdatedDanceList(danceList));
         });
     }
     //TODO нахрен сеты

@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DanceListDTO {
-
     private int id;
     private String name;
     private Timestamp date;
