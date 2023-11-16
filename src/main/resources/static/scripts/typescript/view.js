@@ -47,6 +47,7 @@ export class DanceListListView extends ListView {
         super();
         this._$html.classList.add('ul');
         this.items = [];
+        this.newItemBtn = document.getElementById('new-item-btn');
     }
     //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists) {
@@ -64,9 +65,25 @@ export class DanceListListView extends ListView {
         this._listItemChangeAction = action;
     }
     bindNewDanceListBtnAction(action) {
-        document.getElementById('new-item-btn').addEventListener('click', ev => {
+        this.newItemBtn.addEventListener('click', ev => {
             action(new DanceList(-1, '', new Date(), '', []));
         });
+    }
+    selectListItem(danceList) {
+        for (let i = 0; i < this.items.length; i++) {
+            if (danceList == this.items[i].danceList) {
+                this.items[i].select();
+            }
+        }
+    }
+    clearListItemAndNewItemBtnSelection() {
+        this.newItemBtn.classList.remove('new-btn-selected');
+        for (let i = 0; i < this.items.length; i++) {
+            this.items[i].clearSelection();
+        }
+    }
+    selectNewItemBtn() {
+        this.newItemBtn.classList.add('new-btn-selected');
     }
 }
 class DanceListListItemView {
@@ -87,6 +104,12 @@ class DanceListListItemView {
         this._danceList = danceList;
         this._$name.textContent = danceList.name;
         this._$date.textContent = dateToCustomDateString(danceList.date);
+    }
+    select() {
+        this.$html.classList.add('list-item-selected');
+    }
+    clearSelection() {
+        this.$html.classList.remove('list-item-selected');
     }
     get $html() {
         return this._$html;

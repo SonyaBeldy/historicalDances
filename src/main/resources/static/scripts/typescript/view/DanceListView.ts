@@ -16,24 +16,21 @@ export class DanceListView {
         this._$danceListInfoContainer.appendChild(this._danceListInfoView.$html);
     }
 
-    changeList(list: ListView) {
+    changeList(list: ListView): void {
         this._$listContainer.innerHTML = '';
         this._$listContainer.appendChild(list.$html);
     }
-    changeInfo(danceList: DanceList) {
+    changeInfo(danceList: DanceList): void {
         this._danceListInfoView.update(danceList);
     }
 
-    selectListItem(danceList: DanceList) {
-        for (let i = 0; i < this._danceListListView.items.length; i++) {
-            this._danceListListView.items[i].$html.classList.remove('list-item-select');
-            if(danceList == this._danceListListView.items[i].danceList) {
-                this._danceListListView.items[i].$html.classList.add('list-item-select');
-            }
-        }
+    selectListItem(danceList: DanceList): void {
+        this._danceListListView.clearListItemAndNewItemBtnSelection();
+        this._danceListListView.selectListItem(danceList);
     }
 
     selectNewDanceBtn() {
-        //TODO выделение кнопки новая подборка
+        this._danceListListView.clearListItemAndNewItemBtnSelection();
+        this._danceListListView.selectNewItemBtn();
     }
 }

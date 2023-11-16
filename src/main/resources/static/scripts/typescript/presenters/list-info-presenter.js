@@ -1,4 +1,3 @@
-import { DanceList } from "../models/DanceList.js";
 export class DanceListPresenter {
     constructor(view, model) {
         this._view = view;
@@ -32,18 +31,11 @@ export class DanceListPresenter {
     createNewDanceList(danceListId, newDanceList) {
         this._model.danceLists.add(newDanceList);
     }
-    generateDancesInDanceMenu(danceListId) {
-        for (let i = 0; i < this._model.danceLists.length; i++) {
-            if (this._model.danceLists.get(i).id == danceListId) {
-                this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), this._model.danceLists.get(i));
-                return;
-            }
-        }
-        //TODO убрать позорный пустой лист
-        this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), new DanceList(-1, '', new Date(), '', []));
+    generateDancesInDanceMenu(danceList) {
+        this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), danceList);
     }
-    selectDances(danceListId, checkedDancesId) {
-        let danceList = this._model.danceLists.getBy('id', danceListId);
+    selectDances(danceList, checkedDancesId) {
+        // let danceList = this._model.danceLists.getBy('id', danceListId);
         let newDances = [];
         for (let i = 0; i < this._model.dances.length; i++) {
             for (let j = 0; j < checkedDancesId.length; j++) {

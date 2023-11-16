@@ -13,8 +13,8 @@ export class DanceListInfoView {
     private _$dances: HTMLUListElement;
 
     private _danceFromDanceListDeleteAction: (danceListId: number, danceInDanceList: Dance) => void;
-    private _danceMenuOpenAction: (dancesInDanceListId: number) => void;
-    private _danceMenuConfirmBtnAction: (danceListId: number, checkedDancesId: number[]) => void;
+    private _danceMenuOpenAction: (danceList: DanceList) => void;
+    private _danceMenuConfirmBtnAction: (danceList: DanceList, checkedDancesId: number[]) => void;
     private _saveChangesBtnAction: (danceList: DanceList, updatedDAnceList: DanceList) => void;
     private _nameInputChangeAction: (danceListId: number) => void;
     constructor() {
@@ -96,7 +96,7 @@ export class DanceListInfoView {
         addDancesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
             document.getElementById('dances-menu-back').style.display = 'flex';
-            this._danceMenuOpenAction(danceList.id);
+            this._danceMenuOpenAction(danceList);
         });
 
         let dancesMenuConfirmBtn = document.getElementById('dances-from-dance-list-menu-confirm-btn');
@@ -114,7 +114,7 @@ export class DanceListInfoView {
             }
             console.log('check');
             console.log(checkedDancesId);
-            this._danceMenuConfirmBtnAction(danceList.id, checkedDancesId);
+            this._danceMenuConfirmBtnAction(danceList, checkedDancesId);
         });
 
         let saveChangesBtn = document.getElementById('save-changes-btn');
@@ -154,16 +154,16 @@ export class DanceListInfoView {
     }
 
     checkInputForChanges(input: HTMLInputElement, value: string) {
-        console.log(input.value + ' & ' + value);
-        if(input.value != value) {
-            input.style.borderColor = '#91f55f';
-            // input.classList.replace('input', 'input-change');
-        } else {
-            input.style.border = '#b1b9b7';
-        }
+        // console.log(input.value + ' & ' + value);
+        // if(input.value != value) {
+        //     input.style.borderColor = '#91f55f';
+        //     // input.classList.replace('input', 'input-change');
+        // } else {
+        //     input.style.border = '#b1b9b7';
+        // }
     }
 
-    bindDanceMenuOpenAction(action: (dancesInDanceListId: number) => void): void {
+    bindDanceMenuOpenAction(action: (danceList: DanceList) => void): void {
         this._danceMenuOpenAction = action;
     }
 
@@ -171,7 +171,7 @@ export class DanceListInfoView {
         this._danceFromDanceListDeleteAction = action;
     }
 
-    bindDanceMenuConfirmBtnAction(action: (danceListId: number, checkedDancesId: number[]) => void): void {
+    bindDanceMenuConfirmBtnAction(action: (danceList: DanceList, checkedDancesId: number[]) => void): void {
         this._danceMenuConfirmBtnAction = action;
     }
 

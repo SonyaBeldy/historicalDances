@@ -88,12 +88,14 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
 
     public items: DanceListListItemView[];
     public currentDanceList: DanceList;
+    private newItemBtn: HTMLButtonElement;
     private _listItemChangeAction: (danceList: DanceList) => void;
     private _newDanceListBtnAction: (newDanceList: DanceList) => void;
     constructor() {
         super();
         this._$html.classList.add('ul')
         this.items = [];
+        this.newItemBtn = document.getElementById('new-item-btn') as HTMLButtonElement;
     }
 
     //TODO change the way dance list updates so I don't have to reassign observers
@@ -114,9 +116,27 @@ export class DanceListListView extends ListView implements Observer<DanceList[]>
     }
 
     bindNewDanceListBtnAction(action: (newDanceList: DanceList) => void) {
-        document.getElementById('new-item-btn').addEventListener('click', ev => {
+        this.newItemBtn.addEventListener('click', ev => {
             action(new DanceList(-1, '', new Date(), '', []));
         });
+    }
+
+    selectListItem(danceList: DanceList) {
+        for (let i = 0; i < this.items.length; i++) {
+            if(danceList == this.items[i].danceList) {
+                this.items[i].select();
+            }
+        }
+    }
+    clearListItemAndNewItemBtnSelection() {
+        this.newItemBtn.classList.remove('new-btn-selected');
+        for (let i = 0; i < this.items.length; i++) {
+            this.items[i].clearSelection();
+        }
+    }
+
+    selectNewItemBtn() {
+        this.newItemBtn.classList.add('new-btn-selected');
     }
 }
 
@@ -146,14 +166,20 @@ class DanceListListItemView implements Observer<DanceList> {
         this._$date.textContent = dateToCustomDateString(danceList.date);
     }
 
+    select() {
+        this.$html.classList.add('list-item-selected');
+    }
+    clearSelection() {
+        this.$html.classList.remove('list-item-selected');
+    }
+
     get $html(): HTMLLIElement {
         return this._$html;
     }
+
     get danceList(): DanceList {
         return this._danceList;
     }
-
-
 }
 class TableView {
     protected readonly _$html: HTMLTableElement;

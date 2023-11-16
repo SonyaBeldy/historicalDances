@@ -72,7 +72,7 @@ export class DanceListInfoView {
         addDancesBtn.replaceWith(clone);
         clone.addEventListener('click', ev => {
             document.getElementById('dances-menu-back').style.display = 'flex';
-            this._danceMenuOpenAction(danceList.id);
+            this._danceMenuOpenAction(danceList);
         });
         let dancesMenuConfirmBtn = document.getElementById('dances-from-dance-list-menu-confirm-btn');
         clone = dancesMenuConfirmBtn.cloneNode(true);
@@ -89,7 +89,7 @@ export class DanceListInfoView {
             }
             console.log('check');
             console.log(checkedDancesId);
-            this._danceMenuConfirmBtnAction(danceList.id, checkedDancesId);
+            this._danceMenuConfirmBtnAction(danceList, checkedDancesId);
         });
         let saveChangesBtn = document.getElementById('save-changes-btn');
         clone = saveChangesBtn.cloneNode(true);
@@ -120,14 +120,13 @@ export class DanceListInfoView {
         return new DanceList(oldDanceList.id, name, inputDateToDate(date, time), desc, []);
     }
     checkInputForChanges(input, value) {
-        console.log(input.value + ' & ' + value);
-        if (input.value != value) {
-            input.style.borderColor = '#91f55f';
-            // input.classList.replace('input', 'input-change');
-        }
-        else {
-            input.style.border = '#b1b9b7';
-        }
+        // console.log(input.value + ' & ' + value);
+        // if(input.value != value) {
+        //     input.style.borderColor = '#91f55f';
+        //     // input.classList.replace('input', 'input-change');
+        // } else {
+        //     input.style.border = '#b1b9b7';
+        // }
     }
     bindDanceMenuOpenAction(action) {
         this._danceMenuOpenAction = action;
