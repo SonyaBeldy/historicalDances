@@ -13,7 +13,7 @@ export class DanceListPresenter {
         this._view = view;
         this._model = model;
 
-        this._view._danceListListView.bindListItemChangeAction(this.changeInfo.bind(this));
+        this._view._danceListListView.bindListItemChangeAction(this.changeSelectedDanceList.bind(this));
         this._view._danceListInfoView.bindDanceDeleteAction(this.removeDance.bind(this));
 
         this._view._danceListListView.bindNewDanceListBtnAction(this.changeInfoForNewDanceList.bind(this));
@@ -21,6 +21,7 @@ export class DanceListPresenter {
         this._view._danceListInfoView.bindDanceMenuConfirmBtnAction(this.selectDances.bind(this));
         //TODO почему если опустить вниз, то не работает
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
+        this._view._danceListInfoView.bindRemoveDanceListBtnAction(this.removeDanceList.bind(this));
 
         this._model.updateDances().then(() => {
             this._view._danceListInfoView.bindDanceMenuOpenAction(this.generateDancesInDanceMenu.bind(this));
@@ -32,7 +33,7 @@ export class DanceListPresenter {
         });
     }
 
-    changeInfo(danceList: DanceList) {
+    changeSelectedDanceList(danceList: DanceList) {
         this._view.changeInfo(danceList);
         this._view.selectListItem(danceList);
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
@@ -85,5 +86,10 @@ export class DanceListPresenter {
 
     saveChanges(danceList: DanceList, updatedDanceList: DanceList): void {
         danceList.update(updatedDanceList);
+    }
+
+    //TODO should rename to delete?
+    removeDanceList(danceList: DanceList) {
+        this._model.danceLists.remove(danceList);
     }
 }

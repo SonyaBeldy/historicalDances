@@ -25,25 +25,31 @@ export class DanceListInfoView {
                     <textarea id="desc-input" class="calendar jost"></textarea>
                 </div>
                 <div class="flex-column gap-10 dance-menu-div">
-                    <label for="dances" class="font-size-12  variant large">Танцы</label>
-                    <button class="new-dance-for-dance-list-btn" id="add-dances-btn">+</button>
+                    <div class="flex-row gap-10">
+                        <label for="dances" class="font-size-12  variant large">Танцы</label>
+                        <button class="new-dance-for-dance-list-btn" id="add-dances-btn">
+                            <img src="../../images/btns/edit-16.png" class="">
+                        </button>
+                    </div>
                     <ul id="dances">
                     </ul>
                 </div>  
-                <button class="button save-changes-btn" id="save-changes-btn">сохранить изменения</button>
+                <div>
+                    <button class="button " id="delete-dance-list-btn">удалить</button>
+                    <button class="button save-changes-btn" id="save-changes-btn">сохранить изменения</button>
+                </div>
             </div>
             `;
         [this._$name, this._$date, this._$time] = this._$html.querySelectorAll('input');
         this._$description = this._$html.querySelector('textarea');
         this._$dances = this._$html.querySelector('ul');
         this._$dances.classList.add('ul');
-        this._$html.querySelector('button').addEventListener('click', ev => {
-        });
         document.getElementById('close-dance-menu-btn').addEventListener('click', ev => {
             document.getElementById('dances-menu-back').style.display = 'none';
         });
     }
     update(danceList) {
+        console.log('update');
         this._$name.value = danceList.name;
         this._$date.value = danceList.date.toISOString().substring(0, 10);
         this._$time.value = danceList.date.toISOString().substring(11, 16);
@@ -67,18 +73,13 @@ export class DanceListInfoView {
             });
         }
         let addDancesBtn = document.getElementById('add-dances-btn');
-        //TODO remove listeners
-        let clone = addDancesBtn.cloneNode(true);
-        addDancesBtn.replaceWith(clone);
-        clone.addEventListener('click', ev => {
+        this.cloneElement(addDancesBtn).addEventListener('click', ev => {
             document.getElementById('dances-menu-back').style.display = 'flex';
             this._danceMenuOpenAction(danceList);
         });
         let dancesMenuConfirmBtn = document.getElementById('dances-from-dance-list-menu-confirm-btn');
-        clone = dancesMenuConfirmBtn.cloneNode(true);
-        dancesMenuConfirmBtn.replaceWith(clone);
         //TODO может в другой класс?
-        clone.addEventListener('click', ev => {
+        this.cloneElement(dancesMenuConfirmBtn).addEventListener('click', ev => {
             let checkboxes = document.getElementsByName('dances');
             let checkedDancesId = [];
             console.log(checkboxes);
@@ -87,16 +88,25 @@ export class DanceListInfoView {
                     checkedDancesId.push(Number(checkboxes.item(i).value));
                 }
             }
-            console.log('check');
-            console.log(checkedDancesId);
             this._danceMenuConfirmBtnAction(danceList, checkedDancesId);
         });
         let saveChangesBtn = document.getElementById('save-changes-btn');
-        clone = saveChangesBtn.cloneNode(true);
-        saveChangesBtn.replaceWith(clone);
-        clone.addEventListener('click', ev => {
+        // clone = saveChangesBtn.cloneNode(true);
+        // saveChangesBtn.replaceWith(clone);
+        // clone.addEventListener('click', ev => {
+        //     this._saveChangesBtnAction(danceList, this.getUpdatedDanceList(danceList));
+        // });
+        this.cloneElement(saveChangesBtn).addEventListener('click', ev => {
             this._saveChangesBtnAction(danceList, this.getUpdatedDanceList(danceList));
         });
+        this.cloneElement(document.getElementById('delete-dance-list-btn')).addEventListener('click', ev => {
+            this._removeDanceListBtnAction(danceList);
+        });
+    }
+    cloneElement(elementToClone) {
+        let clone = elementToClone.cloneNode(true);
+        elementToClone.replaceWith(clone);
+        return clone;
     }
     //TODO нахрен сеты
     generateDancesInDanceMenu(allDances, danceList) {
@@ -139,6 +149,9 @@ export class DanceListInfoView {
     }
     bindSaveChangesBtnAction(action) {
         this._saveChangesBtnAction = action;
+    }
+    bindRemoveDanceListBtnAction(action) {
+        this._removeDanceListBtnAction = action;
     }
     get $html() {
         return this._$html;
