@@ -26,7 +26,7 @@ export class AdminPagePresenter {
                     break;
                 }
                 this._view.danceListView.changeInfo(this._model.danceLists.get(0));
-                this._view.danceListView.selectListItem(0);
+                this._view.danceListView.selectListItem(this._model.danceLists.get(0));
                 break;
             case 2:
                 await this._model.updateDances();

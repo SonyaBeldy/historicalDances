@@ -25,7 +25,12 @@ export class AdminPageModel {
                 let name = danceListsJSON[i].name;
                 let date = new Date(danceListsJSON[i].date);
                 let desc = danceListsJSON[i].description;
-                let dances = danceListsJSON[i].dances;
+                let dancesFromJson = danceListsJSON[i].dances;
+                let dances = [];
+                for (let j = 0; j < dancesFromJson.length; j++) {
+                    let dance = this.dances.getBy('id', dancesFromJson[j].id);
+                    dances.push(dance);
+                }
                 this.danceLists.add(new DanceList(id, name, date, desc, dances));
             }
         });

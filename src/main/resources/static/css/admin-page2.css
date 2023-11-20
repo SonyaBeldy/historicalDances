@@ -243,11 +243,8 @@
 }
 
 
-
 .popup-menu-background {
-    /*display: flex;*/
-    display: none;
-
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -261,6 +258,10 @@
     left:0;
     background: rgba(72, 72, 72, 0.5);
     z-index: 132;
+}
+
+.hided {
+    display: none !important;
 }
 
 .creating-menu {
@@ -491,7 +492,6 @@
 
     display: none;
     flex-direction: column;
-    /*display: none;*/
 
     position:fixed;
     margin:0;

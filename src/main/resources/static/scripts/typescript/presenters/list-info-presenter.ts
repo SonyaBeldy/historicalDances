@@ -23,10 +23,7 @@ export class DanceListPresenter {
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
         this._view._danceListInfoView.bindRemoveDanceListBtnAction(this.removeDanceList.bind(this));
 
-        this._model.updateDances().then(() => {
-            this._view._danceListInfoView.bindDanceMenuOpenAction(this.generateDancesInDanceMenu.bind(this));
-        });
-
+        this._model.updateDances();
         this._model.updateDanceLists().then(()=> {
             this._model.danceLists.addObserver(this._view._danceListListView);
 
@@ -36,6 +33,7 @@ export class DanceListPresenter {
     changeSelectedDanceList(danceList: DanceList) {
         this._view.changeInfo(danceList);
         this._view.selectListItem(danceList);
+        this._view._danceListInfoView.dancesMenu.fill(this._model.dances.getAll(), danceList.dances);
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.saveChanges.bind(this));
     }
 
@@ -54,9 +52,9 @@ export class DanceListPresenter {
         this._model.danceLists.add(newDanceList);
     }
 
-    generateDancesInDanceMenu(danceList: DanceList) {
-        this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), danceList);
-    }
+    // generateDancesInDanceMenu(danceList: DanceList) {
+    //     this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), danceList);
+    // }
 
     selectDances(danceList: DanceList, checkedDancesId: number[]) {
         // let danceList = this._model.danceLists.getBy('id', danceListId);
