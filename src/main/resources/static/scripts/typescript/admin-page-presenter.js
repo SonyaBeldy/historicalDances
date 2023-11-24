@@ -25,7 +25,7 @@ export class AdminPagePresenter {
                     // this._view.changeTable(this._view.danceListsTableView);
                     //
                     // // this._model.danceLists.addObserver(this._view.danceListListView);
-                    // this._view.changeToListView();
+                    this._view.changeToListView();
                     this._view.danceListView.changeList(this._view.danceListView._danceListListView);
                     if (this._model.danceLists.length == 0) {
                         break;

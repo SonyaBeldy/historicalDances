@@ -32,34 +32,37 @@ export class AdminPageView {
         }
     }
     changeToListView() {
-        this._$contentView.innerHTML = '';
-        this.danceListView;
+        this._$contentView.appendChild(this.danceListView.$html);
     }
 }
 export class ListView {
     constructor() {
-        this._$html = document.createElement('ul');
-    }
-    get $html() {
-        return this._$html;
+        this.$html = document.createElement('ul');
     }
 }
-export class DanceListListView extends ListView {
+export class DanceListListView {
     constructor() {
-        super();
-        this._$html.classList.add('ul');
+        this.$html = document.createElement('div');
+        this.$html.classList.add('flex-column', 'gap-5');
+        this.$html.innerHTML =
+            `<button class="button new-dance-list-btn" id="new-item-btn">
+                + Новая подборка
+            </button>
+            <ul class="ul"></ul>`;
+        this._$ul = this.$html.querySelector('ul');
+        this._$newItemBtn = this.$html.querySelector('button');
         this.items = [];
-        this.newItemBtn = document.getElementById('new-item-btn');
+        // this.newItemBtn = document.getElementById('new-item-btn') as HTMLButtonElement;
     }
     //TODO change the way dance list updates so I don't have to reassign observers
     update(danceLists) {
-        this._$html.innerHTML = '';
+        this._$ul.innerHTML = '';
         this.items = [];
         for (let i = 0; i < danceLists.length; i++) {
             let item = new DanceListListItemView();
             item.bindListItemChangeAction(this._listItemChangeAction);
             danceLists[i].addObserver(item);
-            this._$html.appendChild(item.$html);
+            this._$ul.appendChild(item.$html);
             this.items.push(item);
         }
     }
@@ -67,7 +70,7 @@ export class DanceListListView extends ListView {
         this._listItemChangeAction = action;
     }
     bindNewDanceListBtnAction(action) {
-        this.newItemBtn.addEventListener('click', ev => {
+        this._$newItemBtn.addEventListener('click', ev => {
             action(new DanceList(-1, '', new Date(), '', []));
         });
     }
@@ -79,13 +82,13 @@ export class DanceListListView extends ListView {
         }
     }
     clearListItemAndNewItemBtnSelection() {
-        this.newItemBtn.classList.remove('new-btn-selected');
+        this._$newItemBtn.classList.remove('new-btn-selected');
         for (let i = 0; i < this.items.length; i++) {
             this.items[i].clearSelection();
         }
     }
     selectNewItemBtn() {
-        this.newItemBtn.classList.add('new-btn-selected');
+        this._$newItemBtn.classList.add('new-btn-selected');
     }
 }
 class DanceListListItemView {

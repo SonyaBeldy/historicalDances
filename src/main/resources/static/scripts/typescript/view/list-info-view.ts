@@ -5,9 +5,7 @@ import {BiMap, DanceMenuView} from "./DanceMenuView.js";
 
 export class DanceListInfoView {
 
-
-    private currentDanceList: DanceList;
-    private _$html: HTMLDivElement;
+    $html: HTMLDivElement;
     private _$name: HTMLInputElement;
     private _$time: HTMLInputElement;
     private _$date: HTMLInputElement;
@@ -26,8 +24,9 @@ export class DanceListInfoView {
     private _removeDanceListBtnAction: (danceList: DanceList) => void;
     private _nameInputChangeAction: (danceListId: number) => void;
     constructor() {
-        this._$html = document.createElement('div');
-        this._$html.innerHTML =
+        this.$html = document.createElement('div');
+        this.$html.classList.add('list-info-container');
+        this.$html.innerHTML =
             `<div class="flex-column gap-10 jost">
                 <div class="flex-column gap-5">
                     <label for="name-input" class="font-size-12 weight-600">Название</label>
@@ -64,9 +63,9 @@ export class DanceListInfoView {
                 </div>
             </div>
             `;
-        [this._$name, this._$date, this._$time] = this._$html.querySelectorAll('input');
-        this._$description = this._$html.querySelector('textarea');
-        this._$dancesUl = this._$html.querySelector('ul');
+        [this._$name, this._$date, this._$time] = this.$html.querySelectorAll('input');
+        this._$description = this.$html.querySelector('textarea');
+        this._$dancesUl = this.$html.querySelector('ul');
         this._$dancesUl.classList.add('ul');
 
         this.dances = new BiMap<Dance, HTMLLIElement>();
@@ -187,9 +186,5 @@ export class DanceListInfoView {
 
     bindRemoveDanceListBtnAction(action: (danceList: DanceList) => void): void {
         this._removeDanceListBtnAction = action;
-    }
-
-    get $html(): HTMLDivElement {
-        return this._$html;
     }
 }

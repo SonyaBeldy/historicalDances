@@ -3,24 +3,25 @@ import {DanceListListView, ListView} from "../view.js";
 import {DanceListInfoView} from "./list-info-view.js";
 
 export class DanceListView {
-    _$html: HTMLDivElement;
+    $html: HTMLDivElement;
     public _danceListListView: DanceListListView;
     public _danceListInfoView: DanceListInfoView;
     private _$listContainer: HTMLDivElement;
     private _$danceListInfoContainer: HTMLDivElement;
     constructor() {
-        this._$html = document.getElementById('content-view') as HTMLDivElement;
+        this.$html = document.createElement('div');
+        this.$html.classList.add('flex-row', 'gap-5');
+        this.$html.innerHTML =
+            `<div id="list-container"></div>
+            <div id="list-info-container"></div>`;
         this._danceListListView = new DanceListListView();
         this._danceListInfoView = new DanceListInfoView();
 
         //todo что за #
-        this._$listContainer = document.querySelector('#list-container');
-        this._$danceListInfoContainer = document.querySelector('#list-info-container');
+        this._$listContainer = this.$html.querySelector('#list-container');
+        this._$listContainer.appendChild(this._danceListListView.$html);
+        this._$danceListInfoContainer = this.$html.querySelector('#list-info-container');
         this._$danceListInfoContainer.appendChild(this._danceListInfoView.$html);
-    }
-
-    show() {
-
     }
 
     changeList(list: ListView): void {
