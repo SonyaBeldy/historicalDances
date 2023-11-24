@@ -8,14 +8,12 @@ export class AdminPageView {
         this._$danceListsRadio = document.querySelector('#radio-dance-lists');
         this._$dancesRadio = document.querySelector('#radio-dances');
         this._$danceTypesRadio = document.querySelector('#radio-dance-types');
+        //TODO убрать таблицы
         this._$tableContainer = document.querySelector('#table-container');
-        this._$addBtn = document.querySelector('#new-item-btn');
-        this._$deleteBtn = document.querySelector('#delete-btn');
+        this._$contentView = document.getElementById('content-view');
         this.danceListsTableView = new DanceListsTableView();
         this.dancesTableView = new DancesTableView();
         this.danceTypesTableView = new DanceTypesTableView();
-        // this.danceListInfoView = new DanceListInfoView();
-        // this.danceListListView = new DanceListListView();
         this.danceListView = new DanceListView();
         // this.list = new ObservableList<DanceList>(new DanceList(1, 'Танго', new Date(Date.now()), ''), new DanceList(2, 'Парижский вальс', new Date(Date.now()), ''));
         // this.list.addObserver(this.danceListListView);
@@ -32,6 +30,10 @@ export class AdminPageView {
                 action(Number(radio.value));
             });
         }
+    }
+    changeToListView() {
+        this._$contentView.innerHTML = '';
+        this.danceListView;
     }
 }
 export class ListView {

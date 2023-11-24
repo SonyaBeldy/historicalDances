@@ -12,10 +12,10 @@ export class AdminPagePresenter {
     constructor(view, model) {
         this._view = view;
         this._model = model;
-        this._view.bindChangeTableAction(this.changeTable.bind(this));
+        this._view.bindChangeTableAction(this.changeView.bind(this));
         new DanceListPresenter(this._view.danceListView, this._model);
     }
-    changeTable(tableType) {
+    changeView(tableType) {
         return __awaiter(this, void 0, void 0, function* () {
             switch (tableType) {
                 case 1:
@@ -25,6 +25,7 @@ export class AdminPagePresenter {
                     // this._view.changeTable(this._view.danceListsTableView);
                     //
                     // // this._model.danceLists.addObserver(this._view.danceListListView);
+                    // this._view.changeToListView();
                     this._view.danceListView.changeList(this._view.danceListView._danceListListView);
                     if (this._model.danceLists.length == 0) {
                         break;
@@ -33,6 +34,7 @@ export class AdminPagePresenter {
                     this._view.danceListView.selectListItem(this._model.danceLists.get(0));
                     break;
                 case 2:
+                    // this._view.changeToDanceView();
                     yield this._model.updateDances();
                     this._model.dances.addObserver(this._view.dancesTableView); //todo  а где добавляются наблюдатели строк
                     this._view.changeTable(this._view.dancesTableView);

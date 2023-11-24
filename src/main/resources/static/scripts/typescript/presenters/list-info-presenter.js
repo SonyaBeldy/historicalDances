@@ -26,10 +26,12 @@ export class DanceListPresenter {
         // this._model.danceLists.add(newDanceList);
         this._view.changeInfo(newDanceList);
         this._view.selectNewDanceBtn();
+        this._view._danceListInfoView.dancesMenu.fill(this._model.dances.getAll(), newDanceList.dances);
         this._view._danceListInfoView.bindSaveChangesBtnAction(this.createNewDanceList.bind(this));
     }
     createNewDanceList(danceListId, newDanceList) {
         this._model.danceLists.add(newDanceList);
+        //TODO очистить поля
     }
     // generateDancesInDanceMenu(danceList: DanceList) {
     //     this._view._danceListInfoView.generateDancesInDanceMenu(this._model.dances.getAll(), danceList);
@@ -59,6 +61,7 @@ export class DanceListPresenter {
         }
     }
     saveChanges(danceList, updatedDanceList) {
+        //это тот же список?
         danceList.update(updatedDanceList);
     }
     //TODO should rename to delete?

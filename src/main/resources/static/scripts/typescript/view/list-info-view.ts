@@ -139,35 +139,22 @@ export class DanceListInfoView {
         return clone;
     }
 
-    // generateDancesInDanceMenu(allDances: Dance[], danceList: DanceList) {
-    //     let menuHTML = document.getElementById('dances-from-dance-list-menu');
-    //     let ul = menuHTML.querySelector('ul');
-    //     let listItems = '';
-    //     for (let currentDance of allDances) {
-    //         listItems +=
-    //             `<li class="flex-row gap-5">
-    //                 <input type="checkbox" name="dances" value="${currentDance.id}" ${danceList.has(currentDance) ? "checked" : ""}>
-    //                 <span>${currentDance.name}</span>
-    //                 </li>`;
-    //     }
-    //     ul.innerHTML = listItems;
-    // }
-    setCheckedToDances(ulHtml: HTMLUListElement, danceList: DanceList) {
-
-
-    }
-
     private getUpdatedDanceList(oldDanceList: DanceList) {
         let name = this._$name.value;
         let date = this._$date.value;
         let time = this._$time.value;
         let desc = this._$description.value;
+
+        let dances = [];
+        for (const dancesKey of this.dances.m1.keys()) {
+            dances.push(dancesKey);
+        }
         return new DanceList(
             oldDanceList.id,
             name,
             inputDateToDate(date, time),
             desc,
-            []);
+            dances);
     }
 
     checkInputForChanges(input: HTMLInputElement, value: string) {
@@ -180,10 +167,6 @@ export class DanceListInfoView {
         // }
     }
 
-    bindDanceMenuOpenAction(action: (danceList: DanceList) => void): void {
-        this._danceMenuOpenAction = action;
-    }
-
     bindDanceDeleteAction(action: (danceListId: number, dance: Dance) => void): void {
         this._danceFromDanceListDeleteAction = action;
     }
@@ -194,6 +177,12 @@ export class DanceListInfoView {
 
     bindSaveChangesBtnAction(action: (danceList: DanceList) => void): void {
         this._saveChangesBtnAction = action;
+
+        // let dances = [];
+        // for (const dancesKey in this.dances.m1.keys()) {
+        //     dances.push(dancesKey);
+        // }
+        // action(dances);
     }
 
     bindRemoveDanceListBtnAction(action: (danceList: DanceList) => void): void {

@@ -48,10 +48,7 @@ export class DanceMenuView {
     }
     setChecked(selectedDances) {
         this.clearChecked();
-        console.log(this.dances.m1);
-        console.log(selectedDances);
         for (let i = 0; i < selectedDances.length; i++) {
-            console.log(selectedDances[i].name);
             let li = this.dances.getByKey(selectedDances[i]);
             li.querySelector('input').checked = true;
         }

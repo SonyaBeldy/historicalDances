@@ -107,27 +107,16 @@ export class DanceListInfoView {
         elementToClone.replaceWith(clone);
         return clone;
     }
-    // generateDancesInDanceMenu(allDances: Dance[], danceList: DanceList) {
-    //     let menuHTML = document.getElementById('dances-from-dance-list-menu');
-    //     let ul = menuHTML.querySelector('ul');
-    //     let listItems = '';
-    //     for (let currentDance of allDances) {
-    //         listItems +=
-    //             `<li class="flex-row gap-5">
-    //                 <input type="checkbox" name="dances" value="${currentDance.id}" ${danceList.has(currentDance) ? "checked" : ""}>
-    //                 <span>${currentDance.name}</span>
-    //                 </li>`;
-    //     }
-    //     ul.innerHTML = listItems;
-    // }
-    setCheckedToDances(ulHtml, danceList) {
-    }
     getUpdatedDanceList(oldDanceList) {
         let name = this._$name.value;
         let date = this._$date.value;
         let time = this._$time.value;
         let desc = this._$description.value;
-        return new DanceList(oldDanceList.id, name, inputDateToDate(date, time), desc, []);
+        let dances = [];
+        for (const dancesKey of this.dances.m1.keys()) {
+            dances.push(dancesKey);
+        }
+        return new DanceList(oldDanceList.id, name, inputDateToDate(date, time), desc, dances);
     }
     checkInputForChanges(input, value) {
         // console.log(input.value + ' & ' + value);
@@ -138,9 +127,6 @@ export class DanceListInfoView {
         //     input.style.border = '#b1b9b7';
         // }
     }
-    bindDanceMenuOpenAction(action) {
-        this._danceMenuOpenAction = action;
-    }
     bindDanceDeleteAction(action) {
         this._danceFromDanceListDeleteAction = action;
     }
@@ -149,6 +135,11 @@ export class DanceListInfoView {
     }
     bindSaveChangesBtnAction(action) {
         this._saveChangesBtnAction = action;
+        // let dances = [];
+        // for (const dancesKey in this.dances.m1.keys()) {
+        //     dances.push(dancesKey);
+        // }
+        // action(dances);
     }
     bindRemoveDanceListBtnAction(action) {
         this._removeDanceListBtnAction = action;
