@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Исторические танцы</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&family=Libre+Franklin&display=swap" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" th:href="@{/css/dance.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/admin-page2.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/calendar.css}">
+
+    <script defer type="module" th:src="@{/scripts/typescript/main.js}"></script>
+</head>
+<body>
+    <header class="header">
+        <span class="logo-text-historical">исторические</span>
+        <span class="logo-text-dance">ТАНЦЫ</span>
+    </header>
+
+    <div class="content-div flex-column gap-20">
+        <div class="flex-row gap-10">
+            <div class="flex-row space-between search">
+                <input class="" type="text" placeholder="Искать...">
+                <button class="more-btn">
+                    <img th:src="@{/images/btns/search-24.png}">
+                </button>
+            </div>
+            <button class="round-btn more-btn jost font-size-14">
+                <div class="flex-row gap-20">
+                    <span>Сортировать</span>
+                    <img class="btn-img" th:src="@{/images/btns/more-2-25.png}">
+                </div>
+
+            </button>
+            <button class="round-btn more-btn jost font-size-14">
+                <div class="flex-row gap-20">
+                    <span>Фильтры</span>
+                    <img class="btn-img" th:src="@{/images/btns/more-2-25.png}">
+                </div>
+            </button>
+        </div>
+        <div id="dances-greed">
+
+        </div>
+        <div>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,7 +19,6 @@ export class AdminPageModel {
         return __awaiter(this, void 0, void 0, function* () {
             this.danceLists = new ObservableList();
             let danceListsJSON = yield this.getDanceListsJSON();
-            console.log(danceListsJSON);
             for (let i = 0; i < danceListsJSON.length; i++) {
                 let id = danceListsJSON[i].id;
                 let name = danceListsJSON[i].name;
@@ -39,10 +38,11 @@ export class AdminPageModel {
         return __awaiter(this, void 0, void 0, function* () {
             this.dances = new ObservableList();
             let dancesJSON = yield this.getDancesJSON();
+            console.log(dancesJSON);
             for (let i = 0; i < dancesJSON.length; i++) {
                 let id = dancesJSON[i].id;
                 let name = dancesJSON[i].name;
-                let danceType = dancesJSON[i].danceType;
+                let danceType = dancesJSON[i].type.name;
                 let videoLink = dancesJSON[i].videoLink;
                 let description = dancesJSON[i].description;
                 let difficulty = dancesJSON[i].difficulty;

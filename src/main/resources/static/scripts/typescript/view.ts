@@ -5,9 +5,9 @@ import {ObservableList, Observer} from "./utils/Observer.js";
 import {AdminPagePresenter} from "./admin-page-presenter.js";
 import {AdminPageModel} from "./admin-page-model.js";
 import {dateToCustomDateString, dateToCustomTimeString} from "./utils/date-time-converter.js";
-import {DanceListInfoView} from "./view/list-info-view.js";
-import {DanceListPresenter} from "./presenters/list-info-presenter.js";
 import {DanceListView} from "./view/DanceListView.js";
+import {MainPageView} from "./view/main/MainPageView.js";
+import {MainPagePresenter} from "./presenters/main/main-page-presenter.js";
 
 export class AdminPageView {
     private _$contentView: HTMLDivElement;
@@ -67,7 +67,18 @@ export class AdminPageView {
     }
 
     changeToListView() {
+        this._$contentView.innerHTML = '';
         this._$contentView.appendChild(this.danceListView.$html);
+    }
+
+    changeToDanceView() {
+        this._$contentView.innerHTML = '';
+        this._$contentView.appendChild(this.dancesTableView.$html);
+    }
+
+    changeToDAnceTypeView() {
+        this._$contentView.innerHTML = '';
+        this._$contentView.appendChild(this.danceTypesTableView.$html);
     }
 }
 
@@ -83,7 +94,6 @@ export class DanceListListView implements Observer<DanceList[]> {
 
     $html: HTMLDivElement;
     public items: DanceListListItemView[];
-    public currentDanceList: DanceList;
     private _$newItemBtn: HTMLButtonElement;
     private _$ul: HTMLUListElement;
     private _listItemChangeAction: (danceList: DanceList) => void;
@@ -189,26 +199,23 @@ class DanceListListItemView implements Observer<DanceList> {
     }
 }
 class TableView {
-    protected readonly _$html: HTMLTableElement;
+    $html: HTMLTableElement;
     protected readonly _$tbody: HTMLTableSectionElement;
     constructor(...headers: string[]) {
         let headersHTML = '';
         for (let i = 0; i < headers.length; i++) {
             headersHTML += `<th>${headers[i]}</th>`;
         }
-        this._$html = document.createElement('table');
-        this._$html.innerHTML =
+        this.$html = document.createElement('table');
+        this.$html.innerHTML =
             `<thead>
                 <tr class="table-row">
                     ${headersHTML}
                 </tr>
             </thead>
             <tbody></tbody>`;
-        this._$html.classList.add('table');
-        this._$tbody = this._$html.querySelector('tbody');
-    }
-    get $html(): HTMLTableElement {
-        return this._$html;
+        this.$html.classList.add('table');
+        this._$tbody = this.$html.querySelector('tbody');
     }
 }
 
@@ -305,6 +312,11 @@ class DanceRowView implements Observer<Dance> {
         this._$type = document.createElement('td');
         this._$videoLink = document.createElement('td');
         this._$desc = document.createElement('td');
+        this._$desc.innerHTML =
+            `<div>
+                <textarea class="calendar jost"></textarea>
+            </div>
+            `;
         this._$difficulty = document.createElement('td');
 
         this._$html = document.createElement('tr');
@@ -319,8 +331,9 @@ class DanceRowView implements Observer<Dance> {
     update(dance: Dance): void {
         this._$name.textContent = dance.name;
         this._$type.textContent = dance.danceType;
+        console.log('type ' + dance.danceType);
         this._$videoLink.textContent = dance.videoLink;
-        this._$desc.textContent = dance.desc;
+        // this._$desc.textContent = dance.desc;
         this._$difficulty.textContent = dance.difficulty.toString();
     }
 
@@ -349,3 +362,4 @@ class DanceTypeRowView implements Observer<DanceType> {
 let view = new AdminPageView();
 let model = new AdminPageModel();
 new AdminPagePresenter(view, model);
+

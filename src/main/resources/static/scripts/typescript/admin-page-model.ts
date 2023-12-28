@@ -18,7 +18,6 @@ export class AdminPageModel {
      public async updateDanceLists() {
         this.danceLists = new ObservableList<DanceList>();
         let danceListsJSON = await this.getDanceListsJSON();
-        console.log(danceListsJSON);
          for (let i = 0; i < danceListsJSON.length; i++) {
             let id = danceListsJSON[i].id;
             let name = danceListsJSON[i].name;
@@ -38,10 +37,11 @@ export class AdminPageModel {
     public async updateDances() {
         this.dances = new ObservableList<Dance>();
         let dancesJSON = await this.getDancesJSON();
+        console.log(dancesJSON);
         for (let i = 0; i < dancesJSON.length; i++) {
             let id = dancesJSON[i].id;
             let name = dancesJSON[i].name;
-            let danceType = dancesJSON[i].danceType;
+            let danceType = dancesJSON[i].type.name;
             let videoLink = dancesJSON[i].videoLink;
             let description = dancesJSON[i].description;
             let difficulty = dancesJSON[i].difficulty;
@@ -96,7 +96,7 @@ type DanceListJSON = {
 type DanceJSON = {
     id: number;
     name: string;
-    danceType: string;
+    type: DanceTypeJSON;
     videoLink: string;
     description: string;
     difficulty: number;

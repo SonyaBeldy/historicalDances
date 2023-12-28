@@ -32,7 +32,16 @@ export class AdminPageView {
         }
     }
     changeToListView() {
+        this._$contentView.innerHTML = '';
         this._$contentView.appendChild(this.danceListView.$html);
+    }
+    changeToDanceView() {
+        this._$contentView.innerHTML = '';
+        this._$contentView.appendChild(this.dancesTableView.$html);
+    }
+    changeToDAnceTypeView() {
+        this._$contentView.innerHTML = '';
+        this._$contentView.appendChild(this.danceTypesTableView.$html);
     }
 }
 export class ListView {
@@ -129,19 +138,16 @@ class TableView {
         for (let i = 0; i < headers.length; i++) {
             headersHTML += `<th>${headers[i]}</th>`;
         }
-        this._$html = document.createElement('table');
-        this._$html.innerHTML =
+        this.$html = document.createElement('table');
+        this.$html.innerHTML =
             `<thead>
                 <tr class="table-row">
                     ${headersHTML}
                 </tr>
             </thead>
             <tbody></tbody>`;
-        this._$html.classList.add('table');
-        this._$tbody = this._$html.querySelector('tbody');
-    }
-    get $html() {
-        return this._$html;
+        this.$html.classList.add('table');
+        this._$tbody = this.$html.querySelector('tbody');
     }
 }
 class DanceListsTableView extends TableView {
@@ -214,6 +220,11 @@ class DanceRowView {
         this._$type = document.createElement('td');
         this._$videoLink = document.createElement('td');
         this._$desc = document.createElement('td');
+        this._$desc.innerHTML =
+            `<div>
+                <textarea class="calendar jost"></textarea>
+            </div>
+            `;
         this._$difficulty = document.createElement('td');
         this._$html = document.createElement('tr');
         this._$html.appendChild(this._$name);
@@ -225,8 +236,9 @@ class DanceRowView {
     update(dance) {
         this._$name.textContent = dance.name;
         this._$type.textContent = dance.danceType;
+        console.log('type ' + dance.danceType);
         this._$videoLink.textContent = dance.videoLink;
-        this._$desc.textContent = dance.desc;
+        // this._$desc.textContent = dance.desc;
         this._$difficulty.textContent = dance.difficulty.toString();
     }
     get $html() {

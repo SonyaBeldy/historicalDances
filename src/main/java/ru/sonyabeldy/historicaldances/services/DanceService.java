@@ -30,4 +30,9 @@ public class DanceService {
         dance.setType(danceType);
         danceRepository.save(dance);
     }
+
+    public void delete(Dance dance) {
+        danceRepository.delete(dance);
+
+    }
 }

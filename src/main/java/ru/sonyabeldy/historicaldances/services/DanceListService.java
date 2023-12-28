@@ -1,10 +1,11 @@
 package ru.sonyabeldy.historicaldances.services;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sonyabeldy.historicaldances.dto.DanceListDTO;
+import ru.sonyabeldy.historicaldances.models.Dance;
 import ru.sonyabeldy.historicaldances.models.DanceList;
 import ru.sonyabeldy.historicaldances.repositories.DanceListRepository;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class DanceListService {
 
     private final DanceListRepository danceListRepository;
@@ -26,17 +28,30 @@ public class DanceListService {
         return danceListRepository.findAllByOrderByIdAsc();
     }
 
+    @Transactional
     public void save(DanceList danceList) {
         danceList.setDate(new Date());
         danceListRepository.save(danceList);
     }
 
-    public void update(int id, DanceList updatedDanceList) {
-        updatedDanceList.setId(id);
+    @Transactional
+    public void update(DanceList updatedDanceList) {
         danceListRepository.save(updatedDanceList);
     }
 
-    public Optional<DanceList> findById(int id) {
-        return danceListRepository.findById(id);
+    public DanceList findById(int id) {
+        Optional<DanceList> foundList = danceListRepository.findById(id);
+        return foundList.orElse(null);
+    }
+
+    @Transactional
+    public void delete(DanceList danceList) {
+        danceListRepository.delete(danceList);
+    }
+
+    @Transactional
+    public void deleteDance(DanceList danceList, Dance dance) {
+        danceList.getDances().remove(dance);
+        danceListRepository.save(danceList);
     }
 }
